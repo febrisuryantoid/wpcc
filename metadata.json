@@ -1,0 +1,10 @@
+{
+  "name": "WordPress Campus Connect Presentation",
+  "description": "Modern Web Presentation for WordPress Campus Connect Indonesia",
+  "requestFramePermissions": [
+    "screen-wake-lock"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
