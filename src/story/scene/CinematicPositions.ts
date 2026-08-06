@@ -1,0 +1,20 @@
+export const CINEMATIC_POSITIONS = [
+  { id: 0, label: "Center Hub", camPos: [0, 0, 7.0], lookAt: [0, 0, 0], objPos: [0, 0, 0] },
+  { id: 1, label: "Orbit Right", camPos: [-2.2, 0.4, 5.8], lookAt: [0, 0, 0], objPos: [2.5, 0.2, -0.2] },
+  { id: 2, label: "Orbit Left", camPos: [2.2, -0.4, 5.8], lookAt: [0, 0, 0], objPos: [-2.5, -0.2, -0.2] },
+  { id: 3, label: "Half Right Eclipse", camPos: [-0.5, 0.3, 4.2], lookAt: [0.9, 0, 0], objPos: [2.8, 0.1, 0.1] },
+  { id: 4, label: "Half Left Eclipse", camPos: [0.5, -0.3, 4.2], lookAt: [-0.9, 0, 0], objPos: [-2.8, -0.1, 0.1] },
+  { id: 5, label: "Half Top Eclipse", camPos: [0, -0.8, 4.8], lookAt: [0, 0.3, 0], objPos: [0, 1.2, -0.2] },
+  { id: 6, label: "Half Bottom Eclipse", camPos: [0, 0.8, 4.8], lookAt: [0, -0.3, 0], objPos: [0, -1.2, -0.2] },
+  { id: 7, label: "Zenith Top Angle", camPos: [-1.2, 4.8, 4.2], lookAt: [0, 0, 0], objPos: [0.8, -0.8, 0.2] },
+  { id: 8, label: "Nadir Bottom Angle", camPos: [1.2, -4.8, 4.2], lookAt: [0, 0, 0], objPos: [-0.8, 0.8, 0.2] },
+  { id: 9, label: "Distant Void", camPos: [0, 0, 10.5], lookAt: [0, 0, 0], objPos: [0, 0, 0] },
+  { id: 10, label: "Cover Center", camPos: [0, 0, 3.8], lookAt: [0, 0, 0], objPos: [0, 0, 0] },
+  { id: 11, label: "Diagonal Top Right", camPos: [-2.8, 2.2, 5.2], lookAt: [0.4, 0, 0], objPos: [2.2, -0.6, -0.4] },
+  { id: 12, label: "Diagonal Low Left", camPos: [2.8, -2.2, 5.2], lookAt: [-0.4, 0, 0], objPos: [-2.2, 0.6, -0.4] },
+  { id: 13, label: "Deep Macro Close-Up", camPos: [-0.3, 0.2, 3.4], lookAt: [0.3, 0, 0], objPos: [1.8, -0.2, 0.4] },
+  { id: 14, label: "Wide Isometric Panorama", camPos: [2.0, 1.8, 6.5], lookAt: [-0.2, -0.2, 0], objPos: [-1.9, 0.4, -0.5] },
+  { id: 15, label: "Low Profile Horizon", camPos: [-1.5, -1.8, 4.9], lookAt: [0.3, 0.3, 0], objPos: [2.1, 0.9, -0.1] },
+  { id: 16, label: "Elevated Spiral Right", camPos: [-3.2, 1.2, 6.0], lookAt: [0.5, -0.2, 0], objPos: [2.6, -0.3, 0.2] },
+  { id: 17, label: "Sunburst Zenith Left", camPos: [2.5, 3.2, 4.6], lookAt: [-0.6, -0.4, 0], objPos: [-2.0, -1.0, -0.3] }
+];

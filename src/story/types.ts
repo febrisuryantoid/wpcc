@@ -1,11 +1,18 @@
 
+export interface ChapterConfig {
+  id: string;
+  title: string;
+  color: string;
+  icon: string;
+}
+
 export interface SceneConfig {
   id: string;
   chapter?: number;
   chapterId?: string;
   title?: string;
   headline: string;
-  supportingSentence: string;
+  supportingSentence?: string;
   points?: string[];
   sideImage?: string;
   topImage?: string;
@@ -44,3 +51,6 @@ export interface SceneProps {
   isPresentationMode?: boolean;
   revealStep?: number;
 }
+
+export * from './chapter';
+

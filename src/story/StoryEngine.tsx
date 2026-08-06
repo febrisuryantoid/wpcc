@@ -1,25 +1,64 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Sparkles } from '@react-three/drei';
 import { motion, AnimatePresence } from 'motion/react';
 import { storyScenes } from './data';
-import { CoverPage, ElectronLines, CoverBackgroundImage } from './components/CoverPage';
-import { SceneLayout } from './components/SceneLayout';
-import { Scene02 } from './scenes/Scene02';
-import { Scene03 } from './scenes/Scene03';
-import { Scene31 } from './scenes/Scene31';
-import { Scene50 } from './scenes/Scene50';
-import { Scene61 } from './scenes/Scene61';
-import { Scene63 } from './scenes/Scene63';
-import { Scene64 } from './scenes/Scene64';
-import { WordPressLogoSVG } from './components/WordPressLogoSVG';
-import { AnimatedBackgrounds } from '../components/AnimatedBackgrounds';
+import { CoverPage, ElectronLines, CoverBackgroundImage } from './slide/CoverPage';
+import { SceneLayout } from './ui/SceneLayout';
+import { Slide01 } from './slide/Slide01';
+import { Slide02 } from './slide/Slide02';
+import { Slide03 } from './slide/Slide03';
+import { Slide04 } from './slide/Slide04';
+import { Slide05 } from './slide/Slide05';
+import { Slide06 } from './slide/Slide06';
+import { Slide07 } from './slide/Slide07';
+import { Slide08 } from './slide/Slide08';
+import { Slide09 } from './slide/Slide09';
+import { Slide10 } from './slide/Slide10';
+import { Slide11 } from './slide/Slide11';
+import { Slide12 } from './slide/Slide12';
+import { Slide13 } from './slide/Slide13';
+import { Slide14 } from './slide/Slide14';
+import { Slide15 } from './slide/Slide15';
+import { Slide16 } from './slide/Slide16';
+import { Slide17 } from './slide/Slide17';
+import { Slide18 } from './slide/Slide18';
+import { Slide19 } from './slide/Slide19';
+import { Slide20 } from './slide/Slide20';
+import { Slide21 } from './slide/Slide21';
+import { Slide22 } from './slide/Slide22';
+import { Slide23 } from './slide/Slide23';
+import { Slide24 } from './slide/Slide24';
+import { Slide25 } from './slide/Slide25';
+import { Slide26 } from './slide/Slide26';
+import { Slide27 } from './slide/Slide27';
+import { Slide28 } from './slide/Slide28';
+import { Slide29 } from './slide/Slide29';
+import { Slide30 } from './slide/Slide30';
+import { Slide31 } from './slide/Slide31';
+import { Slide32 } from './slide/Slide32';
+import { Slide33 } from './slide/Slide33';
+import { Slide34 } from './slide/Slide34';
+import { Slide35 } from './slide/Slide35';
+import { Slide36 } from './slide/Slide36';
+import { Slide37 } from './slide/Slide37';
+import { Slide38 } from './slide/Slide38';
+import { Slide39 } from './slide/Slide39';
+import { Slide40 } from './slide/Slide40';
+import { WordPressLogoSVG } from './ui/WordPressLogoSVG';
+import { AnimatedBackgrounds } from './ui/AnimatedBackgrounds';
+import { getSlideAnimationDetails } from './ui/SlideAnimationContext';
+import { useBackgroundMusic } from './ui/BackgroundMusicContext';
 
-import { GlobalCanvas } from './canvas/GlobalCanvas';
-import { ChevronRight, ChevronLeft, Maximize, Search, Home, Presentation, Play, Pause } from 'lucide-react';
-import { SearchModal } from './components/SearchModal';
+import { GlobalCanvas } from './scene/GlobalCanvas';
+import { ChevronRight, ChevronLeft, Maximize, Search, Home, Presentation, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { SearchModal } from './ui/SearchModal';
+import { Header } from './ui/Header';
+import { Footer } from './ui/Footer';
+import { Navigation } from './ui/Navigation';
 import { audioManager } from './utils/audioManager';
-import { SceneConfig } from './types';
+import { SceneConfig, isChapterSlide } from './types';
+import { getSlideClassification } from './classification/slideCategory';
 
 export const StoryEngine: React.FC = () => {
   // -1 represents Cover Page, 0..N represents Slide 1 to N
@@ -28,11 +67,15 @@ export const StoryEngine: React.FC = () => {
   const [isPresentationMode, setIsPresentationMode] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [revealStep, setRevealStep] = useState(1);
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [isHoveringNavbar, setIsHoveringNavbar] = useState(false);
-  const [isMusicLoaded, setIsMusicLoaded] = useState(false);
-  
-    const wakeLockRef = useRef<any>(null);
+  const [isSpinningCover, setIsSpinningCover] = useState(false);
+  const { isMuted: isMusicMuted, toggleMute: toggleMusic, playMusic: startAudioPlayback } = useBackgroundMusic();
+
+  const isCover = currentSceneIndex === -1;
+  const currentScene = isCover ? { ...storyScenes[0], id: 'scene_cover' } : storyScenes[currentSceneIndex];
+
+  const wakeLockRef = useRef<any>(null);
 
   useEffect(() => {
     const requestWakeLock = async () => {
@@ -40,8 +83,8 @@ export const StoryEngine: React.FC = () => {
         if ('wakeLock' in navigator) {
           wakeLockRef.current = await (navigator as any).wakeLock.request('screen');
         }
-      } catch (err) {
-        console.warn('Wake Lock error:', err);
+      } catch (_err) {
+        // Silently ignore permissions policy disallowance in embedded preview
       }
     };
     
@@ -64,35 +107,35 @@ export const StoryEngine: React.FC = () => {
   }, []);
 
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
+
   useEffect(() => {
     const sfx = [
       { key: 'open', url: 'https://assets.mixkit.co/active_storage/sfx/2950/2950-preview.mp3' },
       { key: 'cover_wpcc_zoom', url: 'https://assets.mixkit.co/active_storage/sfx/167/167-preview.mp3' },
       { key: 'cover_chime', url: 'https://assets.mixkit.co/active_storage/sfx/2740/2740-preview.mp3' },
-      { key: 'cover_ambient', url: 'https://assets.mixkit.co/active_storage/sfx/2734/2734-preview.mp3' },
+      { key: 'cover_ambient', url: 'https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3' },
       { key: 'last_slide_sfx', url: 'https://assets.mixkit.co/active_storage/sfx/381/381-preview.mp3' },
       { key: 'wpcc_click', url: 'https://assets.mixkit.co/active_storage/sfx/900/900-preview.mp3' },
-      { key: 'wpcc_transition', url: 'https://assets.mixkit.co/active_storage/sfx/2738/2738-preview.mp3' },
+      { key: 'wpcc_transition', url: 'https://assets.mixkit.co/active_storage/sfx/2639/2639-preview.mp3' },
       { key: 'sphere_1', url: 'https://assets.mixkit.co/active_storage/sfx/2639/2639-preview.mp3' },
       { key: 'sphere_2', url: 'https://assets.mixkit.co/active_storage/sfx/3176/3176-preview.mp3' },
       { key: 'sphere_3', url: 'https://assets.mixkit.co/active_storage/sfx/3161/3161-preview.mp3' },
-      { key: 'sphere_4', url: 'https://assets.mixkit.co/active_storage/sfx/3024/3024-preview.mp3' },
+      { key: 'sphere_4', url: 'https://assets.mixkit.co/active_storage/sfx/3161/3161-preview.mp3' },
       { key: 'sphere_last', url: 'https://assets.mixkit.co/active_storage/sfx/811/811-preview.mp3' },
-      { key: 'fullscreen_on', url: 'https://assets.mixkit.co/active_storage/sfx/890/890-preview.mp3' },
+      { key: 'fullscreen_on', url: 'https://assets.mixkit.co/active_storage/sfx/913/913-preview.mp3' },
       { key: 'fullscreen_off', url: 'https://assets.mixkit.co/active_storage/sfx/913/913-preview.mp3' },
-      { key: 'profile_more', url: 'https://assets.mixkit.co/active_storage/sfx/183/183-preview.mp3' },
+      { key: 'profile_more', url: 'https://assets.mixkit.co/active_storage/sfx/900/900-preview.mp3' },
       { key: 'sphere_stop_first', url: 'https://assets.mixkit.co/active_storage/sfx/546/546-preview.mp3' },
       { key: 'industries_12', url: 'https://assets.mixkit.co/active_storage/sfx/2629/2629-preview.mp3' },
       { key: 'bg_ambient_1', url: 'https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3' },
-      { key: 'bg_ambient_2', url: 'https://assets.mixkit.co/active_storage/sfx/2008/2008-preview.mp3' },
-      { key: 'box_point_1', url: 'https://assets.mixkit.co/active_storage/sfx/2008/2008-preview.mp3' },
-      { key: 'box_point_2', url: 'https://assets.mixkit.co/active_storage/sfx/3169/3169-preview.mp3' },
+      { key: 'bg_ambient_2', url: 'https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3' },
+      { key: 'box_point_1', url: 'https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3' },
+      { key: 'box_point_2', url: 'https://assets.mixkit.co/active_storage/sfx/2632/2632-preview.mp3' },
       { key: 'box_point_3', url: 'https://assets.mixkit.co/active_storage/sfx/912/912-preview.mp3' },
-      { key: 'box_point_4', url: 'https://assets.mixkit.co/active_storage/sfx/1471/1471-preview.mp3' },
-      { key: 'box_point_5', url: 'https://assets.mixkit.co/active_storage/sfx/1469/1469-preview.mp3' },
+      { key: 'box_point_4', url: 'https://assets.mixkit.co/active_storage/sfx/2632/2632-preview.mp3' },
+      { key: 'box_point_5', url: 'https://assets.mixkit.co/active_storage/sfx/2632/2632-preview.mp3' },
       { key: 'box_point_6', url: 'https://assets.mixkit.co/active_storage/sfx/1461/1461-preview.mp3' },
-      { key: 'box_point_7', url: 'https://assets.mixkit.co/active_storage/sfx/3205/3205-preview.mp3' },
+      { key: 'box_point_7', url: 'https://assets.mixkit.co/active_storage/sfx/2632/2632-preview.mp3' },
       { key: 'point_reveal', url: 'https://assets.mixkit.co/active_storage/sfx/2632/2632-preview.mp3' },
       { key: 'typewriter', url: 'https://assets.mixkit.co/active_storage/sfx/2529/2529-preview.mp3' },
     ];
@@ -107,78 +150,47 @@ export const StoryEngine: React.FC = () => {
     };
     document.addEventListener('fullscreenchange', handleFullscreenChange);
 
-
-    const handleFirstInteraction = () => {
-      audioManager.init();
-      audioManager.playSound('open', 0.65);
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('touchstart', handleFirstInteraction);
+    const handleUserGesture = () => {
+      startAudioPlayback();
     };
-    document.addEventListener('click', handleFirstInteraction);
-    document.addEventListener('touchstart', handleFirstInteraction);
+
+    // Attempt playback immediately
+    startAudioPlayback();
+
+    window.addEventListener('click', handleUserGesture);
+    window.addEventListener('touchstart', handleUserGesture);
+    window.addEventListener('keydown', handleUserGesture);
+    window.addEventListener('pointerdown', handleUserGesture);
 
     return () => {
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', handleUserGesture);
+      window.removeEventListener('touchstart', handleUserGesture);
+      window.removeEventListener('keydown', handleUserGesture);
+      window.removeEventListener('pointerdown', handleUserGesture);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
-  }, []);
+  }, [startAudioPlayback]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      if (currentSceneIndex >= 0 || isMusicLoaded) {
-        audioRef.current.volume = 0.25;
-        audioRef.current.play().catch(e => console.log('Audio playback failed:', e));
-      } else {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    }
-  }, [currentSceneIndex, isMusicLoaded]);
+    startAudioPlayback();
+  }, [isMusicMuted, currentSceneIndex, startAudioPlayback]);
 
-  const isCover = currentSceneIndex === -1;
-  const currentScene = isCover ? { ...storyScenes[0], id: 'scene_cover' } : storyScenes[currentSceneIndex];
-
-  // Identify slide content density to compute dynamic Auto Play duration (5000ms - 10000ms)
+  // Identify slide content density to compute dynamic Auto Play duration
   const getAutoPlayDuration = (scene: SceneConfig): number => {
-    if (isCover) return 6000; // Cover page is 6 seconds
-    if (!scene) return 6000;
+    if (isCover) return 2000;
+    if (!scene) return 2000;
 
-    const isChapter = scene.headline?.startsWith('CHAPTER');
-    const hasDescription = !isChapter && !!scene.supportingSentence;
+    const details = getSlideAnimationDetails(scene);
     
-    let pointsCount = 0;
-    if (scene.id === 'scene_03') pointsCount = 9; // 9 chapters
-    else if (scene.id === 'scene_31') pointsCount = 6; // 6 CMS cards
-    else if (scene.id === 'scene_61') pointsCount = 6; // 6 resource cards
-    else if (scene.id === 'scene_63') pointsCount = 6; // 6 link cards
-    else if (scene.points) pointsCount = scene.points.length;
+    // User requested: "Jika di dalam slide animasinya belum selesai semua jangan auto slide langsung harus nunggu semuanya selesai terlebih dahulu setelah itu ada jeda 1,5 detik baru next slide."
+    // Wait for all slide animations to finish (details.totalDuration) and then add exactly 1.5 seconds (1500ms) of delay.
+    const totalDurationMs = (details.totalDuration + 1.5) * 1000;
 
-    const hasPoints = pointsCount > 0;
-
-    // Heading typing duration (at least 3.5 seconds)
-    const headingText = isChapter ? scene.headline : (scene.headline || '');
-    const headingDuration = Math.max(3.5, headingText.length * 0.05);
-
-    // Description typing duration (at least 4.0 seconds if present)
-    const descriptionText = hasDescription ? (scene.supportingSentence || '') : '';
-    const descriptionDuration = hasDescription ? Math.max(4.0, descriptionText.length * 0.04) : 0;
-
-    // Points appear staggered by 0.4s each
-    const pointsDuration = hasPoints ? pointsCount * 0.4 : 0;
-
-    // Let's add 0.1s initial delay before typing starts
-    const totalAnimationDuration = 0.1 + headingDuration + descriptionDuration + pointsDuration;
-
-    // Add 2.0 seconds buffer after the animation sequence finishes for the user to read
-    const totalDurationMs = (totalAnimationDuration + 2.0) * 1000;
-
-    // Clamp duration safely (at least 6000ms)
-    return Math.max(6000, Math.floor(totalDurationMs));
+    return Math.max(2500, Math.floor(totalDurationMs));
   };
 
   const getMaxStepsForScene = (scene: SceneConfig) => {
-    if (scene.headline?.startsWith('CHAPTER')) return 1;
+    if (isChapterSlide(scene.id)) return 2;
     if (scene.points && scene.points.length > 0) return 3;
     if (scene.supportingSentence) return 2;
     return 1;
@@ -189,6 +201,7 @@ export const StoryEngine: React.FC = () => {
     if (isCover) {
       setCurrentSceneIndex(0);
       setRevealStep(3);
+      startAudioPlayback();
       return;
     }
 
@@ -198,6 +211,7 @@ export const StoryEngine: React.FC = () => {
       setCurrentSceneIndex(prev => prev + 1);
       setRevealStep(3);
     }
+    startAudioPlayback();
   };
 
   const prevStep = () => {
@@ -213,6 +227,7 @@ export const StoryEngine: React.FC = () => {
       setCurrentSceneIndex(-1);
       setRevealStep(3);
     }
+    startAudioPlayback();
   };
 
   useEffect(() => {
@@ -240,15 +255,12 @@ export const StoryEngine: React.FC = () => {
 
   // Auto Play Timer Logic (Dynamic 5s - 10s depending on content)
   useEffect(() => {
-    if (!isPlaying || isSearchOpen) return;
+    if (!isPlaying || isSearchOpen || isCover) return;
 
     const duration = getAutoPlayDuration(currentScene);
 
     const timer = setTimeout(() => {
-      if (isCover) {
-        setCurrentSceneIndex(0);
-        setRevealStep(1);
-      } else if (
+      if (
         currentSceneIndex === storyScenes.length - 1 &&
         (!isPresentationMode || revealStep >= getMaxStepsForScene(currentScene))
       ) {
@@ -294,40 +306,15 @@ export const StoryEngine: React.FC = () => {
     };
   }, [currentSceneIndex, storyScenes.length]);
 
-  // Navbar Auto-Hide Logic: Auto hide after 3 seconds if navbar area is untouched
+  // Navbar Auto-Hide Logic:
+  // ONLY appears when the user's cursor hovers the navbar area at the bottom (or search modal is active)
   useEffect(() => {
-    if (isCover) {
+    if (isCover || isSearchOpen || isHoveringNavbar) {
       setIsNavbarVisible(true);
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-      return;
+    } else {
+      setIsNavbarVisible(false);
     }
-
-    if (isSearchOpen) {
-      setIsNavbarVisible(true);
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-      return;
-    }
-
-    // If the user is currently hovering/touching the navbar area, keep it visible and clear timer
-    if (isHoveringNavbar) {
-      setIsNavbarVisible(true);
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-      return;
-    }
-
-    // If it is currently visible but not hovered, let's start a 3-second countdown to hide it.
-    // If it's already hidden, we do NOT show it or set any timer.
-    if (isNavbarVisible) {
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-      hideTimerRef.current = setTimeout(() => {
-        setIsNavbarVisible(false);
-      }, 3000);
-    }
-
-    return () => {
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    };
-  }, [isCover, isSearchOpen, isHoveringNavbar, isNavbarVisible]);
+  }, [isCover, isSearchOpen, isHoveringNavbar]);
 
   // Handle Left Click for Next Page
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -370,60 +357,14 @@ export const StoryEngine: React.FC = () => {
         currentIndex={currentSceneIndex}
       />
       
-      <audio 
-        ref={audioRef} 
-        src="https://herkcjez4t5tfiiv.public.blob.vercel-storage.com/Minor_Horizon.mp3" 
-        preload="auto" 
-        loop 
-        onCanPlay={(e) => { 
-          e.currentTarget.volume = 0.25; 
-          if (currentSceneIndex >= 0 || isMusicLoaded) {
-            e.currentTarget.play().catch(() => {});
-          }
-        }} 
-      />
-      
       {/* Top Header with WPCC & WP Logos (Only shown on Slides, NOT on Cover or Scene 64) */}
       {(!isCover && currentScene.id !== 'scene_64') && (
-        <header className="absolute top-0 left-0 w-full p-4 md:p-6 flex justify-between items-center z-40 pointer-events-auto">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3"
-          >
-            <button 
-              onClick={() => {
-                setCurrentSceneIndex(-1);
-                setRevealStep(1);
-              }} 
-              className="flex items-center gap-2 group cursor-pointer border-none bg-transparent outline-none"
-              title="Kembali ke Cover Presentasi"
-            >
-              <motion.img 
-                layoutId="wpcc-header-logo"
-                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibSOq5GIr9KBMVJU2-7b8EyeOf8FSYqIEMSLvkuN6GPsWpk6lzvBrDnLjfbGa13Y2uKnuyGKfePOn6p138AgUQVaSPf5D25rCV9uxOa4oUReEwwWjFNmdore7sq9qmN4ozTBejMkQCZHYi8PtptE1VTshNsj7Lbg0tbkup4F14pRjuhbOw2IHz5vTQobM/s1600/wpcc-logo-horizontal-white.png" 
-                alt="WPCC Logo" 
-                className="h-9 md:h-11 w-auto object-contain transition-transform group-hover:scale-105" 
-              />
-            </button>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-2 md:gap-3"
-          >
-            
-            <motion.img
-              layoutId="wp-header-logo"
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-ML1gSOI3LDIMf_vNLeahgkoFWZaat8RgxKijhpHnWHed7N6skUY8MdjVHoanvWNiEeCcIBQVAQv7FOkNlpUUXrMnczmlFw1Aio_1O-krIAZMFIT3XkhrTVFLC1XOsSWwmZ4fnYIYZMg1xGJxe41aa5yGSlxCbvihCmkg8PIUFbIZKnUMziMg6LcmET8/s1600/wordpress-logo.png"
-              alt="WordPress Logo"
-              className="h-8 md:h-10 w-auto object-contain transition-transform group-hover:scale-105"
-            />
-          </motion.div>
-        </header>
+        <Header 
+          onBackToCover={() => {
+            setCurrentSceneIndex(-1);
+            setRevealStep(1);
+          }} 
+        />
       )}
 
       {/* Accessibility Live Region */}
@@ -460,81 +401,392 @@ export const StoryEngine: React.FC = () => {
 
       {/* 3D Canvas Background */}
 
-      <div className="absolute inset-0 z-[5] pointer-events-none">
-        <Canvas aria-hidden="true" style={{ pointerEvents: 'none' }} dpr={[1, 2]}>
+      <div className="absolute inset-0 z-[5] pointer-events-none" style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}>
+        <Canvas 
+          aria-hidden="true" 
+          style={{ pointerEvents: 'none', transform: 'translateZ(0)' }} 
+          dpr={[1, Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 2 : 2, 2)]}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance', preserveDrawingBuffer: true }}
+        >
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.2} penumbra={1} intensity={2} color="#ffffff" />
           <spotLight position={[-10, -10, -10]} angle={0.2} penumbra={1} intensity={1} color="#3858E9" />
           
           <Sparkles count={40} scale={12} size={1.5} speed={0.3} opacity={0.15} />
           
-          <GlobalCanvas scene={currentScene} />
+          <GlobalCanvas scene={currentScene} isSpinningCover={isSpinningCover} />
         </Canvas>
       </div>
 
       {/* HTML UI Overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center pointer-events-none p-6 md:p-12">
+      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center pointer-events-none p-2 sm:p-4 md:p-6 lg:p-10 max-w-[1800px] mx-auto w-full h-full overflow-hidden">
         <AnimatePresence mode="wait">
           {isCover ? (
             <CoverPage 
               key="cover_page" 
+              isMusicMuted={isMusicMuted}
+              onToggleMusic={toggleMusic}
+              onSpinStart={() => setIsSpinningCover(true)}
               onStart={() => {
-                setIsMusicLoaded(true);
+                setIsSpinningCover(false);
                 setCurrentSceneIndex(0);
                 setRevealStep(3);
               }} 
             />
-          ) : currentScene.id === 'scene_02' ? (
-            <Scene02 
+          ) :           currentScene.id === 'scene_01' ? (
+            <Slide01 
+              key="scene_01" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_02' ? (
+            <Slide02 
               key="scene_02" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
               revealStep={revealStep}
             />
-          ) : currentScene.id === 'scene_03' ? (
-            <Scene03 
+          )
+          : currentScene.id === 'scene_03' ? (
+            <Slide03 
               key="scene_03" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
               revealStep={revealStep}
             />
-          ) : currentScene.id === 'scene_31' ? (
-            <Scene31 
+          )
+          : currentScene.id === 'scene_04' ? (
+            <Slide04 
+              key="scene_04" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_05' ? (
+            <Slide05 
+              key="scene_05" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_06' ? (
+            <Slide06 
+              key="scene_06" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_07' ? (
+            <Slide07 
+              key="scene_07" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_08' ? (
+            <Slide08 
+              key="scene_08" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_09' ? (
+            <Slide09 
+              key="scene_09" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_10' ? (
+            <Slide10 
+              key="scene_10" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_11' ? (
+            <Slide11 
+              key="scene_11" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_12' ? (
+            <Slide12 
+              key="scene_12" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_13' ? (
+            <Slide13 
+              key="scene_13" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_14' ? (
+            <Slide14 
+              key="scene_14" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_15' ? (
+            <Slide15 
+              key="scene_15" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_16' ? (
+            <Slide16 
+              key="scene_16" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_17' ? (
+            <Slide17 
+              key="scene_17" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_18' ? (
+            <Slide18 
+              key="scene_18" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_19' ? (
+            <Slide19 
+              key="scene_19" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_20' ? (
+            <Slide20 
+              key="scene_20" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_21' ? (
+            <Slide21 
+              key="scene_21" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_22' ? (
+            <Slide22 
+              key="scene_22" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_23' ? (
+            <Slide23 
+              key="scene_23" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_24' ? (
+            <Slide24 
+              key="scene_24" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_25' ? (
+            <Slide25 
+              key="scene_25" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_26' ? (
+            <Slide26 
+              key="scene_26" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_27' ? (
+            <Slide27 
+              key="scene_27" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_28' ? (
+            <Slide28 
+              key="scene_28" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_29' ? (
+            <Slide29 
+              key="scene_29" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_30' ? (
+            <Slide30 
+              key="scene_30" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_31' ? (
+            <Slide31 
               key="scene_31" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
               revealStep={revealStep}
             />
-          ) : currentScene.id === 'scene_50' ? (
-            <Scene50 
-              key="scene_50" 
+          )
+          : currentScene.id === 'scene_32' ? (
+            <Slide32 
+              key="scene_32" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
               revealStep={revealStep}
             />
-          ) : currentScene.id === 'scene_61' ? (
-            <Scene61 
-              key="scene_61" 
+          )
+          : currentScene.id === 'scene_33' ? (
+            <Slide33 
+              key="scene_33" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
               revealStep={revealStep}
             />
-          ) : currentScene.id === 'scene_63' ? (
-            <Scene63 
-              key="scene_63" 
+          )
+          : currentScene.id === 'scene_34' ? (
+            <Slide34 
+              key="scene_34" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
               revealStep={revealStep}
             />
-          ) : currentScene.id === 'scene_64' ? (
-            <Scene64 
-              key="scene_64" 
+          )
+          : currentScene.id === 'scene_35' ? (
+            <Slide35 
+              key="scene_35" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_36' ? (
+            <Slide36 
+              key="scene_36" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_37' ? (
+            <Slide37 
+              key="scene_37" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_38' ? (
+            <Slide38 
+              key="scene_38" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_39' ? (
+            <Slide39 
+              key="scene_39" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_40' ? (
+            <Slide40 
+              key="scene_40" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}
@@ -558,159 +810,44 @@ export const StoryEngine: React.FC = () => {
 
       {/* Footer */}
       {!isCover && (
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full px-6 py-4 flex items-center justify-between text-slate-400 text-xs font-mono z-[20] pointer-events-none"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.35 }}
-        >
-          <div className="hidden sm:block">© 2026 WordPress Campus Connect</div>
-          <div className="block sm:hidden">© 2026 WPCC</div>
-          <div className="text-center absolute left-1/2 -translate-x-1/2">Febri Suryanto</div>
-          <div className="font-bold text-white/80">
-            {(currentSceneIndex + 1).toString().padStart(2, '0')}<span className="text-white/30 font-normal mx-1" aria-hidden="true">/</span>{storyScenes.length}
-          </div>
-        </motion.div>
+        <Footer 
+          currentSceneIndex={currentSceneIndex} 
+          totalScenes={storyScenes.length} 
+        />
       )}
 
       {/* UI Controls Bar (Navbar - Only shown on Slides, NOT on Cover) */}
       {!isCover && (
-        <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[30] pb-6 md:pb-8 pt-12 px-8 flex items-end justify-center pointer-events-auto"
-          style={{ width: 'min(480px, 100%)' }}
-          onMouseEnter={() => {
-            setIsHoveringNavbar(true);
+        <Navigation 
+          isNavbarVisible={isNavbarVisible}
+          isHoveringNavbar={isHoveringNavbar}
+          setIsHoveringNavbar={setIsHoveringNavbar}
+          onHome={() => {
+            setCurrentSceneIndex(-1);
+            setRevealStep(1);
           }}
-          onMouseMove={() => {
-            setIsHoveringNavbar(true);
+          onPrev={prevStep}
+          onNext={nextStep}
+          prevDisabled={currentSceneIndex <= 0 && revealStep <= 1}
+          nextDisabled={currentSceneIndex === storyScenes.length - 1 && revealStep >= getMaxStepsForScene(currentScene)}
+          isPlaying={isPlaying}
+          onTogglePlay={() => setIsPlaying(prev => !prev)}
+          isPresentationMode={isPresentationMode}
+          onTogglePresentation={() => {
+            setIsPresentationMode(prev => !prev);
+            setRevealStep(3);
           }}
-          onMouseLeave={() => {
-            setIsHoveringNavbar(false);
+          isMusicMuted={isMusicMuted}
+          onToggleMusic={toggleMusic}
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onToggleFullscreen={() => {
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen().catch(() => {});
+            } else if (document.exitFullscreen) {
+              document.exitFullscreen().catch(() => {});
+            }
           }}
-          onTouchStart={() => {
-            setIsHoveringNavbar(true);
-          }}
-          onTouchEnd={() => {
-            setIsHoveringNavbar(false);
-          }}
-        >
-          <motion.div 
-            className="glass-nav flex items-center gap-2 md:gap-3 px-4 py-2 rounded-full"
-            initial={{ y: 0, opacity: 1 }}
-            animate={{ 
-              y: !isNavbarVisible ? 100 : 0, 
-              opacity: !isNavbarVisible ? 0 : 1 
-            }}
-            style={{ pointerEvents: isNavbarVisible ? 'auto' : 'none' }}
-            transition={{ duration: 0.35, ease: 'easeInOut' }}
-          >
-            {/* Cover Home Button */}
-            <button 
-              onClick={() => {
-                setCurrentSceneIndex(-1);
-                setRevealStep(1);
-              }} 
-              className="text-slate-300 hover:text-blue-300 hover:bg-blue-500/20 p-1.5 rounded-full transition-colors cursor-pointer flex items-center justify-center group"
-              title="Kembali ke Cover"
-              aria-label="Kembali ke Cover"
-            >
-              <Home className="w-4 h-4 text-slate-300 group-hover:text-blue-400 transition-colors" />
-            </button>
-
-            <div className="w-px h-4 bg-white/15 mx-0.5" />
-
-            {/* Prev Slide / Step */}
-            <button 
-              onClick={prevStep} 
-              disabled={currentSceneIndex <= 0 && revealStep <= 1} 
-              className="text-slate-300 hover:text-blue-300 disabled:opacity-30 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-full hover:bg-blue-500/20 group"
-              title="Slide / Tahap Sebelumnya"
-              aria-label="Slide / Tahap Sebelumnya"
-            >
-              <ChevronLeft className="w-4 h-4 text-slate-300 group-hover:text-blue-400 transition-colors" />
-            </button>
-            
-            {/* Next Slide / Step */}
-            <button 
-              onClick={nextStep} 
-              disabled={currentSceneIndex === storyScenes.length - 1 && revealStep >= getMaxStepsForScene(currentScene)} 
-              className="text-slate-300 hover:text-blue-300 disabled:opacity-30 transition-colors cursor-pointer flex items-center justify-center p-1.5 rounded-full hover:bg-blue-500/20 group"
-              title="Slide / Tahap Selanjutnya"
-              aria-label="Slide / Tahap Selanjutnya"
-            >
-              <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-blue-400 transition-colors" />
-            </button>
-            
-            <div className="w-px h-4 bg-white/15 mx-0.5" />
-
-            {/* Auto Play Toggle Button */}
-            <button
-              onClick={() => setIsPlaying(prev => !prev)}
-              className={`p-1.5 rounded-full transition-all cursor-pointer flex items-center justify-center border ${
-                isPlaying 
-                  ? 'bg-blue-600 border-blue-400 text-white shadow-[0_0_12px_rgba(59,130,246,0.5)]' 
-                  : 'text-slate-300 border-transparent hover:text-blue-300 hover:bg-blue-500/20'
-              }`}
-              title={isPlaying ? "Jeda Putar Otomatis (Pause)" : "Mulai Putar Otomatis (Auto Play)"}
-              aria-label={isPlaying ? "Jeda Putar Otomatis (Pause)" : "Mulai Putar Otomatis (Auto Play)"}
-              aria-pressed={isPlaying}
-            >
-              {isPlaying ? (
-                <Pause className="w-4 h-4 text-white animate-pulse" />
-              ) : (
-                <Play className="w-4 h-4 text-slate-300 group-hover:text-blue-400 transition-colors ml-0.5" />
-              )}
-            </button>
-
-            <div className="w-px h-4 bg-white/15 mx-0.5" />
-
-            {/* Mode Presentasi Toggle Button - Uniform styling */}
-            <button
-              onClick={() => {
-                setIsPresentationMode(prev => !prev);
-                setRevealStep(3);
-              }}
-              className={`p-1.5 rounded-full transition-all cursor-pointer flex items-center justify-center border ${
-                isPresentationMode 
-                  ? 'bg-blue-600 border-blue-400 text-white shadow-[0_0_12px_rgba(59,130,246,0.5)]' 
-                  : 'text-slate-300 border-transparent hover:text-blue-300 hover:bg-blue-500/20'
-              }`}
-              title={isPresentationMode ? "Nonaktifkan Mode Presentasi" : "Aktifkan Mode Presentasi"}
-              aria-label={isPresentationMode ? "Nonaktifkan Mode Presentasi" : "Aktifkan Mode Presentasi"}
-              aria-pressed={isPresentationMode}
-            >
-              <Presentation className={`w-4 h-4 ${isPresentationMode ? 'text-white' : 'text-slate-300'}`} />
-            </button>
-
-            <div className="w-px h-4 bg-white/15 mx-0.5" />
-
-            {/* Quick Search Button */}
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="text-slate-300 hover:text-blue-300 hover:bg-blue-500/20 p-1.5 rounded-full transition-colors cursor-pointer flex items-center justify-center group"
-              title="Cari Slide (Ctrl+K)"
-              aria-label="Cari Slide (Ctrl+K)"
-            >
-              <Search className="w-4 h-4 text-slate-300 group-hover:text-blue-400 transition-colors" />
-            </button>
-            
-            {/* Fullscreen Toggle */}
-            <button 
-              onClick={() => {
-                if (!document.fullscreenElement) {
-                  document.documentElement.requestFullscreen().catch(() => {});
-                } else if (document.exitFullscreen) {
-                  document.exitFullscreen().catch(() => {});
-                }
-              }} 
-              className="text-slate-300 hover:text-blue-300 hover:bg-blue-500/20 p-1.5 rounded-full transition-colors cursor-pointer flex items-center justify-center group" 
-              title="Toggle Fullscreen"
-              aria-label="Toggle Fullscreen"
-            >
-              <Maximize className="w-4 h-4 text-slate-300 group-hover:text-blue-400 transition-colors" />
-            </button>
-          </motion.div>
-        </div>
+        />
       )}
     </div>
   );
