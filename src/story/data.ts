@@ -292,6 +292,7 @@ export const storyScenes: SceneConfig[] = [
     points: [
       "WordCamp (Konferensi skala besar tingkat kota, regional, hingga benua yang dihadiri ribuan pecinta WordPress)",
       "Local Meetup (Pertemuan berkala bulanan yang diadakan komunitas lokal secara gratis untuk bertukar pengetahuan)",
+      "Meetup Serang (meetup.com/wpserang)",
       "Networking Luas (Tempat berkumpulnya pebisnis, developer, desainer, blogger, dan pemula untuk berkolaborasi)",
       "Sharing is Caring (Semua pembicara dan panitia adalah relawan yang murni ingin berkontribusi bagi komunitas)"
     ],
@@ -514,6 +515,7 @@ export const storyScenes: SceneConfig[] = [
     points: [
       "Learn WordPress (Situs pembelajaran resmi dari WordPress yang menyediakan tutorial gratis, kursus, dan webinar)",
       "WordPress.org Codex (Dokumentasi teknis lengkap mengenai kode, fungsi, dan standar pengembangan WordPress)",
+      "Meetup Serang (meetup.com/wpserang)",
       "Komunitas Lokal (Bergabung dengan grup Facebook, Telegram, dan forum diskusi WordPress Indonesia)",
       "Tutorial Online (Manfaatkan blog, YouTube, dan kursus online terpercaya untuk terus menambah wawasan)"
     ],

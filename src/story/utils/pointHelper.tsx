@@ -814,6 +814,14 @@ export const getPointDetails = (pointText: string, sceneHeadline?: string): Poin
     };
   }
 
+  if (lower.includes('meetup.com/wpserang') || lower.includes('wpserang') || lower.includes('meetup serang')) {
+    return { originalText: text,
+      title: 'WordPress Meetup Serang',
+      description: 'Komunitas lokal resmi WordPress di Serang untuk belajar, berbagi ilmu, dan berjejaring gratis.',
+      icon: Users
+    };
+  }
+
 
   // Slide 12 (Mengapa CMS?)
   if (lower.includes("mempercepat pembuatan website")) {

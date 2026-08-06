@@ -1,9 +1,22 @@
-export class AudioManager {
+export class SFXManager {
   private ctx: AudioContext | null = null;
   private buffers: Record<string, AudioBuffer> = {};
   private loading: Record<string, boolean> = {};
   private urls: Record<string, string> = {};
   private audioPool: Record<string, HTMLAudioElement[]> = {};
+  private sfxVolume: number = (() => {
+    const saved = localStorage.getItem('bg_sfx_volume');
+    return saved ? parseFloat(saved) : 0.75; // Default 75%
+  })();
+
+  setSfxVolume(val: number) {
+    this.sfxVolume = Math.max(0, Math.min(1, val));
+    localStorage.setItem('bg_sfx_volume', String(this.sfxVolume));
+  }
+
+  getSfxVolume(): number {
+    return this.sfxVolume;
+  }
 
   init() {
     if (!this.ctx) {
@@ -83,6 +96,8 @@ export class AudioManager {
 
     this.init();
 
+    const scaledVol = volume * this.sfxVolume;
+
     // 1. Try Web Audio API if buffer is decoded
     if (this.ctx && this.buffers[key]) {
       if (this.ctx.state === 'suspended') {
@@ -92,7 +107,7 @@ export class AudioManager {
         const source = this.ctx.createBufferSource();
         source.buffer = this.buffers[key];
         const gainNode = this.ctx.createGain();
-        gainNode.gain.value = Math.min(1.0, Math.max(0, volume));
+        gainNode.gain.value = Math.min(1.0, Math.max(0, scaledVol));
         source.connect(gainNode);
         gainNode.connect(this.ctx.destination);
         source.start(0);
@@ -102,16 +117,37 @@ export class AudioManager {
       }
     }
 
-    // 2. Fallback to HTML5 Audio Element if URL exists
+    // 2. Fallback to HTML5 Audio Element using Audio Pool
     const url = this.urls[key];
     if (url) {
       try {
-        const audio = new Audio(url);
-        audio.volume = Math.min(1.0, Math.max(0, volume));
+        if (!this.audioPool[key]) {
+          this.audioPool[key] = [];
+        }
+
+        // Find an idle audio element from the pool
+        let audio = this.audioPool[key].find(a => a.paused || a.ended);
+
+        if (!audio) {
+          // If pool is not too large, create a new one, otherwise reuse the oldest one
+          if (this.audioPool[key].length < 10) {
+            audio = new Audio(url);
+            audio.preload = 'auto';
+            this.audioPool[key].push(audio);
+          } else {
+            // Reuse the first one by resetting it
+            audio = this.audioPool[key][0];
+            audio.pause();
+            audio.currentTime = 0;
+          }
+        }
+
+        audio.volume = Math.min(1.0, Math.max(0, scaledVol));
+        audio.currentTime = 0;
         const playPromise = audio.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            this.playSynthFallback(key, volume);
+            this.playSynthFallback(key, scaledVol);
           });
         }
         return;
@@ -121,11 +157,12 @@ export class AudioManager {
     }
 
     // 3. Fallback to Web Audio Synthetic SFX Generator
-    this.playSynthFallback(key, volume);
+    this.playSynthFallback(key, scaledVol);
   }
 
   playSoundLoop(key: string, volume: number = 1.0, durationMs: number): any {
     this.init();
+    const scaledVol = volume * this.sfxVolume;
     if (this.ctx && this.buffers[key]) {
       if (this.ctx.state === 'suspended') {
         this.ctx.resume().catch(() => {});
@@ -135,7 +172,7 @@ export class AudioManager {
         source.buffer = this.buffers[key];
         source.loop = true;
         const gainNode = this.ctx.createGain();
-        gainNode.gain.value = Math.min(1.0, Math.max(0, volume));
+        gainNode.gain.value = Math.min(1.0, Math.max(0, scaledVol));
         source.connect(gainNode);
         gainNode.connect(this.ctx.destination);
         source.start(0);
@@ -156,7 +193,7 @@ export class AudioManager {
       try {
         const audio = new Audio(url);
         audio.loop = true;
-        audio.volume = Math.min(1.0, Math.max(0, volume));
+        audio.volume = Math.min(1.0, Math.max(0, scaledVol));
         audio.play().catch(() => {});
         setTimeout(() => {
           try {
@@ -168,7 +205,7 @@ export class AudioManager {
       } catch (e) {}
     }
 
-    this.playSynthFallback(key, volume);
+    this.playSynthFallback(key, scaledVol);
     return null;
   }
 
@@ -227,5 +264,6 @@ export class AudioManager {
   }
 }
 
-export const audioManager = new AudioManager();
+export const sfxManager = new SFXManager();
+export const audioManager = sfxManager;
 

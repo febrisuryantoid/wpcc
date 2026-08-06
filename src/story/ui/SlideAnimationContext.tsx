@@ -44,10 +44,30 @@ export const useSlideAnimation = () => {
 
 export const getPointsCountForScene = (scene: SceneConfig): number => {
   if (!scene) return 0;
-  if (scene.id === 'scene_03') return 9; // 9 chapters
-  if (scene.id === 'scene_31') return 6; // 6 CMS cards
-  if (scene.id === 'scene_61') return 6; // 6 resource cards
-  if (scene.id === 'scene_63') return 6; // 6 link cards
+  
+  // Specific slide item overrides to match actual custom visual cards/steps
+  switch (scene.id) {
+    case 'scene_01': return 0; // Cover page
+    case 'scene_02': return 8; // Speaker Profile (needs more time for multiple custom animations/staggers)
+    case 'scene_03': return 0; // Chapter 1 Title
+    case 'scene_04': return 5; // Objectives
+    case 'scene_05': return 5; // Agenda Steps
+    case 'scene_07': return 6; // Flow Nodes (6 workflow diagram boxes)
+    case 'scene_08': return 5; // Analogy Cards
+    case 'scene_10': return 5; // History Timeline
+    case 'scene_11': return 6; // CMS Market Share Data
+    case 'scene_12': return 5; // Comparison Rows
+    case 'scene_13': return 0; // Chapter 2 Title
+    case 'scene_15': return 5; // Career Roles
+    case 'scene_18': return 0; // Chapter 3 Title
+    case 'scene_23': return 0; // Chapter 4 Title
+    case 'scene_32': return 4; // Workflow Steps
+    case 'scene_33': return 0; // Chapter 5 Title
+    case 'scene_36': return 0; // Chapter 6 Title
+    case 'scene_40': return 0; // Closing slide
+  }
+
+  // Fallback to config points array if defined
   if (scene.points) return scene.points.length;
   return 0;
 };

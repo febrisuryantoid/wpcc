@@ -20,6 +20,17 @@ interface SceneLayoutProps {
   revealStep?: number;
 }
 
+const extractUrl = (str: string): string | null => {
+  const httpMatch = str.match(/https?:\/\/[^\s\)]+/);
+  if (httpMatch) return httpMatch[0];
+
+  const domainMatch = str.match(/(?:[a-zA-Z0-9-]+\.)+(?:com|org|net|me|info|gov|edu|id)(?:\/[^\s\)]*)?/i);
+  if (domainMatch) {
+    return `https://${domainMatch[0]}`;
+  }
+  return null;
+};
+
 const getGridClass = (count: number, hasIllustration: boolean) => {
   if (hasIllustration) {
     if (count > 4) return 'grid-cols-2 sm:grid-cols-2 w-full';
@@ -179,8 +190,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
               >
                 {scene.points.map((point, idx) => {
                   const pointData = getPointDetails(point, scene.headline);
-                  const isUrl = point.includes('.com') || point.includes('.org') || point.startsWith('http');
-                  const url = isUrl ? (point.startsWith('http') ? point : `https://${point}`) : null;
+                  const url = extractUrl(point);
                   const isFive = scene.points.length === 5;
                   
                   let layoutClass = "h-full";
@@ -368,8 +378,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
               >
                 {scene.points.map((point, idx) => {
                   const pointData = getPointDetails(point, scene.headline);
-                  const isUrl = point.includes('.com') || point.includes('.org') || point.startsWith('http');
-                  const url = isUrl ? (point.startsWith('http') ? point : `https://${point}`) : null;
+                  const url = extractUrl(point);
                   const isFive = scene.points.length === 5;
                   
                   let layoutClass = "h-full";
