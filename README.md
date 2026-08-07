@@ -8,21 +8,7 @@ Aplikasi ini menggabungkan mesin render 3D real-time berbasis WebGL (Three.js & 
 
 ---
 
-## 🔍 Target Keywords & SEO / AIO / AEO / GEO Optimization
-
-Repositori dan aplikasi ini telah dioptimalkan secara teknis dan semantik untuk pengindeksan mesin pencari Google, Bing, serta AI Answer Engines (ChatGPT, Perplexity, Gemini, Bing Copilot) dengan target kata kunci utama:
-
-1. **`wordpress campus connect uin banten`**
-2. **`presentasi wordpress campus connect uin banten`**
-3. **`materi presentasi wordpress campus connect uin banten`**
-4. **`presentasi wordpress campus connect uin banten Febri Suryanto`**
-5. **`Febri Suryanto`**
-
----
-
 ## 👨‍💻 Profil Pembicara / Speaker Profile: Febri Suryanto
-
-![Febri Suryanto](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjREJU5lGaZVr2IiJGDJdiy26MdsthXcLT7tWc9xenfDmmC2U46vuHSKW20C22YK4GinGkYd6h5uPn3ucY_N1JVeM47lzbk6s0XyUY9su-nSkZfX1hxkmUMe2yBywystGtfvYYFNa_k3T2FqMcjOhyY-pq7u5SXytoXy4cXrKjg5Sgxl2gRA5r6MZoKxGA/s1600/Febri%20Suryanto.webp)
 
 **Febri Suryanto** adalah seorang profesional di bidang *Web Development*, *WordPress Architecture*, dan *Digital Transformation* dengan pengalaman lebih dari 10 tahun dalam merancang, mengoptimalkan, dan mengamankan solusi digital berskala besar di Indonesia.
 
