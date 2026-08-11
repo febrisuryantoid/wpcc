@@ -31,7 +31,7 @@ const Slide01Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-start justify-start pt-[146px] sm:pt-12 p-6 sm:p-12 md:p-16 lg:p-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
+      className="absolute inset-0 flex flex-col items-start justify-start pt-16 sm:pt-12 p-4 sm:p-12 md:p-16 lg:p-24 pb-20 sm:pb-12 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

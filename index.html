@@ -46,6 +46,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#091328" />
+
     <!-- STRUCTURED DATA (JSON-LD SCHEMA FOR SEO, AEO, AIO & GEO) -->
     <script type="application/ld+json">
     {
@@ -202,6 +205,17 @@
   <body class="bg-[#F8FAFC] text-[#1E293B] font-['Inter',sans-serif] antialiased selection:bg-[#3858E9] selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(reg) {
+            console.log('SW registered successfully:', reg.scope);
+          }).catch(function(err) {
+            console.log('SW registration failed:', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
 

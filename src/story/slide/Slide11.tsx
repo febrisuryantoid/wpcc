@@ -158,11 +158,11 @@ const Slide11Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-start pt-[126px] sm:pt-[100px] p-3 sm:p-8 md:p-12 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      className="absolute inset-0 flex flex-col items-center justify-center my-auto pt-16 sm:pt-20 md:pt-24 p-3 sm:p-8 md:p-12 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
+      initial={{ opacity: 0, scale: 0.96, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, scale: 1.04, filter: 'blur(10px)' }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="w-full max-w-6xl mx-auto flex flex-col justify-center h-full">
         {/* Header Section */}

@@ -187,26 +187,39 @@ export const AnimatedBackgrounds: React.FC<AnimatedBackgroundsProps> = ({ sceneI
         ))}
       </div>
 
-      {/* LAYER 6: CINEMATIC SLIDE TRANSITION STARDUST & WARP FLARE BURST */}
+      {/* LAYER 6: PREMIUM FUTURISTIC MORPH TRANSITION FLARE & LIQUID WAVE */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={`cinematic-transition-${sceneIndex}`}
-          initial={{ opacity: 1, scale: 1.2 }}
-          animate={{ opacity: 0, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 pointer-events-none z-[12] mix-blend-screen flex items-center justify-center overflow-hidden"
+          key={`morph-transition-${sceneIndex}`}
+          initial={{ opacity: 0.9, scale: 1.15, filter: 'blur(16px)' }}
+          animate={{ opacity: 0, scale: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 pointer-events-none z-[12] flex items-center justify-center overflow-hidden"
         >
-          {/* Radial Flare Shockwave */}
-          <div 
-            className="w-[800px] h-[800px] rounded-full blur-[80px] opacity-40 animate-ping"
+          {/* Soft Liquid Morphing Glow Blob */}
+          <motion.div 
+            className="w-[900px] h-[600px] rounded-[40%_60%_70%_30%/50%_60%_40%_50%] opacity-25 mix-blend-screen"
             style={{
-              background: `radial-gradient(circle, ${currentTheme.primary} 0%, ${currentTheme.copper} 40%, transparent 70%)`
+              background: `radial-gradient(ellipse at center, ${currentTheme.primary} 0%, ${currentTheme.secondary} 50%, transparent 80%)`,
+              boxShadow: `0 0 100px ${currentTheme.primary}`
             }}
+            animate={{
+              borderRadius: [
+                '40% 60% 70% 30% / 50% 60% 40% 50%',
+                '60% 30% 50% 70% / 40% 50% 60% 30%',
+                '40% 60% 70% 30% / 50% 60% 40% 50%'
+              ],
+              rotate: [0, 15, -10, 0],
+              scale: [1, 1.08, 0.95, 1]
+            }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           />
-          {/* High-speed Light Streak Lines */}
-          <div className="absolute w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent opacity-60 transform rotate-12" />
-          <div className="absolute w-full h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-60 transform -rotate-12" />
+
+          {/* Soft Ambient Radial Glass Reflection */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 via-blue-500/10 to-indigo-500/5 backdrop-blur-[2px] opacity-40 pointer-events-none"
+          />
         </motion.div>
       </AnimatePresence>
     </div>

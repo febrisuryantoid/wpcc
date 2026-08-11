@@ -9,7 +9,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ currentSceneIndex, totalScenes }) => {
   return (
     <motion.div 
-      className="absolute bottom-3 sm:bottom-6 md:bottom-8 left-0 right-0 w-full z-[20] pointer-events-none px-4 sm:px-6 md:px-8 lg:px-12"
+      className="absolute bottom-[10px] left-0 right-0 w-full z-[20] pointer-events-none px-[25px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35 }}

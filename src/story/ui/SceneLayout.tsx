@@ -97,11 +97,11 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
 
   return (
     <motion.div 
-      className={`absolute inset-0 flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-24 px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      className={`absolute inset-0 flex flex-col items-center justify-center my-auto pt-16 sm:pt-20 md:pt-24 px-[25px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full`}
+      initial={{ opacity: 0, scale: 0.96, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, scale: 1.04, filter: 'blur(10px)' }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
       {hasSideImage ? (
         /* Modern 2-Column Layout for slides with sideImage */
@@ -229,7 +229,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
       ) : (
         /* Standard Layout for most slides */
         <div className={`w-full max-w-7xl flex flex-col ${illustration ? 'md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12' : 'items-center'} flex-1 w-full min-h-0`}>
-          <div className={`flex flex-col ${illustration ? 'w-full md:w-1/2 text-left' : (isChapter ? 'w-full items-center text-center' : (isExceptedSlide ? 'w-full items-start sm:items-center text-left sm:text-center' : 'w-full items-center sm:items-center text-center sm:text-center'))} pointer-events-auto flex-1 w-full ${isChapter ? 'justify-center' : 'justify-start sm:justify-center'} mt-2 sm:mt-0`}>
+          <div className={`flex flex-col ${illustration ? 'w-full md:w-1/2 text-left' : (isChapter ? 'w-full items-center text-center' : (isExceptedSlide ? 'w-full items-center text-center' : 'w-full items-center text-center'))} pointer-events-auto flex-1 w-full justify-center my-auto mt-2 sm:mt-0`}>
             
             {hasPoints && (
               <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-blue-600/5 border border-blue-500/10 blur-3xl pointer-events-none -z-10`} />

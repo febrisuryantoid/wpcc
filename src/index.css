@@ -82,11 +82,21 @@
   font-weight: 700 !important;
   line-height: 1.1 !important;
   letter-spacing: -0.02em !important;
-  font-size: 32px !important; /* Mobile */
+  font-size: 30px !important; /* Mobile */
 }
 @media (min-width: 640px) {
   .wpcc-h1 {
-    font-size: 64px !important; /* Desktop */
+    font-size: 64px !important;
+  }
+}
+@media (min-width: 768px) {
+  .wpcc-h1 {
+    font-size: 74px !important; /* Slightly enlarged Desktop H1 */
+  }
+}
+@media (min-width: 1024px) {
+  .wpcc-h1 {
+    font-size: 82px !important; /* Slightly enlarged Desktop H1 */
   }
 }
 
@@ -96,11 +106,21 @@
   font-weight: 700 !important;
   line-height: 1.15 !important;
   letter-spacing: -0.015em !important;
-  font-size: 28px !important; /* Mobile */
+  font-size: 24px !important; /* Mobile */
 }
 @media (min-width: 640px) {
   .wpcc-h2 {
-    font-size: 42px !important; /* Desktop */
+    font-size: 44px !important;
+  }
+}
+@media (min-width: 768px) {
+  .wpcc-h2 {
+    font-size: 50px !important; /* Slightly enlarged Desktop H2 */
+  }
+}
+@media (min-width: 1024px) {
+  .wpcc-h2 {
+    font-size: 56px !important; /* Slightly enlarged Desktop H2 */
   }
 }
 
@@ -109,21 +129,30 @@
   font-family: 'Lora', Georgia, serif !important;
   font-weight: 700 !important;
   line-height: 1.2 !important;
-  font-size: 22px !important; /* Mobile */
+  font-size: 20px !important; /* Mobile */
 }
 @media (min-width: 640px) {
   .wpcc-h3 {
-    font-size: 24px !important; /* Desktop */
+    font-size: 26px !important;
+  }
+}
+@media (min-width: 768px) {
+  .wpcc-h3 {
+    font-size: 30px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .wpcc-h3 {
+    font-size: 32px !important;
   }
 }
 
 /* H4 */
-
 .wpcc-h4 {
   font-family: 'Lora', Georgia, serif !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  font-size: 14px !important; /* Mobile */
+  font-size: 13px !important; /* Mobile */
 }
 @media (min-width: 640px) {
   .wpcc-h4 {
@@ -440,3 +469,38 @@ div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-t
     transform-origin: bottom center;
   }
 }
+
+/* PRINT STYLESHEET / PDF EXPORT PRESET */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 1cm;
+  }
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+  }
+  canvas,
+  .glass-nav,
+  header,
+  footer,
+  nav,
+  button,
+  [aria-label="Navigation"],
+  .pointer-events-none:not(.printable) {
+    display: none !important;
+  }
+  .wpcc-card, div[class*="bg-slate-900"], div[class*="bg-black"], div[class*="backdrop-blur"] {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+  }
+  h1, h2, h3, h4, p, span, div {
+    color: #0f172a !important;
+    text-shadow: none !important;
+  }
+}
+

@@ -62,15 +62,15 @@ export const BoxPoint: React.FC<BoxPointProps> = ({
           </div>
           
           {/* Title */}
-          <h3 className="wpcc-h4 font-bold text-white tracking-tight flex items-center gap-1.5 flex-1 leading-tight w-full break-words text-left">
-            <span className="text-left text-xs sm:text-base">{pointData.title}</span>
+          <h3 className="wpcc-h4 font-bold text-white tracking-tight flex items-center gap-1.5 flex-1 leading-tight w-full break-normal [word-break:keep-all] text-left">
+            <span className="text-left text-xs sm:text-base [word-break:keep-all]">{pointData.title}</span>
             {url && <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400 opacity-60 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5 sm:mt-0" />}
           </h3>
         </div>
 
         {/* Baris 2: Subheading/Description */}
         <div className="flex flex-col text-left w-full pl-0 sm:pl-0 mt-1 sm:mt-1.5">
-          <p className="wpcc-body-normal text-slate-300/90 text-[12px] sm:text-sm leading-relaxed text-left">
+          <p className="wpcc-body-normal text-slate-300/90 text-[12px] sm:text-sm leading-relaxed text-left break-normal [word-break:keep-all] hyphens-none">
             {pointData.description}
           </p>
         </div>

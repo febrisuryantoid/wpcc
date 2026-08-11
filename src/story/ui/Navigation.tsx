@@ -7,7 +7,6 @@ import {
   ChevronRight, 
   Play, 
   Pause, 
-  Presentation, 
   Volume2, 
   VolumeX, 
   Search, 
@@ -25,8 +24,8 @@ interface NavigationProps {
   nextDisabled: boolean;
   isPlaying: boolean;
   onTogglePlay: () => void;
-  isPresentationMode: boolean;
-  onTogglePresentation: () => void;
+  isPresentationMode?: boolean;
+  onTogglePresentation?: () => void;
   isMusicMuted: boolean;
   onToggleMusic: () => void;
   onOpenSearch: () => void;
@@ -61,7 +60,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   return (
     <div
-      className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[30] h-16 sm:h-20 px-4 sm:px-12 flex items-center justify-center pointer-events-auto"
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[30] h-16 sm:h-20 px-[25px] flex items-center justify-center pointer-events-auto"
       style={{ width: 'auto', minWidth: '320px', maxWidth: '100%' }}
       onMouseEnter={() => setIsHoveringNavbar(true)}
       onMouseMove={() => setIsHoveringNavbar(true)}
@@ -128,17 +127,6 @@ export const Navigation: React.FC<NavigationProps> = ({
           ) : (
             <Play className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-slate-300 group-hover:text-cyan-300 transition-colors shrink-0" />
           )}
-        </button>
-
-        {/* Mode Presentasi Toggle Button */}
-        <button
-          onClick={onTogglePresentation}
-          className={isPresentationMode ? activeBtnClass : inactiveBtnClass}
-          title={isPresentationMode ? "Nonaktifkan Mode Presentasi" : "Aktifkan Mode Presentasi"}
-          aria-label={isPresentationMode ? "Nonaktifkan Mode Presentasi" : "Aktifkan Mode Presentasi"}
-          aria-pressed={isPresentationMode}
-        >
-          <Presentation className={`w-4 h-4 sm:w-4.5 sm:h-4.5 shrink-0 transition-colors ${isPresentationMode ? 'text-cyan-300' : 'text-slate-300 group-hover:text-cyan-300'}`} />
         </button>
 
         {/* Background Music Toggle Button */}

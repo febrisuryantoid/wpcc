@@ -10,6 +10,9 @@ export class MusicManager {
   private isMuted: boolean = false;
   private isPlaying: boolean = false;
   private onStateChange: (() => void) | null = null;
+  private synthCtx: AudioContext | null = null;
+  private synthNodes: { osc1?: OscillatorNode; osc2?: OscillatorNode; gain?: GainNode } = {};
+  private isUsingSynthFallback: boolean = false;
 
   private constructor() {
     const savedMuted = localStorage.getItem('bg_music_muted');
@@ -32,42 +35,75 @@ export class MusicManager {
 
   public init() {
     if (this.audio) return;
-    this.audio = new Audio("https://herkcjez4t5tfiiv.public.blob.vercel-storage.com/Minor_Horizon.mp3");
-    this.audio.loop = true;
-    this.audio.preload = "auto";
-    this.audio.volume = this.isMuted ? 0 : this.volume;
+    try {
+      this.audio = new Audio("https://herkcjez4t5tfiiv.public.blob.vercel-storage.com/Minor_Horizon.mp3");
+      this.audio.loop = true;
+      this.audio.preload = "auto";
+      this.audio.crossOrigin = "anonymous";
+      this.audio.volume = this.isMuted ? 0 : this.volume;
 
-    this.audio.addEventListener('play', () => {
-      this.isPlaying = true;
-      if (this.onStateChange) this.onStateChange();
-    });
+      this.audio.addEventListener('play', () => {
+        this.isPlaying = true;
+        this.isUsingSynthFallback = false;
+        this.stopSynthFallback();
+        if (this.onStateChange) this.onStateChange();
+      });
 
-    this.audio.addEventListener('pause', () => {
-      this.isPlaying = false;
-      if (this.onStateChange) this.onStateChange();
-    });
+      this.audio.addEventListener('pause', () => {
+        this.isPlaying = false;
+        if (this.onStateChange) this.onStateChange();
+      });
+
+      this.audio.addEventListener('ended', () => {
+        // Fallback loop handling for browsers where loop boolean stutters
+        if (!this.isMuted) {
+          this.audio?.play().catch(() => {});
+        }
+      });
+
+      this.audio.addEventListener('error', (e) => {
+        console.warn("BGM HTML5 Audio error, using Web Audio synth fallback:", e);
+        if (!this.isMuted) {
+          this.startSynthFallback();
+        }
+      });
+    } catch (err) {
+      console.warn("Failed to construct BGM Audio element:", err);
+    }
   }
 
   public play() {
     this.init();
+    if (this.isMuted) return;
+
     if (this.audio) {
-      if (this.audio.paused) {
-        this.audio.play()
+      this.audio.volume = this.volume;
+      const playPromise = this.audio.play();
+      if (playPromise !== undefined) {
+        playPromise
           .then(() => {
             this.isPlaying = true;
+            this.isUsingSynthFallback = false;
+            this.stopSynthFallback();
             if (this.onStateChange) this.onStateChange();
           })
-          .catch(e => console.log("Music play blocked:", e));
+          .catch((e) => {
+            console.log("Music play blocked by browser policy, fallback to synth or wait for click:", e);
+            this.startSynthFallback();
+          });
       }
+    } else {
+      this.startSynthFallback();
     }
   }
 
   public pause() {
     if (this.audio) {
       this.audio.pause();
-      this.isPlaying = false;
-      if (this.onStateChange) this.onStateChange();
     }
+    this.stopSynthFallback();
+    this.isPlaying = false;
+    if (this.onStateChange) this.onStateChange();
   }
 
   public toggleMute() {
@@ -79,15 +115,17 @@ export class MusicManager {
   public setMuted(muted: boolean) {
     this.isMuted = muted;
     localStorage.setItem('bg_music_muted', String(this.isMuted));
-    if (this.audio) {
-      this.audio.volume = this.isMuted ? 0 : this.volume;
-      if (!muted && this.audio.paused) {
-        this.audio.play()
-          .then(() => {
-            this.isPlaying = true;
-            if (this.onStateChange) this.onStateChange();
-          })
-          .catch(e => console.log("Music play after unmute blocked:", e));
+    
+    if (muted) {
+      if (this.audio) this.audio.volume = 0;
+      this.stopSynthFallback();
+      this.isPlaying = false;
+    } else {
+      if (this.audio) {
+        this.audio.volume = this.volume;
+        this.play();
+      } else {
+        this.startSynthFallback();
       }
     }
     if (this.onStateChange) this.onStateChange();
@@ -109,15 +147,16 @@ export class MusicManager {
 
     if (this.audio) {
       this.audio.volume = this.isMuted ? 0 : clamped;
-      if (clamped > 0 && this.audio.paused) {
-        this.audio.play()
-          .then(() => {
-            this.isPlaying = true;
-            if (this.onStateChange) this.onStateChange();
-          })
-          .catch(e => console.log("Music play after volume change blocked:", e));
-      }
     }
+
+    if (this.synthNodes.gain) {
+      this.synthNodes.gain.gain.value = this.isMuted ? 0 : clamped * 0.15;
+    }
+
+    if (clamped > 0 && !this.isPlaying && !this.isMuted) {
+      this.play();
+    }
+
     if (this.onStateChange) this.onStateChange();
   }
 
@@ -127,6 +166,70 @@ export class MusicManager {
 
   public getIsPlaying(): boolean {
     return this.isPlaying;
+  }
+
+  // Web Audio Synth ambient pad fallback if audio file cannot be loaded offline
+  private startSynthFallback() {
+    if (this.isMuted || this.isUsingSynthFallback) return;
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      if (!this.synthCtx) {
+        this.synthCtx = new AudioCtx();
+      }
+      if (this.synthCtx.state === 'suspended') {
+        this.synthCtx.resume().catch(() => {});
+      }
+
+      this.stopSynthFallback();
+
+      const now = this.synthCtx.currentTime;
+      const osc1 = this.synthCtx.createOscillator();
+      const osc2 = this.synthCtx.createOscillator();
+      const gain = this.synthCtx.createGain();
+
+      osc1.type = 'sine';
+      osc2.type = 'triangle';
+      
+      osc1.frequency.setValueAtTime(110, now); // A2 chord pad
+      osc2.frequency.setValueAtTime(164.81, now); // E3 fifth interval
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(this.volume * 0.12, now + 2);
+
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(this.synthCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+
+      this.synthNodes = { osc1, osc2, gain };
+      this.isUsingSynthFallback = true;
+      this.isPlaying = true;
+      if (this.onStateChange) this.onStateChange();
+    } catch (e) {
+      console.warn("Synth fallback error:", e);
+    }
+  }
+
+  private stopSynthFallback() {
+    if (!this.isUsingSynthFallback) return;
+    try {
+      if (this.synthNodes.osc1) {
+        this.synthNodes.osc1.stop();
+        this.synthNodes.osc1.disconnect();
+      }
+      if (this.synthNodes.osc2) {
+        this.synthNodes.osc2.stop();
+        this.synthNodes.osc2.disconnect();
+      }
+      if (this.synthNodes.gain) {
+        this.synthNodes.gain.disconnect();
+      }
+    } catch (e) {}
+    this.synthNodes = {};
+    this.isUsingSynthFallback = false;
   }
 }
 

@@ -2,9 +2,28 @@
 
 ![WordPress Campus Connect UIN Banten](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8R-gXCfC9e-y_0OeR5BYtB6pYo9E2ZAyMP9R2ZVEOwztzlordgvN3BPh8oL7mPIfvcOSrQS8Jy8tXGqoYIJAGXTbuyi4b_aSc8l4enZJj_rdU5aThjcC4kZNdM1FvsCpRU6qKLwSoOx6Cd8517xU2qqQWzWLphmI1c0-f69HsTYh9bFuuI4fc4Vn1lpc/s1600/WordPress_Campus_Connect.jpg)
 
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-WebGL_3D-black?style=flat-square&logo=three.js)](https://threejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+
 **WordPress Campus Connect (WPCC) UIN Sultan Maulana Hasanuddin Banten** adalah platform presentasi interaktif 3D modern yang didesain khusus untuk memberikan materi edukasi web development, Content Management System (CMS) WordPress, arsitektur web modern, hingga pengembangan karir IT bagi mahasiswa UIN Sultan Maulana Hasanuddin Banten, Serang.
 
 Aplikasi ini menggabungkan mesin render 3D real-time berbasis WebGL (Three.js & React Three Fiber) dengan antarmuka UI/UX sinematik yang dirancang untuk performa tinggi, aksesibilitas prima, dan optimalisasi mesin pencari (SEO), AI Search Engine Optimization (AIO), Answer Engine Optimization (AEO), serta Generative Engine Optimization (GEO).
+
+---
+
+## ⌨️ Kontrol Navigasi & Pintasan Keyboard (Keyboard Shortcuts)
+
+| Tombol / Aksi | Fungsi |
+| :--- | :--- |
+| **`→` / `Space` / `Page Down`** | Pindah ke Slide Berikutnya |
+| **`←` / `Page Up`** | Kembali ke Slide Sebelumnya |
+| **`Ctrl + K` / `Cmd + K`** | Buka Modal Pencarian Pintar (Quick Search) |
+| **`Home` / `End`** | Lompat ke Slide Pertama / Terakhir |
+| **`Esc`** | Tutup Modal / Dialog Aktif |
+| **`Swipe Kiri / Kanan`** | Navigasi Slide pada Layar Sentuh (Mobile/Tablet) |
 
 ---
 

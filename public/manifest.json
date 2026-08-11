@@ -1,0 +1,17 @@
+{
+  "short_name": "WPCC Banten",
+  "name": "WordPress Campus Connect UIN Sultan Maulana Hasanuddin Banten",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512 192x192 any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#000205",
+  "theme_color": "#091328",
+  "display": "standalone",
+  "orientation": "landscape-primary",
+  "description": "Platform Presentasi Interaktif 3D & Edukasi WordPress Architecture UIN Banten"
+}

@@ -36,13 +36,13 @@ const Slide05Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-start pt-[146px] sm:pt-[100px] p-6 sm:p-10 md:p-16 z-10 pointer-events-none overflow-hidden h-full max-h-screen overflow-y-auto sm:overflow-hidden"
+      className="absolute inset-0 flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-24 p-3 sm:p-8 md:p-12 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="w-full max-w-6xl mx-auto flex flex-col items-center text-center justify-center h-full">
+      <div className="w-full max-w-6xl mx-auto flex flex-col items-center text-center justify-center my-auto py-4">
         {/* Top Alur Pelatihan Pill */}
         <motion.div 
           initial={{ opacity: 0, y: -15 }}
@@ -72,7 +72,7 @@ const Slide05Content: React.FC<SceneProps> = ({ scene }) => {
         </motion.div>
 
         {/* Description */}
-        <p className="text-sm sm:text-base md:text-lg font-normal text-slate-300 max-w-3xl text-center leading-[1.6] font-sans mx-auto mb-4 sm:mb-6 wpcc-slide-desc">
+        <p className="text-sm sm:text-base md:text-lg font-normal text-slate-300 max-w-3xl text-center leading-[1.6] font-sans mx-auto mb-5 sm:mb-8 wpcc-slide-desc">
           <TypewriterText 
             text={scene.supportingSentence || "Sesi teori akan disampaikan secara ringkas sebelum dilanjutkan dengan praktik membangun website menggunakan WordPress."} 
             showMode={descriptionShowMode} 
@@ -81,7 +81,7 @@ const Slide05Content: React.FC<SceneProps> = ({ scene }) => {
         </p>
 
         {/* Horizontal Timeline Section */}
-        <div className="w-full pointer-events-auto relative max-w-5xl mx-auto px-4">
+        <div className="w-full pointer-events-auto relative max-w-5xl mx-auto px-[25px]">
           
           {/* Desktop Connecting Line & Glowing Connector Nodes */}
           <div className="hidden lg:block absolute top-[48px] left-[5%] right-[5%] h-[2px] bg-gradient-to-r from-blue-500/20 via-purple-500/40 to-blue-500/20 -z-10 rounded-full">
@@ -167,9 +167,9 @@ const TimelineStepCard: React.FC<StepProps> = ({ step, index, isTextFinished }) 
       initial={{ opacity: 0, y: 30 }}
       animate={isTextFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.5, delay: index * 0.15 }}
-      className={`group relative flex flex-col text-left justify-center sm:justify-start py-[10px] px-[8px] sm:p-5 rounded-xl sm:rounded-2xl backdrop-blur-xl transition-all duration-300 cursor-pointer overflow-hidden ${
+      className={`group relative flex flex-col text-left justify-center sm:justify-start p-2.5 sm:p-3.5 md:p-4 rounded-xl sm:rounded-2xl backdrop-blur-xl transition-all duration-300 cursor-pointer overflow-hidden ${
         isHigh 
-          ? 'bg-purple-950/20 border-2 border-purple-500/80 shadow-[0_0_35px_rgba(168,85,247,0.35)] hover:bg-purple-950/30 hover:shadow-[0_0_45px_rgba(168,85,247,0.5)] scale-[1.03] lg:scale-[1.05] z-20' 
+          ? 'bg-purple-950/20 border-2 border-purple-500/80 shadow-[0_0_35px_rgba(168,85,247,0.35)] hover:bg-purple-950/30 hover:shadow-[0_0_45px_rgba(168,85,247,0.5)] scale-[1.03] lg:scale-[1.04] z-20' 
           : 'bg-slate-900/40 border border-white/10 hover:border-blue-400/40 hover:bg-slate-900/60 shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.25)]'
       }`}
       onClick={() => audioManager.playSound('wpcc_click', 0.6)}
@@ -188,7 +188,7 @@ const TimelineStepCard: React.FC<StepProps> = ({ step, index, isTextFinished }) 
       )}
 
       {/* Step Badge */}
-      <div className={`mb-2 sm:mb-3 px-2 py-0.5 rounded-md text-[10px] sm:text-xs font-bold tracking-wider w-max z-20 ${
+      <div className={`mb-1.5 sm:mb-2.5 px-2 py-0.5 rounded-md text-[10px] sm:text-xs font-bold tracking-wider w-max z-20 ${
         isHigh
           ? 'bg-purple-500/20 border border-purple-400/30 text-purple-300'
           : 'bg-blue-500/10 border border-blue-400/20 text-blue-400'
@@ -197,21 +197,21 @@ const TimelineStepCard: React.FC<StepProps> = ({ step, index, isTextFinished }) 
       </div>
 
       {/* Content Wrapper */}
-      <div className="relative z-10 flex flex-col flex-grow text-left justify-start w-full">
+      <div className="relative z-10 flex flex-col flex-grow text-left justify-start w-full min-w-0">
         {/* Baris 1: Ikon & Heading */}
-        <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
-          <div className={`w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-lg flex items-center justify-center transition-all duration-300 ${
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-1.5 min-w-0">
+          <div className={`w-6 h-6 sm:w-7 sm:h-7 shrink-0 rounded-lg flex items-center justify-center transition-all duration-300 ${
             isHigh 
               ? 'bg-purple-500/20 border border-purple-400/50 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.3)] group-hover:scale-110' 
               : 'bg-gradient-to-br from-blue-500/20 to-cyan-500/10 border border-blue-400/20 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)] group-hover:scale-110'
           }`}>
             {step.isWordPress ? (
-              <WordPressLogoSVG className="w-4 h-4 sm:w-5 sm:h-5" />
+              <WordPressLogoSVG className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             ) : IconComponent ? (
-              <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
+              <IconComponent className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             ) : null}
           </div>
-          <h3 className={`wpcc-h4 font-bold transition-colors leading-tight flex-1 ${
+          <h3 className={`text-[12px] sm:text-[13px] lg:text-[12px] xl:text-[13px] font-bold transition-colors leading-tight flex-1 whitespace-nowrap overflow-visible tracking-tight [word-break:keep-all] hyphens-none ${
             isHigh ? 'text-purple-200 group-hover:text-white' : 'text-white'
           }`}>
             {step.title}
@@ -219,8 +219,8 @@ const TimelineStepCard: React.FC<StepProps> = ({ step, index, isTextFinished }) 
         </div>
 
         {/* Baris 2: Subheading/Desc */}
-        <div className="flex flex-col text-left w-full pl-0 sm:pl-0 mt-1 sm:mt-1.5">
-          <p className={`text-[13px] sm:text-xs leading-relaxed text-left ${
+        <div className="flex flex-col text-left w-full pl-0 sm:pl-0 mt-0.5 sm:mt-1 min-w-0">
+          <p className={`text-[11px] sm:text-[11px] lg:text-[10.5px] xl:text-[11px] leading-snug text-left tracking-tight [word-break:keep-all] break-words hyphens-none ${
             isHigh ? 'text-purple-200/90 font-medium' : 'text-slate-300/90 font-light sm:font-medium'
           }`}>
             {step.desc}

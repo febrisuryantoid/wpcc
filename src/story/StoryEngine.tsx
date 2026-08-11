@@ -45,13 +45,15 @@ import { Slide37 } from './slide/Slide37';
 import { Slide38 } from './slide/Slide38';
 import { Slide39 } from './slide/Slide39';
 import { Slide40 } from './slide/Slide40';
+import { SlideRealCaseStudies } from './slide/SlideRealCaseStudies';
+import { SlideCostEffortComparison } from './slide/SlideCostEffortComparison';
 import { WordPressLogoSVG } from './ui/WordPressLogoSVG';
 import { AnimatedBackgrounds } from './ui/AnimatedBackgrounds';
 import { getSlideAnimationDetails } from './ui/SlideAnimationContext';
 import { useBackgroundMusic } from './ui/BackgroundMusicContext';
 
 import { GlobalCanvas } from './scene/GlobalCanvas';
-import { ChevronRight, ChevronLeft, Maximize, Search, Home, Presentation, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Maximize, Search, Home, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { SearchModal } from './ui/SearchModal';
 import { Header } from './ui/Header';
 import { Footer } from './ui/Footer';
@@ -532,9 +534,27 @@ export const StoryEngine: React.FC = () => {
               revealStep={revealStep}
             />
           )
+          : currentScene.id === 'scene_case_studies' ? (
+            <SlideRealCaseStudies 
+              key="scene_case_studies" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
           : currentScene.id === 'scene_12' ? (
             <Slide12 
               key="scene_12" 
+              scene={currentScene} 
+              isActive={true} 
+              isPresentationMode={isPresentationMode}
+              revealStep={revealStep}
+            />
+          )
+          : currentScene.id === 'scene_cost_effort' ? (
+            <SlideCostEffortComparison 
+              key="scene_cost_effort" 
               scene={currentScene} 
               isActive={true} 
               isPresentationMode={isPresentationMode}

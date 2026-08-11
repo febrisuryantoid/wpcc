@@ -160,6 +160,15 @@ export const storyScenes: SceneConfig[] = [
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
   },
+  // Real-World Case Studies Slide
+  {
+    id: 'scene_case_studies',
+    chapterId: 'chapter_01',
+    headline: "Real-World Case Studies",
+    supportingSentence: "Bukti nyata keandalan WordPress di skala global & lokal: NASA, Meta, Disney, Sony Music, White House, hingga Toko Online Lokal.",
+    backgroundExperience: { colorWorld: '#0F172A' },
+    heroExperience: { heroPosition: 'center' }
+  },
   // Slide 12
   {
     id: 'scene_12',
@@ -172,6 +181,15 @@ export const storyScenes: SceneConfig[] = [
       "Pemeliharaan & Keamanan (WordPress.com mengurus update & backup otomatis; WordPress.org memerlukan pemeliharaan & proteksi dari pemilik situs)",
       "Monetisasi & Kontrol (WordPress.com terikat paket langganan; WordPress.org memberikan kebebasan komersial & kepemilikan 100% tanpa batasan)"
     ],
+    backgroundExperience: { colorWorld: '#0F172A' },
+    heroExperience: { heroPosition: 'center' }
+  },
+  // Cost & Effort Comparison Slide
+  {
+    id: 'scene_cost_effort',
+    chapterId: 'chapter_01',
+    headline: "Perbandingan Cost & Effort",
+    supportingSentence: "Visualisasi matriks perbandingan biaya awal, waktu pengerjaan, dan kepemilikan data: WordPress vs Framework Custom vs Closed SaaS.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
   },
