@@ -178,3 +178,33 @@ Hasil kompilasi statis siap deploy akan berada di direktori `/dist`.
 Dibuat dengan ❤️ oleh **Febri Suryanto** untuk materi edukasi **WordPress Campus Connect UIN Sultan Maulana Hasanuddin Banten**.
 
 © 2026 Febri Suryanto. Hak Cipta Dilindungi Undang-Undang.
+
+---
+
+## 📝 Update Log & Changelog (11 Agustus 2026)
+
+### Visual & Layout Enhancements
+* **Cover Page Redesign**: 
+  * Mengganti logo `favicon.svg` putih polos menjadi ikon `/icon.svg` berwarna (1:1 square, `200x200px`).
+  * Membalut ikon utama cover dengan container bulat sempurna berwarna putih (`bg-white rounded-full`) dengan jarak tepi proporsional `15px` (`p-[15px]`) serta efek bayangan berpendar elegan.
+  * Menghapus label "Mulai Presentasi" di bawah ikon agar tampilan lebih bersih dan berpusat pada ikon.
+* **Slide 01 Strict Layout**: 
+  * Mengatur seluruh perataan konten Slide 01 menjadi rata kiri penuh (menghapus batas tengah `mx-auto` dan `max-w-4xl`), dengan padding tepi responsif yang konsisten dengan slide konten utama (`px-[20px]` / `px-[30px]` / `px-[40px]`).
+  * Menyelaraskan ukuran teks H1 antara "Campus Connect" dan "WordPress" sehingga seimbang dan serasi di segala layar resolusi besar.
+  * Mengganti ikon label UIN dengan `/icon.svg` dan melengkapinya dengan container putih bulat sempurna (`p-[3px]`).
+* **Global Typography Boost**: 
+  * Memperbesar ukuran teks deskripsi sub-heading (`.wpcc-slide-desc`) menjadi **16px** (sebelumnya ~14px) untuk keterbacaan ekstra nyaman di desktop, laptop, dan tablet landscape.
+  * Memperbesar ukuran teks deskripsi box konten reguler (`.wpcc-body-normal` dan `.wpcc-body-small`) menjadi **14px** (sebelumnya ~12px) di perangkat layar lebar.
+
+### 💾 Git Commit Message
+```text
+feat(ui): redesign cover icon, align slide 01 layout, and boost global typography
+
+- feat: update cover page icon to use detailed /icon.svg (200x200px) inside a white rounded-full p-15 container
+- ui: remove 'Mulai Presentasi' text label from cover page for a cleaner look
+- style: enforce strict left-alignment on Slide 01 and match responsive paddings
+- style: balance H1 sizing for "Campus Connect" and "WordPress" texts on Slide 01
+- style: replace UIN label icon with /icon.svg wrapped in a white circular background
+- style(css): boost global typography readability; .wpcc-slide-desc to 16px, body texts to 14px on md+ breakpoints
+```
+

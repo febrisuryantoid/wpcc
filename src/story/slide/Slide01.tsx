@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { SceneProps } from '../types';
 import { Calendar, BookOpen, Code2, Users, TrendingUp } from 'lucide-react';
-import uinLogo from '../../assets/logo/uin.svg';
 import { SlideAnimationProvider, useSlideAnimation } from '../ui/SlideAnimationContext';
 import { TypewriterText } from '../ui/TypewriterText';
 import { SegmentedTypewriterText } from '../ui/SegmentedTypewriterText';
@@ -42,19 +41,19 @@ const Slide01Content: React.FC<SceneProps> = ({ scene }) => {
     },
     {
       text: "Campus Connect",
-      className: "text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 font-serif leading-tight drop-shadow-[0_0_15px_rgba(34,211,238,0.25)] block"
+      className: "text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 font-serif leading-tight drop-shadow-[0_0_15px_rgba(34,211,238,0.25)] block"
     }
   ];
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-start justify-center p-6 sm:p-12 md:p-16 z-10 pointer-events-none h-full max-h-screen overflow-y-auto"
+      className="absolute inset-0 flex flex-col items-start justify-center pt-14 sm:pt-18 md:pt-20 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-24 z-10 pointer-events-none h-full max-h-screen overflow-y-auto w-full"
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.04 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="w-full max-w-4xl mx-auto flex flex-col items-start text-left justify-center space-y-5 sm:space-y-6 my-auto">
+      <div className="w-full max-w-[1800px] mr-auto flex flex-col items-start text-left justify-center space-y-5 sm:space-y-6 my-auto">
         
         {/* 1. Badge: Date */}
         <motion.div
@@ -111,7 +110,9 @@ const Slide01Content: React.FC<SceneProps> = ({ scene }) => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-blue-950/40 border border-blue-400/20 text-slate-200 text-xs sm:text-sm md:text-base font-semibold backdrop-blur-md"
         >
-          <img src={uinLogo} alt="UIN Sultan Maulana Hasanuddin Banten" className="w-5 h-5 sm:w-6 sm:h-6 object-contain shrink-0" />
+          <div className="bg-white rounded-full p-[3px] flex items-center justify-center shrink-0">
+            <img src="/icon.svg" alt="UIN Sultan Maulana Hasanuddin Banten" className="w-4 h-4 sm:w-5 sm:h-5 object-contain" />
+          </div>
           <span>UIN Sultan Maulana Hasanuddin Banten</span>
         </motion.div>
 

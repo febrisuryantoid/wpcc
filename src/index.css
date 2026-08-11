@@ -192,6 +192,11 @@
     font-size: 14px !important;
   }
 }
+@media (min-width: 768px) {
+  .wpcc-slide-desc {
+    font-size: 16px !important;
+  }
+}
 
 /* Custom divide container to override top/bottom margins perfectly */
 .wpcc-divide-container {
@@ -213,6 +218,7 @@
   font-size: 11px !important;
 }
 @media (min-width: 640px) { .wpcc-body-normal { font-size: 13px !important; } }
+@media (min-width: 768px) { .wpcc-body-normal { font-size: 14px !important; } }
 
 /* Body Small */
 .wpcc-body-small {
@@ -221,9 +227,10 @@
   line-height: 1.5 !important;
   font-size: 11px !important;
 }
-@media (min-width: 640px) { .wpcc-body-small { font-size: 12px !important; } }
-@media (min-width: 1024px) { .wpcc-body-small { font-size: 12px !important; } }
-@media (min-width: 1280px) { .wpcc-body-small { font-size: 12px !important; } }
+@media (min-width: 640px) { .wpcc-body-small { font-size: 13px !important; } }
+@media (min-width: 768px) { .wpcc-body-small { font-size: 14px !important; } }
+@media (min-width: 1024px) { .wpcc-body-small { font-size: 14px !important; } }
+@media (min-width: 1280px) { .wpcc-body-small { font-size: 14px !important; } }
 
 /* Button Controls */
 .wpcc-button {
