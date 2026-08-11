@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { Sparkles } from '@react-three/drei';
 import { motion, AnimatePresence } from 'motion/react';
 import { storyScenes } from './data';
-import { CoverPage, ElectronLines, CoverBackgroundImage } from './slide/CoverPage';
+import { SlideCover, CoverPage, ElectronLines, CoverBackgroundImage } from './slide/SlideCover';
 import { SceneLayout } from './ui/SceneLayout';
 import { Slide01 } from './slide/Slide01';
 import { Slide02 } from './slide/Slide02';
@@ -45,8 +45,53 @@ import { Slide37 } from './slide/Slide37';
 import { Slide38 } from './slide/Slide38';
 import { Slide39 } from './slide/Slide39';
 import { Slide40 } from './slide/Slide40';
-import { SlideRealCaseStudies } from './slide/SlideRealCaseStudies';
-import { SlideCostEffortComparison } from './slide/SlideCostEffortComparison';
+import { Slide41 } from './slide/Slide41';
+import { Slide42 } from './slide/Slide42';
+
+const SLIDE_COMPONENTS: Record<string, React.FC<any>> = {
+  scene_01: Slide01,
+  scene_02: Slide02,
+  scene_03: Slide03,
+  scene_04: Slide04,
+  scene_05: Slide05,
+  scene_06: Slide06,
+  scene_07: Slide07,
+  scene_08: Slide08,
+  scene_09: Slide09,
+  scene_10: Slide10,
+  scene_11: Slide11,
+  scene_12: Slide12,
+  scene_13: Slide13,
+  scene_14: Slide14,
+  scene_15: Slide15,
+  scene_16: Slide16,
+  scene_17: Slide17,
+  scene_18: Slide18,
+  scene_19: Slide19,
+  scene_20: Slide20,
+  scene_21: Slide21,
+  scene_22: Slide22,
+  scene_23: Slide23,
+  scene_24: Slide24,
+  scene_25: Slide25,
+  scene_26: Slide26,
+  scene_27: Slide27,
+  scene_28: Slide28,
+  scene_29: Slide29,
+  scene_30: Slide30,
+  scene_31: Slide31,
+  scene_32: Slide32,
+  scene_33: Slide33,
+  scene_34: Slide34,
+  scene_35: Slide35,
+  scene_36: Slide36,
+  scene_37: Slide37,
+  scene_38: Slide38,
+  scene_39: Slide39,
+  scene_40: Slide40,
+  scene_41: Slide41,
+  scene_42: Slide42,
+};
 import { WordPressLogoSVG } from './ui/WordPressLogoSVG';
 import { AnimatedBackgrounds } from './ui/AnimatedBackgrounds';
 import { getSlideAnimationDetails } from './ui/SlideAnimationContext';
@@ -424,7 +469,7 @@ export const StoryEngine: React.FC = () => {
       <div className="absolute inset-0 z-10 flex flex-col justify-center items-center pointer-events-none p-2 sm:p-4 md:p-6 lg:p-10 max-w-[1800px] mx-auto w-full h-full overflow-hidden">
         <AnimatePresence mode="wait">
           {isCover ? (
-            <CoverPage 
+            <SlideCover 
               key="cover_page" 
               isMusicMuted={isMusicMuted}
               onToggleMusic={toggleMusic}
@@ -435,392 +480,18 @@ export const StoryEngine: React.FC = () => {
                 setRevealStep(3);
               }} 
             />
-          ) :           currentScene.id === 'scene_01' ? (
-            <Slide01 
-              key="scene_01" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_02' ? (
-            <Slide02 
-              key="scene_02" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_03' ? (
-            <Slide03 
-              key="scene_03" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_04' ? (
-            <Slide04 
-              key="scene_04" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_05' ? (
-            <Slide05 
-              key="scene_05" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_06' ? (
-            <Slide06 
-              key="scene_06" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_07' ? (
-            <Slide07 
-              key="scene_07" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_08' ? (
-            <Slide08 
-              key="scene_08" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_09' ? (
-            <Slide09 
-              key="scene_09" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_10' ? (
-            <Slide10 
-              key="scene_10" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_11' ? (
-            <Slide11 
-              key="scene_11" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_case_studies' ? (
-            <SlideRealCaseStudies 
-              key="scene_case_studies" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_12' ? (
-            <Slide12 
-              key="scene_12" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_cost_effort' ? (
-            <SlideCostEffortComparison 
-              key="scene_cost_effort" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_13' ? (
-            <Slide13 
-              key="scene_13" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_14' ? (
-            <Slide14 
-              key="scene_14" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_15' ? (
-            <Slide15 
-              key="scene_15" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_16' ? (
-            <Slide16 
-              key="scene_16" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_17' ? (
-            <Slide17 
-              key="scene_17" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_18' ? (
-            <Slide18 
-              key="scene_18" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_19' ? (
-            <Slide19 
-              key="scene_19" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_20' ? (
-            <Slide20 
-              key="scene_20" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_21' ? (
-            <Slide21 
-              key="scene_21" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_22' ? (
-            <Slide22 
-              key="scene_22" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_23' ? (
-            <Slide23 
-              key="scene_23" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_24' ? (
-            <Slide24 
-              key="scene_24" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_25' ? (
-            <Slide25 
-              key="scene_25" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_26' ? (
-            <Slide26 
-              key="scene_26" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_27' ? (
-            <Slide27 
-              key="scene_27" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_28' ? (
-            <Slide28 
-              key="scene_28" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_29' ? (
-            <Slide29 
-              key="scene_29" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_30' ? (
-            <Slide30 
-              key="scene_30" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_31' ? (
-            <Slide31 
-              key="scene_31" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_32' ? (
-            <Slide32 
-              key="scene_32" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_33' ? (
-            <Slide33 
-              key="scene_33" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_34' ? (
-            <Slide34 
-              key="scene_34" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_35' ? (
-            <Slide35 
-              key="scene_35" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_36' ? (
-            <Slide36 
-              key="scene_36" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_37' ? (
-            <Slide37 
-              key="scene_37" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_38' ? (
-            <Slide38 
-              key="scene_38" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_39' ? (
-            <Slide39 
-              key="scene_39" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )
-          : currentScene.id === 'scene_40' ? (
-            <Slide40 
-              key="scene_40" 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          ) : (
-            <SceneLayout 
-              key={currentScene.id} 
-              scene={currentScene} 
-              isActive={true} 
-              isPresentationMode={isPresentationMode}
-              revealStep={revealStep}
-            />
-          )}
+          ) : (() => {
+            const Component = SLIDE_COMPONENTS[currentScene.id] || SceneLayout;
+            return (
+              <Component 
+                key={currentScene.id} 
+                scene={currentScene} 
+                isActive={true} 
+                isPresentationMode={isPresentationMode}
+                revealStep={revealStep}
+              />
+            );
+          })()}
         </AnimatePresence>
       </div>
 

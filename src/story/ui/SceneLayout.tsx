@@ -91,8 +91,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
   const getHeadingWhitespaceClass = (text: string) => {
     if (!text) return '';
     if (text.includes('\n')) return 'whitespace-pre-line';
-    const wordCount = text.trim().split(/\s+/).length;
-    return 'whitespace-normal sm:whitespace-nowrap';
+    return 'whitespace-normal md:whitespace-nowrap';
   };
 
   return (
@@ -136,7 +135,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
             {showHeading && (
               <>
                 <HeadingTag 
-                  className={`font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-[-0.02em] drop-shadow-2xl font-serif leading-[1.15] ${isExceptedSlide ? 'text-left' : 'text-center md:text-left'} ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
+                  className={`font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-[-0.02em] drop-shadow-sm font-serif leading-[1.15] ${isExceptedSlide ? 'text-left' : 'text-center md:text-left'} ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
@@ -255,7 +254,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
                 {showDescription && (
                   <>
                     <HeadingTag 
-                      className={`font-bold text-white mb-2 drop-shadow-2xl text-center max-w-4xl mx-auto ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
+                      className={`font-bold text-white mb-2 drop-shadow-sm text-center max-w-4xl mx-auto ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.1 }}
@@ -309,7 +308,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
                 {showHeading && (
                   <>
                     <HeadingTag 
-                      className={`font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-[-0.02em] drop-shadow-2xl ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")} ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
+                      className={`font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-[-0.02em] drop-shadow-sm ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")} ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.1 }}

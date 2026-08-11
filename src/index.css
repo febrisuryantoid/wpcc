@@ -64,10 +64,10 @@
 
 /* TYPOGRAPHY SYSTEM */
 
-/* Headings Base Overrides - Rich Shadow and Bright White */
+/* Headings Base Overrides - Elegant Soft Shadow and Bright White */
 .wpcc-h1, .wpcc-h2, .wpcc-h3, .wpcc-h4 {
   color: #ffffff !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.95)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.65)) !important;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4)) !important;
 }
 
 /* Ensure transparent gradient text is fully respected */
@@ -86,17 +86,17 @@
 }
 @media (min-width: 640px) {
   .wpcc-h1 {
-    font-size: 64px !important;
+    font-size: 60px !important;
   }
 }
 @media (min-width: 768px) {
   .wpcc-h1 {
-    font-size: 74px !important; /* Slightly enlarged Desktop H1 */
+    font-size: 78px !important; /* Enlarged Desktop H1 */
   }
 }
 @media (min-width: 1024px) {
   .wpcc-h1 {
-    font-size: 82px !important; /* Slightly enlarged Desktop H1 */
+    font-size: 92px !important; /* Enlarged Desktop H1 */
   }
 }
 
@@ -110,17 +110,17 @@
 }
 @media (min-width: 640px) {
   .wpcc-h2 {
-    font-size: 44px !important;
+    font-size: 42px !important;
   }
 }
 @media (min-width: 768px) {
   .wpcc-h2 {
-    font-size: 50px !important; /* Slightly enlarged Desktop H2 */
+    font-size: 52px !important; /* Enlarged Desktop H2 */
   }
 }
 @media (min-width: 1024px) {
   .wpcc-h2 {
-    font-size: 56px !important; /* Slightly enlarged Desktop H2 */
+    font-size: 62px !important; /* Enlarged Desktop H2 */
   }
 }
 
@@ -128,22 +128,27 @@
 .wpcc-h3 {
   font-family: 'Lora', Georgia, serif !important;
   font-weight: 700 !important;
-  line-height: 1.2 !important;
+  line-height: 1.15 !important;
   font-size: 20px !important; /* Mobile */
 }
 @media (min-width: 640px) {
   .wpcc-h3 {
-    font-size: 26px !important;
+    font-size: 28px !important;
   }
 }
 @media (min-width: 768px) {
   .wpcc-h3 {
-    font-size: 30px !important;
+    font-size: 36px !important; /* Enlarged Desktop H3 */
   }
 }
 @media (min-width: 1024px) {
   .wpcc-h3 {
-    font-size: 32px !important;
+    font-size: 40px !important; /* Enlarged Desktop H3 */
+  }
+}
+@media (min-width: 1280px) {
+  .wpcc-h3 {
+    font-size: 44px !important; /* Enlarged Desktop H3 */
   }
 }
 
@@ -156,7 +161,12 @@
 }
 @media (min-width: 640px) {
   .wpcc-h4 {
-    font-size: 16px !important; /* Desktop */
+    font-size: 16px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .wpcc-h4 {
+    font-size: 18px !important; /* Enlarged Desktop H4 */
   }
 }
 
@@ -171,10 +181,10 @@
 }
 @media (min-width: 640px) { .wpcc-body-large { font-size: 14px !important; } }
 
-/* Premium readable slide descriptions with text shadow and comfortable bright color */
+/* Premium readable slide descriptions with subtle text shadow and comfortable bright color */
 .wpcc-slide-desc {
   color: #f1f5f9 !important; /* Slightly brighter, slate-100, extremely readable and comfortable */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.85), 0 4px 16px rgba(0, 0, 0, 0.65) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
   font-size: 11px !important;
 }
 @media (min-width: 640px) {

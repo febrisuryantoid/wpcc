@@ -107,7 +107,7 @@ export const ElectronLines = () => {
   );
 };
 
-export const CoverPage: React.FC<CoverPageProps> = ({ onStart, isMusicMuted = false, onToggleMusic, onSpinStart }) => {
+export const SlideCover: React.FC<CoverPageProps> = ({ onStart, isMusicMuted = false, onToggleMusic, onSpinStart }) => {
   const [isFullscreen, setIsFullscreen] = useState<boolean>(!!document.fullscreenElement);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [isMusicPopoverOpen, setIsMusicPopoverOpen] = useState<boolean>(false);
@@ -221,20 +221,20 @@ export const CoverPage: React.FC<CoverPageProps> = ({ onStart, isMusicMuted = fa
         </button>
       </div>
 
-      {/* Centered Start Button Overlay */}
+      {/* Centered Cover Content - WPCC Icon at the center of the sphere */}
       <div className="absolute inset-0 flex flex-col items-center justify-center z-40 pointer-events-none p-4">
         <button
           onClick={handleSphereClick}
-          className="pointer-events-auto cursor-pointer relative focus:outline-none group z-50 border-none bg-transparent outline-none flex items-center justify-center w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 shrink-0 transition-transform hover:scale-105 active:scale-95"
+          className="pointer-events-auto cursor-pointer relative focus:outline-none group z-50 border-none bg-transparent outline-none flex items-center justify-center w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 shrink-0 transition-transform hover:scale-110 active:scale-95"
           title="Klik untuk Mulai Presentasi"
           aria-label="Klik untuk Mulai Presentasi"
         >
           <img 
             src="/favicon.svg" 
             alt="Mulai Presentasi WPCC" 
-            className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-contain brightness-0 invert drop-shadow-[0_0_25px_rgba(59,130,246,0.95)] relative z-10 shrink-0"
+            className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-contain brightness-0 invert drop-shadow-[0_0_30px_rgba(59,130,246,0.95)] relative z-10 shrink-0"
           />
-          <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] sm:text-xs font-semibold tracking-widest text-cyan-200/90 group-hover:text-cyan-100 uppercase opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] sm:text-xs font-semibold tracking-widest text-cyan-200/90 group-hover:text-cyan-100 uppercase transition-all duration-300 pointer-events-none bg-slate-950/70 px-3.5 py-1 rounded-full border border-cyan-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.25)]">
             Mulai Presentasi
           </span>
         </button>
@@ -242,3 +242,5 @@ export const CoverPage: React.FC<CoverPageProps> = ({ onStart, isMusicMuted = fa
     </motion.div>
   );
 };
+
+export const CoverPage = SlideCover;

@@ -70,7 +70,7 @@ const Slide06Content: React.FC<SceneProps> = ({ scene }) => {
             <Sparkles className="w-3.5 h-3.5" /> WordPress Foundations
           </motion.div>
           
-          <h2 className="wpcc-h3 font-bold text-white tracking-[-0.02em] leading-[1.15] font-serif drop-shadow-2xl text-center mb-1.5 sm:mb-2 whitespace-normal sm:whitespace-nowrap">
+          <h2 className="wpcc-h3 font-bold text-white tracking-[-0.02em] leading-[1.15] font-serif drop-shadow-sm text-center mb-1.5 sm:mb-2 whitespace-normal md:whitespace-nowrap">
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 

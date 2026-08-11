@@ -13,8 +13,8 @@ export const Header: React.FC<HeaderProps> = ({
   const handleCoverNav = onGoCover || onBackToCover;
 
   return (
-    <header className="absolute top-0 left-0 right-0 w-full z-40 px-4 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 pointer-events-auto bg-gradient-to-b from-slate-950/80 via-slate-950/30 to-transparent">
-      <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
+    <header className="absolute top-0 left-0 right-0 w-full z-40 px-[15px] md:px-[25px] py-3 sm:py-4 pointer-events-auto bg-gradient-to-b from-slate-950/80 via-slate-950/30 to-transparent">
+      <div className="w-full flex justify-between items-center">
         {/* Left WPCC Logo */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}

@@ -6,65 +6,65 @@ export interface ChapterInfo {
 }
 
 export const CHAPTER_NAMES: Record<string, string> = {
-  chapter_01: 'Welcome to WordPress Campus Connect',
-  chapter_02: 'Website & CMS Foundations',
-  chapter_03: 'Career Opportunities',
-  chapter_04: 'WordPress Modern',
-  chapter_05: 'Hands-on Workshop',
-  chapter_06: 'Penutup & Langkah Selanjutnya',
+  chapter_01: 'WordPress Fundamentals',
+  chapter_02: 'Career in WordPress',
+  chapter_03: 'WordPress & Open Source',
+  chapter_04: 'Community & WordPress Events',
+  chapter_05: 'WordPress Campus Connect',
+  chapter_06: 'Build, Connect & Grow',
 };
 
 export const CHAPTER_DEFINITIONS: Record<string, ChapterInfo> = {
   chapter_01: {
     id: 'chapter_01',
     number: 'CHAPTER 1',
-    title: 'Welcome to WordPress Campus Connect',
-    description: 'Pengenalan ekosistem dan visi WordPress Campus Connect'
+    title: 'WordPress Fundamentals',
+    description: 'Mengenal WordPress dari dasar, mulai dari konsep CMS, fungsi, ekosistem, hingga perannya dalam membangun website modern.'
   },
   chapter_02: {
     id: 'chapter_02',
     number: 'CHAPTER 2',
-    title: 'Website & CMS Foundations',
-    description: 'Dasar-dasar website, CMS, dan arsitektur web modern'
+    title: 'Career in WordPress',
+    description: 'Menjelajahi berbagai career path dalam ekosistem WordPress, dari development dan design hingga SEO, marketing, e-commerce, consulting, dan education.'
   },
   chapter_03: {
     id: 'chapter_03',
     number: 'CHAPTER 3',
-    title: 'Career Opportunities',
-    description: 'Peluang karir dan potensi industri di ekosistem WordPress'
+    title: 'WordPress & Open Source',
+    description: 'Memahami siapa yang mengembangkan WordPress, bagaimana open-source project dikelola, dan bagaimana perusahaan, contributor, serta komunitas membentuk ekosistemnya.'
   },
   chapter_04: {
     id: 'chapter_04',
     number: 'CHAPTER 4',
-    title: 'WordPress Modern',
-    description: 'Full Site Editing, Block Editor, dan arsitektur modern'
+    title: 'Community & WordPress Events',
+    description: 'Mengenal WordPress Community melalui Meetup, WordCamp, knowledge sharing, networking, dan berbagai bentuk kontribusi dalam ekosistem global.'
   },
   chapter_05: {
     id: 'chapter_05',
     number: 'CHAPTER 5',
-    title: 'Hands-on Workshop',
-    description: 'Praktik langsung membangun website profesional'
+    title: 'WordPress Campus Connect',
+    description: 'Memahami bagaimana WordPress Campus Connect membawa hands-on learning, career exposure, community connection, dan digital skills ke lingkungan kampus.'
   },
   chapter_06: {
     id: 'chapter_06',
     number: 'CHAPTER 6',
-    title: 'Penutup & Langkah Selanjutnya',
-    description: 'Kesimpulan dan langkah pengembangan karir Anda'
+    title: 'Build, Connect & Grow',
+    description: 'Mengubah pembelajaran menjadi pengalaman nyata melalui workshop, community connection, resources, dan langkah berikutnya untuk terus berkembang bersama WordPress.'
   }
 };
 
 export const isChapterSlide = (sceneId: string): boolean => {
-  return ['scene_03', 'scene_13', 'scene_18', 'scene_23', 'scene_33', 'scene_36'].includes(sceneId);
+  return ['scene_03', 'scene_16', 'scene_18', 'scene_25', 'scene_35', 'scene_38'].includes(sceneId);
 };
 
 export const getChapterNumber = (sceneId: string): string => {
   switch (sceneId) {
     case 'scene_03': return 'CHAPTER 1';
-    case 'scene_13': return 'CHAPTER 2';
+    case 'scene_16': return 'CHAPTER 2';
     case 'scene_18': return 'CHAPTER 3';
-    case 'scene_23': return 'CHAPTER 4';
-    case 'scene_33': return 'CHAPTER 5';
-    case 'scene_36': return 'CHAPTER 6';
+    case 'scene_25': return 'CHAPTER 4';
+    case 'scene_35': return 'CHAPTER 5';
+    case 'scene_38': return 'CHAPTER 6';
     default: return '';
   }
 };

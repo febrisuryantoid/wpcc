@@ -266,7 +266,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
             >
               <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/40 bg-blue-500/5 backdrop-blur-sm shadow-[inset_0_1px_8px_rgba(59,130,246,0.1)]">
                 <User className="w-3.5 h-3.5 text-cyan-400" />
-                <span className="text-[10px] sm:text-xs font-bold text-cyan-400 tracking-[0.2em] uppercase">ABOUT SPEAKER</span>
+                <span className="text-[10px] sm:text-xs font-bold text-cyan-400 tracking-[0.2em] uppercase">ABOUT THE SPEAKER</span>
               </div>
               <div className="hidden sm:flex items-center gap-1.5 ml-1">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
@@ -276,9 +276,19 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
             </motion.div>
 
             {/* Profile Name */}
-            <h2 className="wpcc-h3 font-bold text-white mb-1.5 sm:mb-2.5 tracking-[-0.02em] leading-tight font-serif drop-shadow-2xl whitespace-normal sm:whitespace-nowrap text-center md:text-left">
+            <h2 className="wpcc-h3 font-bold text-white mb-1 tracking-[-0.02em] leading-tight font-serif drop-shadow-sm whitespace-normal sm:whitespace-nowrap text-center md:text-left">
               <TypewriterText text="Febri Suryanto" showMode={headingShowMode} exactDuration={headingDuration} />
             </h2>
+
+            {/* Positioning Tagline */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-xs sm:text-sm font-semibold text-cyan-300 tracking-wide mb-2 text-center md:text-left"
+            >
+              WordPress Specialist · Web Developer · AI Engineer
+            </motion.div>
 
             {/* Divider line with glowing dot */}
             <motion.div 
@@ -292,19 +302,19 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
               <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40 md:bg-gradient-to-r md:from-cyan-500/40 md:to-transparent" />
             </motion.div>
 
-            {/* Profile Supporting Description */}
-            <p className="hidden md:block text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mb-3 sm:mb-4 leading-relaxed font-light text-center md:text-left wpcc-slide-desc">
-              <TypewriterText text="Kenali pembicara yang akan menemani perjalanan belajar hari ini." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
+            {/* Profile Supporting Description / Proof Sentence */}
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mb-3 sm:mb-4 leading-relaxed font-light text-center md:text-left wpcc-slide-desc">
+              <TypewriterText text="10+ years building websites, digital solutions, and WordPress projects." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
             </p>
 
             {/* 5 High-Tech Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 w-full mb-4 sm:mb-6">
               {[
-                { title: "Experience", desc: "Pengalaman 10+ tahun", icon: Star, color: "bg-blue-600 border-blue-400" },
-                { title: "WordPress", desc: "Ahli WordPress & CMS", icon: WordPressIcon, color: "bg-blue-600 border-blue-400" },
-                { title: "Developer", desc: "Pengembang solusi AI", icon: Code2, color: "bg-blue-600 border-blue-400" },
-                { title: "Community", desc: "Pemimpin Komunitas", icon: Users, color: "bg-blue-600 border-blue-400" },
-                { title: "Solutif", desc: "Berorientasi pada Hasil", icon: ShieldCheck, color: "bg-blue-600 border-blue-400" }
+                { title: "10+ YEARS", desc: "Web Development Experience", icon: Calendar, color: "bg-blue-600 border-blue-400" },
+                { title: "WORDPRESS", desc: "WordPress Specialist", icon: WordPressIcon, color: "bg-blue-600 border-blue-400" },
+                { title: "WEB DEVELOPMENT", desc: "Website & Digital Solutions", icon: Code2, color: "bg-blue-600 border-blue-400" },
+                { title: "AI ENGINEERING", desc: "AI & Automation", icon: BrainCircuit, color: "bg-blue-600 border-blue-400" },
+                { title: "COMMUNITY", desc: "Community & Knowledge Sharing", icon: Users, color: "bg-blue-600 border-blue-400" }
               ].map((item, idx) => {
                 const isRevealed = revealedCount > idx;
                 return (
@@ -332,7 +342,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
               })}
             </div>
 
-            {/* Premium LIHAT PROFIL LENGKAP Button */}
+            {/* Premium VIEW PROFILE Button */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ 
@@ -349,7 +359,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                 className="group relative inline-flex items-center justify-between pl-5 pr-6 sm:pl-7 sm:pr-9 py-2.5 sm:py-3.5 rounded-full border border-blue-400/50 bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 hover:from-blue-600 hover:to-indigo-700 hover:border-cyan-400/80 text-white font-bold transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:shadow-[0_0_35px_rgba(34,211,238,0.5)] hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm tracking-[0.15em] gap-4 sm:gap-6 pointer-events-auto w-fit"
               >
                 <span className="uppercase font-bold tracking-wider">
-                  {isSpinningFast ? "MEMUAT REKAM JEJAK..." : "LIHAT PROFIL LENGKAP"}
+                  {isSpinningFast ? "LOADING PROFILE..." : "VIEW PROFILE"}
                 </span>
                 <ArrowRight size={18} className={`text-cyan-300 group-hover:translate-x-1.5 transition-transform duration-300 ${isSpinningFast ? 'animate-spin' : ''}`} />
               </button>
@@ -421,7 +431,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                   <div className="text-center md:text-left flex-1">
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-semibold mb-3 tracking-widest uppercase">
                       <Terminal size={12} />
-                      Speaker Resume & Profile
+                      Speaker Profile
                     </div>
                     
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-2 tracking-tight font-serif">
@@ -429,7 +439,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     </h2>
 
                     <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 mb-4">
-                      {["Technology Consultant", "WordPress Specialist", "AI Solutions Engineer", "Speaker Lead"].map((tag) => (
+                      {["Technology Consultant", "WordPress Specialist", "AI Solutions Engineer"].map((tag) => (
                         <span 
                           key={tag} 
                           className="px-3.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-xs font-semibold flex items-center gap-1.5"
@@ -441,15 +451,15 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     </div>
                     
                     <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl font-light">
-                      Profesional di bidang Web Development, WordPress, dan Digital Transformation dengan pengalaman lebih dari 10 tahun membangun solusi digital yang inovatif, aman, cepat, dan scalable. Mendedikasikan diri untuk kemajuan ekosistem web Indonesia.
+                      Web Developer, WordPress Specialist, dan Technology Consultant dengan pengalaman 10+ tahun dalam membangun website, aplikasi web, serta solusi digital untuk bisnis dan organisasi. Aktif berbagi pengetahuan dan berkontribusi dalam pengembangan ekosistem teknologi web di Indonesia.
                     </p>
                   </div>
                 </motion.div>
 
-                {/* Staggered Vertical Resume Modules (Sequenced at ~1-second tempo when scrolling) */}
-                <div className="flex flex-col gap-12">
+                {/* Staggered Vertical Resume Modules */}
+                <div className="flex flex-col gap-10">
                   
-                  {/* Item 2: Stat Counters (Animates on Scroll) */}
+                  {/* Item 2: Stat Counters */}
                   <motion.div
                     initial={{ opacity: 0, y: 40, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -458,9 +468,9 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     className="grid grid-cols-1 md:grid-cols-3 gap-5"
                   >
                     {[
-                      { start: 0, target: 12, pad: true, label: "Tahun Pengalaman", icon: Calendar, color: "from-blue-600/20 to-blue-500/5", border: "border-blue-500/30" },
-                      { start: 0, target: 6, pad: true, label: "Posisi Strategis", icon: ShieldCheck, color: "from-cyan-600/20 to-cyan-500/5", border: "border-cyan-500/30" },
-                      { start: 128, target: 368, pad: false, label: "Klien & Partner", icon: User, color: "from-purple-600/20 to-purple-500/5", border: "border-purple-500/30" }
+                      { start: 0, target: 10, pad: true, label: "Years Experience", icon: Calendar, color: "from-blue-600/20 to-blue-500/5", border: "border-blue-500/30" },
+                      { start: 0, target: 6, pad: true, label: "Strategic Roles", icon: ShieldCheck, color: "from-cyan-600/20 to-cyan-500/5", border: "border-cyan-500/30" },
+                      { start: 128, target: 368, pad: false, label: "Clients & Partners", icon: User, color: "from-purple-600/20 to-purple-500/5", border: "border-purple-500/30" }
                     ].map((stat, i) => (
                       <div 
                         key={i}
@@ -477,7 +487,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     ))}
                   </motion.div>
 
-                  {/* Item 3: Keahlian Utama (Animates on Scroll 1-by-1) */}
+                  {/* Item 3: Core Expertise */}
                   <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -487,29 +497,29 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     <div className="flex items-center gap-3 mb-6">
                       <div className="h-7 w-1.5 bg-blue-500 rounded-full" />
                       <h3 className="text-base uppercase tracking-[0.2em] text-white font-bold">
-                        KEAHLIAN UTAMA & KAPABILITAS
+                        CORE EXPERTISE
                       </h3>
                     </div>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {[
-                        { icon: Code2, title: "WordPress Development", desc: "Mengembangkan tema & plugin custom berstandar global dengan keamanan tinggi." },
-                        { icon: Database, title: "Web Application", desc: "Arsitektur frontend & backend menggunakan React, Node, dan teknologi termutakhir." },
-                        { icon: Cpu, title: "Performance Optimization", desc: "Optimalisasi Core Web Vitals, caching tingkat lanjut, dan efisiensi server untuk kecepatan web maksimal." },
-                        { icon: Layout, title: "UI/UX Design Philosophy", desc: "Orientasi kenyamanan pengguna dengan transisi animasi halus nan berestetika." },
-                        { icon: Search, title: "SEO & Growth Strategy", desc: "Optimalisasi struktur dan performa web agar merajai peringkat teratas mesin pencari." },
-                        { icon: Briefcase, title: "Project Management", desc: "Manajemen siklus hidup sistem TI secara profesional, transparan, dan tepat waktu." }
+                        { icon: WordPressIcon, title: "WordPress Engineering", desc: "Pengembangan website WordPress, custom theme, plugin, integrasi API, dan solusi berbasis WordPress yang scalable." },
+                        { icon: Database, title: "Web Application", desc: "Merancang dan mengembangkan aplikasi web dengan arsitektur frontend dan backend modern, termasuk React, Node.js, dan API." },
+                        { icon: Cpu, title: "Web Performance", desc: "Optimasi Core Web Vitals, caching, asset delivery, database, dan server untuk meningkatkan kecepatan serta efisiensi website." },
+                        { icon: Layout, title: "UI/UX & Web Design", desc: "Merancang pengalaman digital yang modern, intuitif, responsif, dan berorientasi pada kebutuhan pengguna." },
+                        { icon: Search, title: "SEO & Digital Growth", desc: "Mengembangkan fondasi teknis dan struktur website yang mendukung SEO, discoverability, serta pertumbuhan digital." },
+                        { icon: Briefcase, title: "Technology Consulting", desc: "Menganalisis kebutuhan, menentukan teknologi, merancang solusi, dan mengarahkan implementasi proyek digital dari awal hingga deployment." }
                       ].map((skill, i) => (
                         <motion.div 
                           key={i}
                           initial={{ opacity: 0, y: 30, scale: 0.9 }}
                           whileInView={{ opacity: 1, y: 0, scale: 1 }}
                           viewport={{ amount: 0.1, once: false }}
-                          transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                           className="flex gap-4 p-5 rounded-2xl bg-slate-950/50 border border-white/10 hover:border-blue-400/40 hover:bg-slate-900/70 transition-all duration-300 shadow-lg"
                         >
-                          <div className="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center shrink-0">
-                            <skill.icon size={20} className="text-cyan-300" />
+                          <div className="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center shrink-0 text-cyan-300">
+                            <skill.icon className="w-5 h-5 text-cyan-300" />
                           </div>
                           <div>
                             <span className="wpcc-h4 text-slate-100 font-bold block mb-1">{skill.title}</span>
@@ -520,7 +530,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     </div>
                   </motion.div>
 
-                  {/* Item 4: Perjalanan Karir Timeline (Animates on Scroll 1-by-1) */}
+                  {/* Item 4: Career & Professional Journey Timeline */}
                   <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -530,25 +540,24 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     <div className="flex items-center gap-3 mb-6">
                       <div className="h-7 w-1.5 bg-cyan-400 rounded-full" />
                       <h3 className="text-base uppercase tracking-[0.2em] text-white font-bold">
-                        PERJALANAN KARIR & REKAM JEJAK
+                        CAREER & PROFESSIONAL JOURNEY
                       </h3>
                     </div>
 
-                    <div className="relative border-l-2 border-slate-800 ml-3 sm:ml-5 pl-5 sm:pl-7 space-y-8">
+                    <div className="relative border-l-2 border-slate-800 ml-3 sm:ml-5 pl-5 sm:pl-7 space-y-6">
                       {[
-                        { role: "Founder & CEO", company: "Ziezan Solutions", year: "2021 – Sekarang", desc: "Memimpin agensi pengembangan sistem TI dan konsultasi digital terkemuka di Indonesia, melayani puluhan korporat nasional.", location: "Baros, Serang, Banten" },
-                        { role: "Co-Organizer & Speaker", company: "WordPress Meetup Serang", year: "2022 – Sekarang", desc: "Membina ekosistem developer, menggelar lokakarya, serta aktif menjadi keynote speaker di berbagai ajang nasional.", location: "Kota Serang, Banten" },
-                        { role: "Chief Tech Officer (CTO)", company: "Nest Digital Solutions", year: "2022 – 2025", desc: "Mengarsiteki transformasi digital internal perusahaan, mengepalai divisi engineer, dan mengawasi implementasi produk TI skala massal.", location: "Sukoharjo, Jawa Tengah" }
+                        { role: "Founder & CEO", company: "Ziezan Solutions", year: "2021 — Present", desc: "Memimpin pengembangan solusi website dan digital untuk bisnis, organisasi, dan berbagai kebutuhan transformasi digital.", location: "Baros, Serang, Banten" },
+                        { role: "Co-Organizer & Speaker", company: "WordPress Meetup Serang", year: "2022 — Present", desc: "Aktif dalam kegiatan komunitas WordPress melalui knowledge sharing, meetup, workshop, dan pengembangan ekosistem pengguna serta developer lokal.", location: "Kota Serang, Banten" },
+                        { role: "Chief Technology Officer", company: "Nest Digital Solutions", year: "2022 — 2025", desc: "Memimpin arah teknologi, pengembangan sistem, serta koordinasi engineering dalam implementasi solusi digital perusahaan.", location: "Sukoharjo, Jawa Tengah" }
                       ].map((exp, i) => (
                         <motion.div 
                           key={i}
                           initial={{ opacity: 0, x: -30, scale: 0.95 }}
                           whileInView={{ opacity: 1, x: 0, scale: 1 }}
                           viewport={{ amount: 0.1, once: false }}
-                          transition={{ duration: 0.8, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                           className="relative"
                         >
-                          {/* Timeline Node */}
                           <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-slate-900 border-4 border-blue-500 flex items-center justify-center shadow-md">
                             <span className="w-1 h-1 rounded-full bg-white" />
                           </div>
@@ -572,30 +581,105 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                     </div>
                   </motion.div>
 
-                  {/* Item 5: Edukasi & Sertifikasi */}
+                  {/* Item 5: Community & Knowledge Sharing */}
                   <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ amount: 0.1, once: false }}
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    className="p-6 rounded-3xl bg-slate-950/50 border border-white/10"
+                    className="p-6 sm:p-8 rounded-3xl bg-slate-950/50 border border-white/10 flex flex-col gap-4"
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <GraduationCap className="text-amber-400 w-5 h-5" />
+                    <div className="flex items-center gap-3">
+                      <Users className="text-cyan-400 w-5 h-5" />
                       <h3 className="text-base uppercase tracking-[0.2em] text-white font-bold">
-                        EDUKASI & KOMITMEN KOMUNITAS
+                        COMMUNITY & KNOWLEDGE SHARING
                       </h3>
                     </div>
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
-                      Aktif membagikan materi edukasi teknologi terbuka, mengorganisasi Meetup WordPress lokal, serta membimbing ratusan developer muda Indonesia dalam menguasai teknologi web modern.
+                    
+                    <p className="text-slate-200 text-sm font-semibold">
+                      Aktif berbagi pengetahuan mengenai:
                     </p>
+
                     <div className="flex flex-wrap gap-2">
-                      {["Open Source Contributor", "WordCamp Speaker", "Headless CMS Advocate", "Web Performance Pioneer"].map((item, idx) => (
-                        <span key={idx} className="text-xs bg-cyan-500/10 border border-cyan-400/20 text-cyan-300 px-3 py-1 rounded-full flex items-center gap-1.5 font-semibold">
+                      {["WordPress", "Web Development", "UI/UX", "Web Performance", "SEO", "AI", "Digital Technology"].map((item, idx) => (
+                        <span key={idx} className="text-xs bg-blue-500/10 border border-blue-400/20 text-blue-300 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 font-semibold">
                           <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" /> {item}
                         </span>
                       ))}
                     </div>
+
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+                      Berkomitmen membantu mahasiswa, developer, dan pelaku teknologi memahami bagaimana teknologi web dapat digunakan untuk belajar, berkarya, membangun karier, dan menciptakan solusi nyata.
+                    </p>
+                  </motion.div>
+
+                  {/* Item 6: Community & Professional Focus */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ amount: 0.1, once: false }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="h-7 w-1.5 bg-indigo-500 rounded-full" />
+                      <h3 className="text-base uppercase tracking-[0.2em] text-white font-bold">
+                        COMMUNITY & PROFESSIONAL FOCUS
+                      </h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        { title: "Open Source Contributor", desc: "Berbagi dan berkontribusi pada ekosistem teknologi terbuka.", icon: Globe },
+                        { title: "WordPress Community", desc: "Aktif dalam komunitas dan kegiatan WordPress lokal.", icon: Users },
+                        { title: "Speaker & Educator", desc: "Membagikan pengetahuan melalui meetup, workshop, dan sesi edukasi.", icon: GraduationCap },
+                        { title: "Web Performance", desc: "Berfokus pada website yang cepat, efisien, dan scalable.", icon: Cpu },
+                        { title: "AI Solutions", desc: "Mengeksplorasi pemanfaatan AI untuk meningkatkan produktivitas dan solusi digital.", icon: BrainCircuit }
+                      ].map((item, i) => (
+                        <div key={i} className="p-5 rounded-2xl bg-slate-950/40 border border-white/10 flex flex-col gap-2">
+                          <div className="flex items-center gap-2.5 text-cyan-300">
+                            <item.icon size={18} />
+                            <span className="font-bold text-sm text-white">{item.title}</span>
+                          </div>
+                          <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+
+                  {/* Item 7: Professional Philosophy */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ amount: 0.1, once: false }}
+                    transition={{ duration: 0.8 }}
+                    className="p-6 rounded-3xl bg-gradient-to-r from-blue-950/40 via-indigo-950/40 to-slate-950/60 border border-blue-500/20 text-center"
+                  >
+                    <span className="text-xs uppercase tracking-[0.25em] text-cyan-400 font-bold block mb-2">
+                      PROFESSIONAL PHILOSOPHY
+                    </span>
+                    <blockquote className="text-lg sm:text-xl font-serif text-white italic max-w-2xl mx-auto">
+                      "Build technology that is useful, accessible, scalable, and built to last."
+                    </blockquote>
+                  </motion.div>
+
+                  {/* Item 8: Connect with Febri */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ amount: 0.1, once: false }}
+                    transition={{ duration: 0.8 }}
+                    className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-slate-950/80 border border-white/10"
+                  >
+                    <div>
+                      <h4 className="text-white font-bold text-base mb-1">Connect with Febri</h4>
+                      <p className="text-slate-400 text-xs">WordPress · Web Development · AI · Digital Transformation</p>
+                    </div>
+                    <button 
+                      onClick={() => setIsModalOpen(false)}
+                      className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-600/30 hover:scale-105 active:scale-95"
+                    >
+                      Close Profile
+                    </button>
                   </motion.div>
 
                 </div>

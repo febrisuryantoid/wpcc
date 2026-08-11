@@ -9,12 +9,12 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ currentSceneIndex, totalScenes }) => {
   return (
     <motion.div 
-      className="absolute bottom-[10px] left-0 right-0 w-full z-[20] pointer-events-none px-[25px]"
+      className="absolute bottom-[10px] left-0 right-0 w-full z-[20] pointer-events-none px-[15px] md:px-[25px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35 }}
     >
-      <div className="w-full max-w-7xl mx-auto flex items-center justify-between text-slate-400 wpcc-footer-text font-medium relative">
+      <div className="w-full flex items-center justify-between text-slate-400 wpcc-footer-text font-medium relative">
         <div className="hidden sm:block text-slate-400">© 2026 WordPress Campus Connect</div>
         <div className="block sm:hidden text-slate-400">© 2026 WPCC</div>
         <div className="hidden sm:block text-center absolute left-1/2 -translate-x-1/2 font-medium text-slate-300">Febri Suryanto</div>

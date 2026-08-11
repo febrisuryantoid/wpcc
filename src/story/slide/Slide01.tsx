@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { SceneProps } from '../types';
-import { Calendar, MapPin } from 'lucide-react';
+import { Calendar, BookOpen, Code2, Users, TrendingUp } from 'lucide-react';
+import uinLogo from '../../assets/logo/uin.svg';
+import { SlideAnimationProvider, useSlideAnimation } from '../ui/SlideAnimationContext';
 import { TypewriterText } from '../ui/TypewriterText';
 import { SegmentedTypewriterText } from '../ui/SegmentedTypewriterText';
-import { SlideAnimationProvider, useSlideAnimation } from '../ui/SlideAnimationContext';
 
 export const Slide01: React.FC<SceneProps> = (props) => {
   if (!props.isActive) return null;
@@ -21,76 +22,109 @@ const Slide01Content: React.FC<SceneProps> = ({ scene }) => {
     headingShowMode, 
     descriptionShowMode, 
     headingDuration, 
-    descriptionDuration 
+    descriptionDuration, 
+    currentPhase 
   } = useSlideAnimation();
 
-  // Split headline for customized layout: "WordPress" and "Campus Connect"
-  const words = scene.headline.split(' ');
-  const firstWord = words[0] || 'WordPress';
-  const remainingWords = words.slice(1).join(' ') || 'Campus Connect';
+  const isHeadingFinished = currentPhase !== 'heading';
+
+  const pillars = [
+    { label: 'Learn', icon: BookOpen, color: 'text-blue-400', border: 'border-blue-500/30' },
+    { label: 'Build', icon: Code2, color: 'text-cyan-400', border: 'border-cyan-500/30' },
+    { label: 'Connect', icon: Users, color: 'text-emerald-400', border: 'border-emerald-500/30' },
+    { label: 'Grow', icon: TrendingUp, color: 'text-indigo-400', border: 'border-indigo-500/30' },
+  ];
+
+  const headingSegments = [
+    {
+      text: "WordPress\n",
+      className: "text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white font-serif leading-none drop-shadow-sm block mb-1 sm:mb-2"
+    },
+    {
+      text: "Campus Connect",
+      className: "text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 font-serif leading-tight drop-shadow-[0_0_15px_rgba(34,211,238,0.25)] block"
+    }
+  ];
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-start justify-start pt-16 sm:pt-12 p-4 sm:p-12 md:p-16 lg:p-24 pb-20 sm:pb-12 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      className="absolute inset-0 flex flex-col items-start justify-center p-6 sm:p-12 md:p-16 z-10 pointer-events-none h-full max-h-screen overflow-y-auto"
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 1.04 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="w-full max-w-5xl flex flex-col items-start text-left justify-center h-full">
-        {/* Date / Metadata Badge */}
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-start text-left justify-center space-y-5 sm:space-y-6 my-auto">
+        
+        {/* 1. Badge: Date */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/20 text-cyan-400 wpcc-badge mb-6 pointer-events-auto"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 shadow-[0_0_20px_rgba(34,211,238,0.15)] text-cyan-300 text-xs sm:text-sm font-semibold tracking-wider uppercase backdrop-blur-md"
         >
-          <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-          <span>17 September 2026</span>
+          <Calendar className="w-4 h-4 text-cyan-400" />
+          <span>17 SEPTEMBER 2026</span>
         </motion.div>
 
-        {/* Dynamic Custom Split Headline with Single Segmented Typewriter */}
-        <h1 className="wpcc-h1 mb-6 flex flex-col items-start gap-1 whitespace-pre-line">
+        {/* 2. H1 Title with Typewriter Animation */}
+        <div className="space-y-1 sm:space-y-1.5 min-h-[90px] sm:min-h-[140px]">
           <SegmentedTypewriterText 
-            segments={[
-              { text: firstWord + "\n", className: "text-white" },
-              { text: remainingWords, className: "text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300" }
-            ]}
-            showMode={headingShowMode}
-            exactDuration={headingDuration}
+            segments={headingSegments} 
+            showMode={headingShowMode} 
+            delay={0.3} 
+            exactDuration={headingDuration} 
           />
-        </h1>
+        </div>
 
-        {/* Key Points / Core Concepts separated by beautiful glowing dots */}
+        {/* 3. Subtitle Pillars: Learn • Build • Connect • Grow */}
+        <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 py-1 min-h-[36px]">
+          {pillars.map((pillar, idx) => (
+            <React.Fragment key={pillar.label}>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={isHeadingFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.4, delay: 0.05 + idx * 0.1 }}
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/60 border ${pillar.border} text-slate-200 text-xs sm:text-sm font-medium backdrop-blur-sm shadow-sm`}
+              >
+                <pillar.icon className={`w-3.5 h-3.5 ${pillar.color}`} />
+                <span>{pillar.label}</span>
+              </motion.div>
+              {idx < pillars.length - 1 && (
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={isHeadingFinished ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 + idx * 0.1 }}
+                  className="text-cyan-500/60 font-bold text-xs sm:text-sm hidden sm:inline"
+                >
+                  •
+                </motion.span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* 4. Institution / Campus Venue Label */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-wrap items-center gap-y-2 text-[11px] sm:text-[14px] text-slate-200 font-medium mb-8 pointer-events-auto font-sans"
+          initial={{ opacity: 0, y: 12 }}
+          animate={isHeadingFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-blue-950/40 border border-blue-400/20 text-slate-200 text-xs sm:text-sm md:text-base font-semibold backdrop-blur-md"
         >
-          <span>Belajar</span>
-          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400 mx-2.5 sm:mx-3.5 shadow-[0_0_10px_#22d3ee] inline-block animate-pulse" />
-          <span>Berbagi</span>
-          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400 mx-2.5 sm:mx-3.5 shadow-[0_0_10px_#22d3ee] inline-block animate-pulse" />
-          <span>Berkarya</span>
-          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400 mx-2.5 sm:mx-3.5 shadow-[0_0_10px_#22d3ee] inline-block animate-pulse" />
-          <span>Bersama WordPress</span>
+          <img src={uinLogo} alt="UIN Sultan Maulana Hasanuddin Banten" className="w-5 h-5 sm:w-6 sm:h-6 object-contain shrink-0" />
+          <span>UIN Sultan Maulana Hasanuddin Banten</span>
         </motion.div>
 
-        {/* Location Info */}
-        {scene.supportingSentence && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex items-center gap-2.5 text-[11px] sm:text-[14px] text-slate-200 font-normal pointer-events-auto font-sans wpcc-slide-desc"
-          >
-            <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 filter drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]" />
-            <span>
-              <TypewriterText text={scene.supportingSentence} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
-            </span>
-          </motion.div>
-        )}
+        {/* 5. Description with Typewriter Animation */}
+        <div className="text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl font-light leading-relaxed wpcc-slide-desc text-left min-h-[48px]">
+          <TypewriterText 
+            text={scene.supportingSentence || "Mengenal WordPress, membangun website, dan membuka peluang di ekosistem open source."} 
+            showMode={descriptionShowMode} 
+            delay={0.75}
+            exactDuration={descriptionDuration} 
+          />
+        </div>
+
       </div>
     </motion.div>
   );

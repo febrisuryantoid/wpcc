@@ -2,7 +2,7 @@ import React from 'react';
 import { SceneProps } from '../types';
 import { SceneLayout } from '../ui/SceneLayout';
 
-export const Slide07: React.FC<SceneProps> = (props) => {
+export const Slide42: React.FC<SceneProps> = (props) => {
   return (
     <SceneLayout 
       scene={props.scene} 
