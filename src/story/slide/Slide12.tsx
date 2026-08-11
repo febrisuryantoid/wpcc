@@ -80,13 +80,13 @@ const Slide12Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-center pt-16 sm:pt-18 md:pt-20 pb-14 sm:pb-16 px-4 sm:px-6 md:px-8 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
+      className="absolute inset-0 flex flex-col items-center justify-center pt-14 sm:pt-18 md:pt-20 pb-14 sm:pb-16 px-5 sm:px-[30px] lg:px-[40px] z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.02 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="w-full max-w-5xl mx-auto flex flex-col justify-center items-center my-auto space-y-3 sm:space-y-4 md:space-y-5">
+      <div className="w-full max-w-[1800px] mx-auto flex flex-col justify-center items-center my-auto space-y-3 sm:space-y-4 md:space-y-5">
         
         {/* Header Section */}
         <div className="text-center flex-shrink-0 w-full space-y-1.5 sm:space-y-2">
@@ -110,18 +110,6 @@ const Slide12Content: React.FC<SceneProps> = ({ scene }) => {
             />
           </h2>
 
-          {/* Divider line with glowing dot */}
-          <motion.div 
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="flex items-center justify-center max-w-sm sm:max-w-md mx-auto w-full wpcc-divide-container my-1.5"
-          >
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
-            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-2.5 inline-block animate-pulse shrink-0" />
-            <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40" />
-          </motion.div>
-
           {/* Description */}
           <p className="text-slate-300 text-xs sm:text-sm max-w-2xl sm:max-w-3xl mx-auto font-light leading-relaxed wpcc-slide-desc">
             <TypewriterText 
@@ -130,6 +118,18 @@ const Slide12Content: React.FC<SceneProps> = ({ scene }) => {
               exactDuration={descriptionDuration} 
             />
           </p>
+
+          {/* Divider line appears AFTER description finishes typing */}
+          <motion.div 
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex items-center justify-center max-w-sm sm:max-w-md mx-auto w-full wpcc-divide-container my-1.5"
+          >
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-2.5 inline-block animate-pulse shrink-0" />
+            <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40" />
+          </motion.div>
         </div>
 
         {/* 5x4 Logo Grid */}

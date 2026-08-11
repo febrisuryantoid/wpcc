@@ -38,13 +38,13 @@ const Slide15Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-24 p-3 sm:p-8 md:p-12 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
+      className="absolute inset-0 flex flex-col items-center justify-start pt-14 sm:pt-18 md:pt-20 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="w-full max-w-6xl mx-auto flex flex-col justify-center h-full">
+      <div className="w-full max-w-[1800px] mx-auto flex flex-col justify-center h-full">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-6 shrink-0">
           <motion.div 
@@ -59,20 +59,21 @@ const Slide15Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
-          {/* Divider line with glowing dot */}
+          <p className="mt-1 text-slate-300 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px] max-w-2xl mx-auto font-light leading-relaxed wpcc-slide-desc my-2">
+            <TypewriterText text={scene.supportingSentence || "Menguasai WordPress membuka pintu ke berbagai peran profesional di industri digital."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
+          </p>
+
+          {/* Divider line appears AFTER description finishes typing */}
           <motion.div 
             initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="flex items-center justify-center max-w-lg mx-auto w-full wpcc-divide-container"
+            animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex items-center justify-center max-w-lg mx-auto w-full wpcc-divide-container mb-2"
           >
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-3 sm:mx-4 inline-block animate-pulse shrink-0" />
             <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40" />
           </motion.div>
-          <p className="mt-1 text-slate-300 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px] max-w-2xl mx-auto font-light leading-relaxed wpcc-slide-desc">
-            <TypewriterText text={scene.supportingSentence || "Menguasai WordPress membuka pintu ke berbagai peran profesional di industri digital."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
-          </p>
         </div>
 
         {/* Roles 4x2 Grid */}

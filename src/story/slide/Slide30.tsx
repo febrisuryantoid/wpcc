@@ -125,13 +125,13 @@ const Slide28Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-24 p-3 sm:p-8 md:p-12 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
+      className="absolute inset-0 flex flex-col items-center justify-start pt-14 sm:pt-18 md:pt-20 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between h-full max-h-full">
+      <div className="w-full max-w-[1800px] mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between h-full max-h-full">
         
         {/* Left Info Column (42% Width) */}
         <div className="w-full lg:w-[42%] flex flex-col items-center sm:items-start text-center sm:text-left shrink-0">
@@ -148,21 +148,21 @@ const Slide28Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
-          {/* Divider line with glowing dot */}
+          <p className="text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-300 mb-3 leading-relaxed wpcc-slide-desc">
+            <TypewriterText text={scene.supportingSentence || "Gutenberg adalah editor bawaan WordPress yang menggunakan konsep Block sehingga setiap bagian halaman dapat dibuat dan disusun secara visual."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
+          </p>
+
+          {/* Divider line appears AFTER description finishes typing */}
           <motion.div 
             initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="flex items-center justify-center sm:justify-start max-w-lg mx-auto sm:mx-0 w-full wpcc-divide-container mb-3"
+            animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex items-center justify-center sm:justify-start max-w-lg mx-auto sm:mx-0 w-full wpcc-divide-container mb-4"
           >
             <div className="sm:hidden h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-3 sm:ml-0 sm:mr-4 inline-block animate-pulse shrink-0" />
             <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40 sm:bg-gradient-to-r sm:from-cyan-500/40 sm:to-transparent" />
           </motion.div>
-
-          <p className="text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-300 mb-5 leading-relaxed wpcc-slide-desc">
-            <TypewriterText text={scene.supportingSentence || "Gutenberg adalah editor bawaan WordPress yang menggunakan konsep Block sehingga setiap bagian halaman dapat dibuat dan disusun secara visual."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
-          </p>
 
           <motion.div 
             className="space-y-3 w-full pointer-events-auto text-xs text-slate-300 font-light"

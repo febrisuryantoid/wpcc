@@ -85,13 +85,13 @@ const Slide14Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-center my-auto pt-16 sm:pt-20 md:pt-24 p-3 sm:p-6 md:p-10 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
+      className="absolute inset-0 flex flex-col items-center justify-center my-auto pt-14 sm:pt-18 md:pt-20 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
       initial={{ opacity: 0, scale: 0.96, filter: 'blur(10px)' }}
       animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
       exit={{ opacity: 0, scale: 1.04, filter: 'blur(10px)' }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="w-full max-w-6xl mx-auto flex flex-col justify-center items-center h-full">
+      <div className="w-full max-w-[1800px] mx-auto flex flex-col justify-center items-center h-full">
         
         {/* Header */}
         <div className="text-center mb-3 sm:mb-4 flex-shrink-0 w-full">
@@ -107,20 +107,21 @@ const Slide14Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text="Perbandingan Cost, Time & Effort" showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
+          <p className="text-slate-300 text-xs sm:text-sm max-w-3xl mx-auto font-light leading-relaxed wpcc-slide-desc my-1.5">
+            <TypewriterText text="Analisis rasional kenapa WordPress menjadi pilihan nomor 1 bagi pebisnis & pembuat web: efisiensi biaya luar biasa, pengerjaan cepat, dan kepemilikan data 100% utuh." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
+          </p>
+
+          {/* Divider line appears AFTER description finishes typing */}
           <motion.div 
             initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="flex items-center justify-center max-w-md mx-auto w-full wpcc-divide-container my-1.5"
           >
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
             <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-3 inline-block animate-pulse shrink-0" />
             <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40" />
           </motion.div>
-
-          <p className="text-slate-300 text-xs sm:text-sm max-w-3xl mx-auto font-light leading-relaxed wpcc-slide-desc">
-            <TypewriterText text="Analisis rasional kenapa WordPress menjadi pilihan nomor 1 bagi pebisnis & pembuat web: efisiensi biaya luar biasa, pengerjaan cepat, dan kepemilikan data 100% utuh." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
-          </p>
         </div>
 
         {/* Metric Selector Pills */}

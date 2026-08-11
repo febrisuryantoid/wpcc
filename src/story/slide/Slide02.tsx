@@ -91,7 +91,8 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
     headingShowMode, 
     descriptionShowMode, 
     headingDuration, 
-    descriptionDuration 
+    descriptionDuration,
+    isTextFinished
   } = useSlideAnimation();
 
   // Play speaker introductory chime as soon as this slide becomes active
@@ -104,9 +105,9 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
     }
   }, [isActive]);
 
-  // Auto stagger-reveal experience cards and the CTA button with audio feedback
+  // Auto stagger-reveal experience cards and the CTA button after text typing is completed
   useEffect(() => {
-    if (!isActive) {
+    if (!isActive || !isTextFinished) {
       setRevealedCount(0);
       return;
     }
@@ -114,8 +115,8 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
     setRevealedCount(0);
 
     const timers: NodeJS.Timeout[] = [];
-    const delayStep = 500; // 500ms gap
-    const initialDelay = 800;
+    const delayStep = 450; // 450ms gap between cards
+    const initialDelay = 150; // start right after heading & description typing complete
 
     for (let i = 1; i <= 6; i++) {
       const t = setTimeout(() => {
@@ -132,9 +133,9 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
     return () => {
       timers.forEach(clearTimeout);
     };
-  }, [isActive]);
+  }, [isActive, isTextFinished]);
 
-  // Handle CTA button click: Fast spin 360 animation then trigger modal popup
+  // Handle CTA button click: Fast anti-clockwise spin 360 animation, photo scale up, then trigger modal popup
   const handleOpenResumeModal = () => {
     audioManager.playSound('point_reveal', 0.85);
     audioManager.playSound('profile_more', 0.9);
@@ -143,7 +144,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
     setTimeout(() => {
       setIsModalOpen(true);
       setIsSpinningFast(false);
-    }, 750);
+    }, 850);
   };
 
   if (!isActive && !isModalOpen) return null;
@@ -151,13 +152,13 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
   return (
     <>
       <motion.div 
-        className="absolute inset-0 flex flex-col items-center justify-center my-auto pt-14 sm:pt-10 p-3 sm:p-10 md:p-16 pb-20 sm:pb-16 z-20 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
+        className="absolute inset-0 flex flex-col items-center justify-center my-auto pt-14 sm:pt-10 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-16 z-20 pointer-events-none overflow-y-auto h-full max-h-screen w-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: isActive ? 1 : 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="w-full max-w-[1240px] mx-auto flex flex-col md:flex-row gap-6 sm:gap-10 md:gap-16 items-center justify-center h-full">
+        <div className="w-full max-w-[1800px] mx-auto flex flex-col md:flex-row gap-6 sm:gap-10 md:gap-16 items-center justify-center h-full">
           
           {/* Left Column - Cyber 360-Degree Orbital Profile Picture */}
           <motion.div 
@@ -166,18 +167,18 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 80, delay: 0.1 }}
           >
-            <div className="relative w-44 sm:w-52 md:w-56 lg:w-64 aspect-square flex items-center justify-center">
+            <div className={`relative w-44 sm:w-52 md:w-56 lg:w-64 aspect-square flex items-center justify-center transition-transform duration-700 ease-out ${isSpinningFast ? 'scale-125' : 'scale-100'}`}>
               
-              {/* Outer 360 Light Ring */}
-              <div className="absolute inset-[-18%] rounded-full border border-blue-500/20 bg-blue-500/5 backdrop-blur-[2px]" />
+              {/* Outer 360 Light Ring (No backdrop blur so image is completely clear) */}
+              <div className="absolute inset-[-18%] rounded-full border border-blue-500/30 bg-blue-500/5" />
 
-              {/* Orbital Balls Ring 1 - 360 Degree Continuous Smooth Rotation */}
+              {/* Orbital Balls Ring 1 - Spins Counter-Clockwise when clicked */}
               <motion.div 
-                className="absolute inset-[-14%] rounded-full border border-cyan-400/25 border-dashed"
-                animate={{ rotate: 360 }}
+                className="absolute inset-[-14%] rounded-full border border-cyan-400/35 border-dashed"
+                animate={{ rotate: isSpinningFast ? -720 : 360 }}
                 transition={{ 
-                  duration: isSpinningFast ? 0.7 : 18, 
-                  ease: isSpinningFast ? "easeIn" : "linear", 
+                  duration: isSpinningFast ? 0.8 : 18, 
+                  ease: isSpinningFast ? "easeOut" : "linear", 
                   repeat: Infinity 
                 }}
               >
@@ -198,11 +199,11 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
 
               {/* Orbital Balls Ring 2 - Reverse Rotation */}
               <motion.div 
-                className="absolute inset-[-6%] rounded-full border border-blue-500/40 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
-                animate={{ rotate: -360 }}
+                className="absolute inset-[-6%] rounded-full border border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                animate={{ rotate: isSpinningFast ? 720 : -360 }}
                 transition={{ 
-                  duration: isSpinningFast ? 0.5 : 12, 
-                  ease: isSpinningFast ? "easeIn" : "linear", 
+                  duration: isSpinningFast ? 0.6 : 12, 
+                  ease: isSpinningFast ? "easeOut" : "linear", 
                   repeat: Infinity 
                 }}
               >
@@ -231,20 +232,13 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                 />
               )}
 
-              {/* Main Profile Image with 360-degree Gloss Reflection */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_50px_rgba(34,211,238,0.5)] bg-slate-950 group">
+              {/* Main Profile Image - Completely Crisp, Bright & Clear with NO front overlay */}
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cyan-400 shadow-[0_0_50px_rgba(34,211,238,0.6)] bg-slate-950 group">
                 <img 
                   src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjREJU5lGaZVr2IiJGDJdiy26MdsthXcLT7tWc9xenfDmmC2U46vuHSKW20C22YK4GinGkYd6h5uPn3ucY_N1JVeM47lzbk6s0XyUY9su-nSkZfX1hxkmUMe2yBywystGtfvYYFNa_k3T2FqMcjOhyY-pq7u5SXytoXy4cXrKjg5Sgxl2gRA5r6MZoKxGA/s1600/Febri%20Suryanto.webp"
                   alt="Febri Suryanto" 
-                  className={`w-full h-full object-cover select-none transition-transform duration-700 ${isSpinningFast ? 'scale-110 rotate-6' : 'scale-[1.02]'}`}
+                  className={`w-full h-full object-cover select-none transition-transform duration-700 ${isSpinningFast ? 'scale-115' : 'scale-[1.02]'}`}
                   referrerPolicy="no-referrer"
-                />
-                
-                {/* 360-Degree Rotating Holographic Lens Flare Overlay */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-cyan-400/20 to-transparent pointer-events-none rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, ease: "linear", repeat: Infinity }}
                 />
               </div>
             </div>
@@ -290,22 +284,22 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
               WordPress Specialist · Web Developer · AI Engineer
             </motion.div>
 
-            {/* Divider line with glowing dot */}
+            {/* Profile Supporting Description / Proof Sentence */}
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mb-3 sm:mb-4 leading-relaxed font-light text-center md:text-left wpcc-slide-desc">
+              <TypewriterText text="10+ years building websites, digital solutions, and WordPress projects." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
+            </p>
+
+            {/* Divider line appears AFTER description finishes typing */}
             <motion.div 
               initial={{ opacity: 0, scaleX: 0 }}
-              animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="flex items-center justify-center md:justify-start w-full max-w-md mx-auto md:mx-0 wpcc-divide-container mb-2"
+              animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex items-center justify-center md:justify-start w-full max-w-md mx-auto md:mx-0 wpcc-divide-container mb-3 sm:mb-4"
             >
               <div className="md:hidden h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-3 md:ml-0 md:mr-4 inline-block animate-pulse shrink-0" />
               <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40 md:bg-gradient-to-r md:from-cyan-500/40 md:to-transparent" />
             </motion.div>
-
-            {/* Profile Supporting Description / Proof Sentence */}
-            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mb-3 sm:mb-4 leading-relaxed font-light text-center md:text-left wpcc-slide-desc">
-              <TypewriterText text="10+ years building websites, digital solutions, and WordPress projects." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
-            </p>
 
             {/* 5 High-Tech Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 w-full mb-4 sm:mb-6">
@@ -361,7 +355,27 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
                 <span className="uppercase font-bold tracking-wider">
                   {isSpinningFast ? "LOADING PROFILE..." : "VIEW PROFILE"}
                 </span>
-                <ArrowRight size={18} className={`text-cyan-300 group-hover:translate-x-1.5 transition-transform duration-300 ${isSpinningFast ? 'animate-spin' : ''}`} />
+                {isSpinningFast ? (
+                  <div className="flex items-center gap-1 py-1 px-0.5">
+                    <motion.span 
+                      className="w-2 h-2 rounded-full bg-cyan-300"
+                      animate={{ scale: [0.6, 1.3, 0.6], opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                    />
+                    <motion.span 
+                      className="w-2 h-2 rounded-full bg-cyan-300"
+                      animate={{ scale: [0.6, 1.3, 0.6], opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                    />
+                    <motion.span 
+                      className="w-2 h-2 rounded-full bg-cyan-300"
+                      animate={{ scale: [0.6, 1.3, 0.6], opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                    />
+                  </div>
+                ) : (
+                  <ArrowRight size={18} className="text-cyan-300 group-hover:translate-x-1.5 transition-transform duration-300" />
+                )}
               </button>
             </motion.div>
           </motion.div>

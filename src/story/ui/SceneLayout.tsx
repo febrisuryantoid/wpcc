@@ -96,7 +96,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
 
   return (
     <motion.div 
-      className={`absolute inset-0 flex flex-col items-center justify-center my-auto pt-16 sm:pt-20 md:pt-24 px-[25px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full`}
+      className={`absolute inset-0 flex flex-col items-center justify-center my-auto pt-16 sm:pt-20 md:pt-24 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto h-full max-h-screen w-full`}
       initial={{ opacity: 0, scale: 0.96, filter: 'blur(10px)' }}
       animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
       exit={{ opacity: 0, scale: 1.04, filter: 'blur(10px)' }}
@@ -104,7 +104,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
     >
       {hasSideImage ? (
         /* Modern 2-Column Layout for slides with sideImage */
-        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-center justify-between flex-1 w-full min-h-0">
+        <div className="w-full max-w-[1800px] flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-center justify-between flex-1 w-full min-h-0">
           {/* Left Column (40% Desktop, 45% Tablet, 100% Mobile) - Portrait Image */}
           <motion.div 
             className="w-full md:w-[45%] lg:w-[40%] shrink-0 flex items-center justify-center pointer-events-auto"
@@ -148,21 +148,9 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
                   />
                 </HeadingTag>
 
-                {/* Animated line bar directly under heading */}
-                <motion.div 
-                  initial={{ opacity: 0, scaleX: 0 }}
-                  animate={{ opacity: 1, scaleX: 1 }}
-                  transition={{ duration: 0.8, delay: 0.15 }}
-                  className="flex items-center justify-center md:justify-start w-full max-w-md mx-auto md:mx-0 wpcc-divide-container"
-                >
-                  <div className="md:hidden h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
-                  <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] inline-block animate-pulse shrink-0 mx-3 md:ml-0 md:mr-4" />
-                  <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40 md:bg-gradient-to-r md:from-cyan-500/40 md:to-transparent" />
-                </motion.div>
-
                 {showDescription && scene.supportingSentence && (
                   <motion.p 
-                    className={`wpcc-body-large wpcc-slide-desc mb-4 sm:mb-6 max-w-xl ${isExceptedSlide ? 'text-left' : 'text-center md:text-left'}`}
+                    className={`wpcc-body-large wpcc-slide-desc mb-3 sm:mb-4 max-w-xl ${isExceptedSlide ? 'text-left' : 'text-center md:text-left'}`}
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.15 }}
@@ -175,6 +163,18 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
                     />
                   </motion.p>
                 )}
+
+                {/* Animated divide line appears AFTER description finishes typing */}
+                <motion.div 
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="flex items-center justify-center md:justify-start w-full max-w-md mx-auto md:mx-0 wpcc-divide-container mb-4 sm:mb-5"
+                >
+                  <div className="md:hidden h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
+                  <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] inline-block animate-pulse shrink-0 mx-3 md:ml-0 md:mr-4" />
+                  <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40 md:bg-gradient-to-r md:from-cyan-500/40 md:to-transparent" />
+                </motion.div>
               </>
             )}
 
@@ -306,40 +306,23 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
             ) : (
               <>
                 {showHeading && (
-                  <>
-                    <HeadingTag 
-                      className={`font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-[-0.02em] drop-shadow-sm ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")} ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
-                    >
-                      <TypewriterText 
-                        text={scene.headline} 
-                        delay={0.1} 
-                        showMode={headingShowMode} 
-                        exactDuration={headingDuration} 
-                      />
-                    </HeadingTag>
-
-                    {/* Divider line with glowing dot */}
-                    <motion.div 
-                      initial={{ opacity: 0, scaleX: 0 }}
-                      animate={{ opacity: 1, scaleX: 1 }}
-                      transition={{ duration: 0.8, delay: 0.15 }}
-                      className={`flex items-center w-full wpcc-divide-container ${scene.heroExperience.heroPosition === "center" ? "justify-center max-w-lg mx-auto" : "justify-center sm:justify-start max-w-md mx-auto sm:mx-0"}`}
-                    >
-                      <div className="sm:hidden h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
-                      {scene.heroExperience.heroPosition === "center" && (
-                        <div className="hidden sm:block h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
-                      )}
-                      <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] inline-block animate-pulse shrink-0 ${scene.heroExperience.heroPosition === "center" ? "mx-3 sm:mx-4" : "mx-3 sm:ml-0 sm:mr-4"}`} />
-                      <div className={`h-[1px] flex-1 ${scene.heroExperience.heroPosition === "center" ? "bg-gradient-to-l from-transparent to-cyan-500/40" : "bg-gradient-to-l from-transparent to-cyan-500/40 sm:bg-gradient-to-r sm:from-cyan-500/40 sm:to-transparent"}`} />
-                    </motion.div>
-                  </>
+                  <HeadingTag 
+                    className={`font-bold text-white mb-2 sm:mb-3 md:mb-4 tracking-[-0.02em] drop-shadow-sm ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")} ${getHeadingWhitespaceClass(scene.headline)} ${headingClass}`}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    <TypewriterText 
+                      text={scene.headline} 
+                      delay={0.1} 
+                      showMode={headingShowMode} 
+                      exactDuration={headingDuration} 
+                    />
+                  </HeadingTag>
                 )}
                 {showDescription && (
                   <motion.div 
-                    className={`wpcc-body-large wpcc-slide-desc mb-4 sm:mb-6 max-w-2xl ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")}`}
+                    className={`wpcc-body-large wpcc-slide-desc mb-3 sm:mb-4 max-w-2xl ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")}`}
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
@@ -352,6 +335,21 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
                     />
                   </motion.div>
                 )}
+                
+                {/* Divider line appears AFTER description finishes typing */}
+                <motion.div 
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className={`flex items-center w-full wpcc-divide-container mb-4 sm:mb-6 ${scene.heroExperience.heroPosition === "center" ? "justify-center max-w-lg mx-auto" : "justify-center sm:justify-start max-w-md mx-auto sm:mx-0"}`}
+                >
+                  <div className="sm:hidden h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
+                  {scene.heroExperience.heroPosition === "center" && (
+                    <div className="hidden sm:block h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
+                  )}
+                  <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] inline-block animate-pulse shrink-0 ${scene.heroExperience.heroPosition === "center" ? "mx-3 sm:mx-4" : "mx-3 sm:ml-0 sm:mr-4"}`} />
+                  <div className={`h-[1px] flex-1 ${scene.heroExperience.heroPosition === "center" ? "bg-gradient-to-l from-transparent to-cyan-500/40" : "bg-gradient-to-l from-transparent to-cyan-500/40 sm:bg-gradient-to-r sm:from-cyan-500/40 sm:to-transparent"}`} />
+                </motion.div>
               </>
             )}
 

@@ -52,13 +52,13 @@ const Slide06Content: React.FC<SceneProps> = ({ scene }) => {
 
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-24 p-3 sm:p-8 md:p-12 pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
+      className="absolute inset-0 flex flex-col items-center justify-start pt-14 sm:pt-18 md:pt-20 px-5 sm:px-[30px] lg:px-[40px] pb-20 sm:pb-24 z-10 pointer-events-none overflow-y-auto sm:overflow-hidden h-full max-h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center justify-center h-full">
+      <div className="w-full max-w-[1800px] mx-auto flex flex-col items-center text-center justify-center h-full">
         {/* Header */}
         <div className="mb-4 sm:mb-5 w-full flex flex-col items-center">
           <motion.div 
@@ -74,25 +74,25 @@ const Slide06Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
-          {/* Divider line with glowing dot */}
+          <p className="text-xs sm:text-sm md:text-base text-slate-100 font-normal max-w-3xl mx-auto leading-relaxed text-center mb-3 sm:mb-4 drop-shadow-md wpcc-slide-desc">
+            <TypewriterText text={scene.supportingSentence || ""} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
+          </p>
+
+          {/* Divider line appears ONLY after description is finished typing */}
           <motion.div 
             initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="flex items-center justify-center w-full max-w-md mx-auto wpcc-divide-container"
+            animate={isTextFinished ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex items-center justify-center w-full max-w-lg mx-auto wpcc-divide-container mb-4 sm:mb-5"
           >
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/40" />
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee] mx-3 sm:mx-4 inline-block animate-pulse shrink-0" />
             <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/40" />
           </motion.div>
-
-          <p className="text-xs sm:text-sm md:text-base text-slate-100 font-normal max-w-2xl mx-auto leading-relaxed text-center mb-4 sm:mb-6 drop-shadow-md wpcc-slide-desc">
-            <TypewriterText text={scene.supportingSentence || ""} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
-          </p>
         </div>
 
-        {/* 4 Cards Grid */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4 pointer-events-auto items-stretch">
+        {/* 3 Columns Box Points Grid */}
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pointer-events-auto items-stretch">
           {scene.points && scene.points.map((point, idx) => {
             const pointData = getPointDetails(point, scene.headline);
             return (
@@ -100,7 +100,7 @@ const Slide06Content: React.FC<SceneProps> = ({ scene }) => {
                 key={idx}
                 initial={{ opacity: 0, y: 25 }}
                 animate={isTextFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
-                transition={{ duration: 0.5, delay: idx * 0.4 }}
+                transition={{ duration: 0.45, delay: 0.15 + idx * 0.45 }}
                 className="h-full flex flex-col"
               >
                 <PointCard 
