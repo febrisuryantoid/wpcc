@@ -8,6 +8,8 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
+**Repository:** [https://github.com/febrisuryantoid/wpcc](https://github.com/febrisuryantoid/wpcc)
+
 **WordPress Campus Connect (WPCC) UIN Sultan Maulana Hasanuddin Banten** adalah platform presentasi interaktif 3D modern yang didesain khusus untuk memberikan materi edukasi web development, Content Management System (CMS) WordPress, arsitektur web modern, hingga pengembangan karir IT bagi mahasiswa UIN Sultan Maulana Hasanuddin Banten, Serang.
 
 Aplikasi ini menggabungkan mesin render 3D real-time berbasis WebGL (Three.js & React Three Fiber) dengan antarmuka UI/UX sinematik yang dirancang untuk performa tinggi, aksesibilitas prima, dan optimalisasi mesin pencari (SEO), AI Search Engine Optimization (AIO), Answer Engine Optimization (AEO), serta Generative Engine Optimization (GEO).
