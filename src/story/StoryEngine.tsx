@@ -224,16 +224,16 @@ export const StoryEngine: React.FC = () => {
 
   // Identify slide content density to compute dynamic Auto Play duration
   const getAutoPlayDuration = (scene: SceneConfig): number => {
-    if (isCover) return 2000;
-    if (!scene) return 2000;
+    if (isCover) return 2500;
+    if (!scene) return 2500;
 
     const details = getSlideAnimationDetails(scene);
     
-    // User requested: "Jika di dalam slide animasinya belum selesai semua jangan auto slide langsung harus nunggu semuanya selesai terlebih dahulu setelah itu ada jeda 1,5 detik baru next slide."
-    // Wait for all slide animations to finish (details.totalDuration) and then add exactly 1.5 seconds (1500ms) of delay.
-    const totalDurationMs = (details.totalDuration + 1.5) * 1000;
+    // User requested: "So, all content must be displayed first. The previous 1.5-second delay has been changed to a minimum of 2 seconds, depending on the length or amount of content on the slide. The maximum is 3 seconds."
+    // Wait for all slide animations to finish completely (details.totalDuration) and then add dynamic post-animation delay (2.0s to 3.0s).
+    const totalDurationMs = (details.totalDuration + details.postAnimationDelay) * 1000;
 
-    return Math.max(2500, Math.floor(totalDurationMs));
+    return Math.max(2000, Math.floor(totalDurationMs));
   };
 
   const getMaxStepsForScene = (scene: SceneConfig) => {
