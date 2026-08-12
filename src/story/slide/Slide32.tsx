@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { SceneProps } from '../types';
 import { TypewriterText } from '../ui/TypewriterText';
 import { audioManager } from '../utils/audioManager';
 import { SlideAnimationProvider, useSlideAnimation } from '../ui/SlideAnimationContext';
-import { CheckCircle, Sparkles, Layout, Move } from 'lucide-react';
+import { CheckCircle, Sparkles } from 'lucide-react';
 
 export const Slide32: React.FC<SceneProps> = (props) => {
   if (!props.isActive) return null;
@@ -24,8 +24,6 @@ const Slide32Content: React.FC<SceneProps> = ({ scene }) => {
     descriptionDuration, 
     isTextFinished 
   } = useSlideAnimation();
-
-  const [activePart, setActivePart] = useState<string>('header');
 
   useEffect(() => {
     if (isTextFinished) {
@@ -93,82 +91,20 @@ const Slide32Content: React.FC<SceneProps> = ({ scene }) => {
           </motion.div>
         </div>
 
-        {/* Right FSE Canvas Layout Mockup (55% Width) */}
+        {/* Right: Full Site Editor Image (55% Width) */}
         <motion.div 
-          className="w-full md:w-[55%] pointer-events-auto h-full max-h-[60vh] md:max-h-[75vh] flex items-center justify-center relative"
+          className="w-full md:w-[55%] pointer-events-auto flex items-center justify-center relative"
           initial={{ opacity: 0, scale: 0.95, x: 40 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
+          animate={isTextFinished ? { opacity: 1, scale: 1, x: 0 } : { opacity: 0, scale: 0.95, x: 40 }}
           transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1.0], delay: 0.1 }}
         >
-          {/* Site Editor Canvas Grid */}
-          <div className="w-full max-w-[480px] aspect-[4/3] rounded-xl border border-white/[0.08] bg-slate-950/80 shadow-[0_24px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl p-4 flex flex-col gap-3.5 overflow-hidden text-left relative">
-            
-            {/* Top Toolbar Control */}
-            <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 shrink-0 text-[9px] text-slate-400">
-              <div className="flex items-center gap-2">
-                <Layout className="w-4 h-4 text-blue-400" />
-                <span className="font-extrabold text-white">Full Site Editor</span>
-              </div>
-              <span className="flex items-center gap-1 font-mono"><Move className="w-3 h-3 text-blue-400" /> Click to select element</span>
-            </div>
-
-            {/* Simulated Live Canvas Builder */}
-            <div className="flex-1 flex flex-col gap-3 overflow-hidden text-[9px]">
-              
-              {/* Header Part Card */}
-              <motion.div 
-                className={`p-2.5 rounded-lg border text-center relative cursor-pointer transition-all duration-300 ${activePart === 'header' ? 'bg-blue-600/10 border-blue-500 shadow-md shadow-blue-500/5' : 'bg-slate-900/40 border-white/[0.04]'}`}
-                onClick={() => {
-                  setActivePart('header');
-                  audioManager.playSound('wpcc_power', 0.5);
-                }}
-                whileHover={{ scale: 1.01 }}
-              >
-                <div className="absolute top-1 left-2 text-[6px] font-extrabold uppercase tracking-widest text-blue-400">Template Part: Header</div>
-                <div className="flex justify-between items-center mt-2.5">
-                  <span className="font-black text-white text-[10px]">🎓 CampusConnect</span>
-                  <div className="flex gap-2.5 text-[8px] text-slate-400 font-semibold">
-                    <span>Beranda</span>
-                    <span>Tentang</span>
-                    <span>Praktik</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Main Template Content Part Card */}
-              <motion.div 
-                className={`p-3 rounded-lg border text-center relative cursor-pointer transition-all duration-300 flex-1 flex flex-col justify-center ${activePart === 'body' ? 'bg-blue-600/10 border-blue-500 shadow-md shadow-blue-500/5' : 'bg-slate-900/40 border-white/[0.04]'}`}
-                onClick={() => {
-                  setActivePart('body');
-                  audioManager.playSound('wpcc_power', 0.5);
-                }}
-                whileHover={{ scale: 1.01 }}
-              >
-                <div className="absolute top-1.5 left-2 text-[6px] font-extrabold uppercase tracking-widest text-purple-400">Page Content Template</div>
-                <div className="space-y-1.5 max-w-[280px] mx-auto mt-2">
-                  <h4 className="text-[11px] font-black text-white">Selamat Datang di Portal WordPress</h4>
-                  <p className="text-[8px] text-slate-400 leading-normal font-light line-clamp-2">
-                    Pelajari WordPress Modern berbasis Gutenberg Block Editor dan rasakan kemudahan membangun website visual impian Anda dalam hitungan menit...
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Footer Part Card */}
-              <motion.div 
-                className={`p-2.5 rounded-lg border text-center relative cursor-pointer transition-all duration-300 ${activePart === 'footer' ? 'bg-blue-600/10 border-blue-500 shadow-md shadow-blue-500/5' : 'bg-slate-900/40 border-white/[0.04]'}`}
-                onClick={() => {
-                  setActivePart('footer');
-                  audioManager.playSound('wpcc_power', 0.5);
-                }}
-                whileHover={{ scale: 1.01 }}
-              >
-                <div className="absolute top-1 left-2 text-[6px] font-extrabold uppercase tracking-widest text-orange-400">Template Part: Footer</div>
-                <div className="flex justify-between items-center mt-2.5 text-[8px] text-slate-500">
-                  <span>© 2026 CampusConnect. All Rights Reserved.</span>
-                  <span className="font-medium text-slate-400 hover:underline">Support</span>
-                </div>
-              </motion.div>
-            </div>
+          <div className="w-full max-w-[640px] rounded-2xl border border-white/10 bg-slate-950/90 shadow-[0_24px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl overflow-hidden p-1.5 sm:p-2 group">
+            <img 
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLUOBEqqQ2qrMhqjVk3GhExAh5WwkvRed7iN4NKEOPZotPDuGtrdq-1ldWogLxnwCxHPPJnD2MBf0SDCfMIGJH61ra1plxr8JdlhixvO0TWEKrwzCMthz4equ3Bk9rpAPrvAHX2m3qQ8gLdbALlJaEuiwhgN3yR0iUEvH0dhkarNApMVfbCFHCT6IY_RM/s1600/full-site-editor.webp" 
+              alt="WordPress Full Site Editor"
+              className="w-full h-auto object-cover rounded-xl border border-white/5 transition-transform duration-500 group-hover:scale-[1.01]"
+              referrerPolicy="no-referrer"
+            />
           </div>
         </motion.div>
       </div>

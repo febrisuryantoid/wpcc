@@ -59,7 +59,7 @@ const Slide15Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
-          <p className="mt-1 text-slate-300 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px] max-w-2xl mx-auto font-light leading-relaxed wpcc-slide-desc my-2">
+          <p className="mt-1 text-slate-300 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px] max-w-4xl mx-auto font-light leading-relaxed wpcc-slide-desc my-2">
             <TypewriterText text={scene.supportingSentence || "Menguasai WordPress membuka pintu ke berbagai peran profesional di industri digital."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
           </p>
 

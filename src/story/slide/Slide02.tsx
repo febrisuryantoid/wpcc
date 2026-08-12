@@ -285,7 +285,7 @@ const Slide02Content: React.FC<SceneProps> = ({ scene, isActive, isPresentationM
             </motion.div>
 
             {/* Profile Supporting Description / Proof Sentence */}
-            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mb-3 sm:mb-4 leading-relaxed font-light text-center md:text-left wpcc-slide-desc">
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-4xl mb-3 sm:mb-4 leading-relaxed font-light text-center md:text-left wpcc-slide-desc">
               <TypewriterText text="10+ years building websites, digital solutions, and WordPress projects." showMode={descriptionShowMode} exactDuration={descriptionDuration} />
             </p>
 

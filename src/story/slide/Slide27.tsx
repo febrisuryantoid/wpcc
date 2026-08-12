@@ -4,7 +4,7 @@ import { SceneProps } from '../types';
 import { TypewriterText } from '../ui/TypewriterText';
 import { audioManager } from '../utils/audioManager';
 import { SlideAnimationProvider, useSlideAnimation } from '../ui/SlideAnimationContext';
-import { LayoutDashboard, FileText, Folder, Eye, Settings, Terminal, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Terminal, Sparkles } from 'lucide-react';
 
 export const Slide27: React.FC<SceneProps> = (props) => {
   if (!props.isActive) return null;
@@ -93,94 +93,23 @@ const Slide25Content: React.FC<SceneProps> = ({ scene }) => {
           </motion.div>
         </div>
 
-        {/* Right: Beautiful Vector WP Dashboard Mockup (55% Width) */}
+        {/* Right: WordPress Dashboard Overview Image (55% Width) */}
         <motion.div 
           className="w-full md:w-[55%] pointer-events-auto h-full max-h-[60vh] md:max-h-[75vh] flex items-center justify-center relative"
           initial={{ opacity: 0, scale: 0.95, x: 40 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1.0], delay: 0.1 }}
         >
-          {/* Dashboard Canvas */}
-          <div className="w-full max-w-[540px] aspect-[4/3] rounded-xl border border-white/[0.08] bg-slate-950/80 shadow-[0_24px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl flex overflow-hidden">
-            {/* Sidebar Mock */}
-            <div className="w-[110px] sm:w-[140px] bg-[#1d2327] border-r border-white/[0.04] p-2 flex flex-col gap-2 shrink-0">
-              <div className="flex items-center gap-2 px-1.5 py-1 mb-2 border-b border-white/[0.06]">
-                <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white text-[10px] font-black">W</div>
-                <span className="text-[10px] font-extrabold text-white hidden sm:inline">WordPress Admin</span>
-              </div>
-              <div className="space-y-1">
-                <SidebarItem icon={LayoutDashboard} text="Dashboard" active={true} />
-                <SidebarItem icon={FileText} text="Posts" />
-                <SidebarItem icon={Folder} text="Media" />
-                <SidebarItem icon={Eye} text="Appearance" />
-                <SidebarItem icon={Settings} text="Plugins" />
-                <SidebarItem icon={Settings} text="Settings" />
-              </div>
-            </div>
-
-            {/* Main Area Mock */}
-            <div className="flex-1 bg-[#f0f0f1]/10 p-3 sm:p-4 flex flex-col gap-3 overflow-hidden text-left">
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
-                <span className="text-xs font-extrabold text-white">Dashboard Overview</span>
-                <span className="text-[9px] text-slate-400 font-mono">WP Version 6.4.3</span>
-              </div>
-
-              {/* Welcome Card */}
-              <div className="p-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/10 border border-blue-500/20 shadow-md">
-                <h3 className="wpcc-h4 font-bold text-white flex items-center gap-1.5">
-                  Welcome to your WordPress Dashboard! <span className="animate-bounce">👋</span>
-                </h3>
-                <p className="text-[10px] text-slate-300 font-light mt-1">
-                  We’ve assembled some links to get you started:
-                </p>
-                <div className="grid grid-cols-2 gap-2 mt-2.5">
-                  <div className="text-[9px] text-blue-400 hover:underline cursor-pointer">✍️ Write your first blog post</div>
-                  <div className="text-[9px] text-blue-400 hover:underline cursor-pointer">🎨 Edit your site layout</div>
-                </div>
-              </div>
-
-              {/* Grid Widgets */}
-              <div className="grid grid-cols-2 gap-3 flex-1 overflow-hidden">
-                {/* Site Health */}
-                <div className="p-2.5 rounded-lg bg-slate-900/40 border border-white/[0.06] flex flex-col justify-between">
-                  <span className="text-[10px] font-bold text-white">Site Health Status</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[9px] text-emerald-400 font-bold">Good / Aman</span>
-                  </div>
-                  <p className="text-[8px] text-slate-400 leading-tight mt-1">Website Anda dalam kondisi optimal & aman.</p>
-                </div>
-
-                {/* At a Glance */}
-                <div className="p-2.5 rounded-lg bg-slate-900/40 border border-white/[0.06] flex flex-col justify-between">
-                  <span className="text-[10px] font-bold text-white">At a Glance</span>
-                  <div className="space-y-0.5 mt-1 text-[8px] text-slate-300">
-                    <div>📝 3 Posts</div>
-                    <div>📄 5 Pages</div>
-                  </div>
-                  <p className="text-[8px] text-slate-400 leading-tight mt-1">Theme: <strong>Twenty Twenty-Four</strong></p>
-                </div>
-              </div>
-            </div>
+          <div className="w-full max-w-[640px] rounded-2xl border border-white/10 bg-slate-950/80 shadow-[0_24px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl overflow-hidden p-1.5 sm:p-2 group">
+            <img 
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXXu8rOwgeVskJ-DEO0U3qsYsdLPw-3ZQxgiILJSRFfltCO0PdM7sTXJBLHdbzKvORuqRNhfXTNhB821Ef0QSkmpWuy4r5u_UbwDR2hxkgvNRjSSa_lAmqOdh2bgR6CuiWmAXliG53EoXqytFTGbCtgyle1J_C3-axoMiLhpU3PlWh3TlwaPfOETB0h5g/s1600/dashboard-overview-wp.webp" 
+              alt="WordPress Dashboard Overview"
+              className="w-full h-auto object-cover rounded-xl border border-white/5 transition-transform duration-500 group-hover:scale-[1.01]"
+              referrerPolicy="no-referrer"
+            />
           </div>
         </motion.div>
       </div>
     </motion.div>
-  );
-};
-
-interface SidebarItemProps {
-  icon: any;
-  text: string;
-  active?: boolean;
-}
-
-const SidebarItem: React.FC<SidebarItemProps> = ({ icon: Icon, text, active = false }) => {
-  return (
-    <div className={`flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer transition-all ${active ? 'bg-blue-600 text-white shadow-md shadow-blue-500/10' : 'text-slate-400 hover:bg-white/[0.04] hover:text-white'}`}>
-      <Icon className="w-3.5 h-3.5 shrink-0" />
-      <span className="text-[9px] font-medium hidden sm:inline">{text}</span>
-    </div>
   );
 };

@@ -31,7 +31,7 @@ export const Grid: React.FC<GridProps> = ({ items, columns = 4 }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="wpcc-card rounded-[24px] border-[1.5px] border-white/15 bg-slate-900/50 backdrop-blur-xl flex flex-col justify-between hover:border-blue-400/50 transition-all group"
+            className="wpcc-card rounded-[24px] border-[1.5px] border-white/20 bg-slate-950/85 backdrop-blur-2xl flex flex-col justify-between hover:border-blue-400/60 transition-all group shadow-[0_12px_40px_rgba(0,0,0,0.7)]"
           >
             <div>
               <div className="flex items-center justify-between mb-3">

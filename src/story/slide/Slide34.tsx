@@ -7,12 +7,12 @@ import { SlideAnimationProvider, useSlideAnimation } from '../ui/SlideAnimationC
 import { Download, LogIn, Monitor, PenTool, LayoutTemplate, Globe, ChevronRight, Sparkles } from 'lucide-react';
 
 const workflowSteps = [
-  { step: '01', title: 'Install WP', label: 'Inisialisasi', icon: Download, desc: 'Instalasi CMS secara lokal di komputer Anda.' },
-  { step: '02', title: 'Login Admin', label: 'Dashboard', icon: LogIn, desc: 'Masuk pusat administrasi utama /wp-admin.' },
-  { step: '03', title: 'Block Theme', label: 'Tampilan', icon: Monitor, desc: 'Mengaktifkan tema berbasis Full Site Editing.' },
-  { step: '04', title: 'Site Editor', label: 'Layouting', icon: LayoutTemplate, desc: 'Menyusun kustomisasi header, menu, & footer.' },
-  { step: '05', title: 'Buat Konten', label: 'Halaman', icon: PenTool, desc: 'Merancang homepage & artikel berita kustom.' },
-  { step: '06', title: 'Publish!', label: 'Go Live', icon: Globe, desc: 'Menayangkan website secara resmi ke internet.' },
+  { step: '01', title: 'Registrasi Akun', label: 'Masuk', icon: LogIn, desc: 'Daftar atau masuk ke WordPress.com memakai email kampus Anda.' },
+  { step: '02', title: 'Klaim Student Plan', label: 'Aktivasi', icon: Sparkles, desc: 'Aktifkan paket Student Plan gratis dari benefit akademis kampus.' },
+  { step: '03', title: 'Pilih Domain', label: 'Identitas', icon: Globe, desc: 'Tentukan nama sub-domain unik kustom gratis yang diinginkan.' },
+  { step: '04', title: 'Pilih Block Theme', label: 'Tampilan', icon: Monitor, desc: 'Aktifkan tema modern berbasis blok yang mendukung Full Site Editing.' },
+  { step: '05', title: 'Desain & Konten', label: 'Layouting', icon: PenTool, desc: 'Mulai susun halaman utama dan tulis artikel via Block Editor.' },
+  { step: '06', title: 'Publish Website', label: 'Go Live', icon: LayoutTemplate, desc: 'Luncurkan website Anda secara resmi ke internet agar bisa diakses publik.' },
 ];
 
 export const Slide34: React.FC<SceneProps> = (props) => {
@@ -57,7 +57,7 @@ const Slide32Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
-          <p className="mt-1.5 sm:mt-2 text-slate-400 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px] max-w-2xl mx-auto font-light leading-snug wpcc-slide-desc my-2">
+          <p className="mt-1.5 sm:mt-2 text-slate-400 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[16px] max-w-4xl mx-auto font-light leading-snug wpcc-slide-desc my-2">
             <TypewriterText text={scene.supportingSentence || "Secara umum, proses membangun website dengan WordPress mengikuti alur sederhana berikut."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
           </p>
 

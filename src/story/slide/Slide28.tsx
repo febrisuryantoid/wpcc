@@ -120,7 +120,7 @@ const Slide26Content: React.FC<SceneProps> = ({ scene }) => {
             <TypewriterText text={scene.headline} showMode={headingShowMode} exactDuration={headingDuration} />
           </h2>
 
-          <p className="text-slate-300 text-[12px] sm:text-[13px] md:text-[14px] max-w-2xl mx-auto font-normal leading-relaxed wpcc-slide-desc my-1.5">
+          <p className="text-slate-300 text-[12px] sm:text-[13px] md:text-[14px] max-w-4xl mx-auto font-normal leading-relaxed wpcc-slide-desc my-1.5">
             <TypewriterText text={scene.supportingSentence || "WordPress menyediakan dua jenis konten utama, yaitu Posts untuk konten dinamis dan Pages untuk konten statis."} showMode={descriptionShowMode} exactDuration={descriptionDuration} />
           </p>
 

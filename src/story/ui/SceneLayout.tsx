@@ -91,7 +91,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
   const getHeadingWhitespaceClass = (text: string) => {
     if (!text) return '';
     if (text.includes('\n')) return 'whitespace-pre-line';
-    return 'whitespace-normal md:whitespace-nowrap';
+    return 'whitespace-normal';
   };
 
   return (
@@ -150,7 +150,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
 
                 {showDescription && scene.supportingSentence && (
                   <motion.p 
-                    className={`wpcc-body-large wpcc-slide-desc mb-3 sm:mb-4 max-w-xl ${isExceptedSlide ? 'text-left' : 'text-center md:text-left'}`}
+                    className={`wpcc-body-large wpcc-slide-desc mb-3 sm:mb-4 max-w-4xl ${isExceptedSlide ? 'text-left' : 'text-center md:text-left'}`}
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.15 }}
@@ -322,7 +322,7 @@ const SceneLayoutContent: React.FC<SceneLayoutProps> = ({
                 )}
                 {showDescription && (
                   <motion.div 
-                    className={`wpcc-body-large wpcc-slide-desc mb-3 sm:mb-4 max-w-2xl ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")}`}
+                    className={`wpcc-body-large wpcc-slide-desc mb-3 sm:mb-4 max-w-4xl ${scene.heroExperience.heroPosition === "center" ? "text-center" : (isExceptedSlide ? "text-left" : "text-center sm:text-left")}`}
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}

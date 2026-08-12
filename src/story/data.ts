@@ -1,12 +1,12 @@
 import { SceneConfig, ChapterConfig } from './types';
 
 export const chapters: ChapterConfig[] = [
-  { id: 'chapter_01', title: 'WordPress Fundamentals', color: '#3B82F6', icon: 'Sun' },
-  { id: 'chapter_02', title: 'Career in WordPress', color: '#F59E0B', icon: 'Users' },
+  { id: 'chapter_01', title: 'Fondasi WordPress', color: '#3B82F6', icon: 'Sun' },
+  { id: 'chapter_02', title: 'Karier di WordPress', color: '#F59E0B', icon: 'Users' },
   { id: 'chapter_03', title: 'WordPress & Open Source', color: '#10B981', icon: 'Globe' },
-  { id: 'chapter_04', title: 'Community & WordPress Events', color: '#8B5CF6', icon: 'Layout' },
+  { id: 'chapter_04', title: 'Komunitas & Acara WordPress', color: '#8B5CF6', icon: 'Layout' },
   { id: 'chapter_05', title: 'WordPress Campus Connect', color: '#EC4899', icon: 'PenTool' },
-  { id: 'chapter_06', title: 'Build, Connect & Grow', color: '#6366F1', icon: 'Star' },
+  { id: 'chapter_06', title: 'Membangun, Terhubung & Berkembang', color: '#6366F1', icon: 'Star' },
 ];
 
 export const storyScenes: SceneConfig[] = [
@@ -29,8 +29,8 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_02',
     chapterId: 'chapter_01',
-    headline: "About The Speaker",
-    supportingSentence: "10+ years building websites, digital solutions, and WordPress projects.",
+    headline: "Tentang Pembicara",
+    supportingSentence: "10+ tahun pengalaman membangun website, solusi digital, dan proyek WordPress.",
     points: [
       "10+ YEARS (Web Development Experience)",
       "WORDPRESS (WordPress Specialist)",
@@ -45,7 +45,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_03',
     chapterId: 'chapter_01',
-    headline: "WordPress Fundamentals",
+    headline: "Dasar-Dasar WordPress",
     supportingSentence: "Mengenal WordPress dari dasar, mulai dari konsep CMS, fungsi, ekosistem, hingga perannya dalam membangun website modern.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -54,7 +54,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_04',
     chapterId: 'chapter_01',
-    headline: "Why WordPress?",
+    headline: "Mengapa Memilih WordPress?",
     supportingSentence: "WordPress berkembang dari blogging software menjadi platform web yang digunakan untuk berbagai kebutuhan digital.\n\nOne Platform. Many Possibilities.\nCore Advantage: Content + Design + Functionality + Extensibility (Tidak perlu membangun semuanya dari nol).",
     points: [
       "Publishing (Posts & Pages untuk pengelolaan konten)",
@@ -72,7 +72,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_05',
     chapterId: 'chapter_01',
-    headline: "A Platform Used Across the Web",
+    headline: "Platform Digital Berbagai Skala",
     supportingSentence: "WordPress bukan hanya digunakan oleh blogger atau personal website. Ekosistem WordPress mencakup skala dari website personal hingga platform digital yang kompleks.",
     points: [
       "Creators (Blog · Portfolio · Personal Website)",
@@ -89,7 +89,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_06',
     chapterId: 'chapter_01',
-    headline: "More Than a CMS",
+    headline: "Lebih dari Sekadar CMS",
     supportingSentence: "WordPress adalah sebuah ecosystem.\nEcosystem Formula = Technology + People + Community + Business",
     points: [
       "CORE (WordPress Core)",
@@ -107,7 +107,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_07',
     chapterId: 'chapter_01',
-    headline: "How WordPress Evolved",
+    headline: "Evolusi & Perkembangan WordPress",
     supportingSentence: "WordPress tidak berhenti sebagai blogging platform.\n\nEvolution Timeline: Blog → CMS → Web Platform → AI-Enabled Platform",
     points: [
       "2003 — Blogging Software (Fokus pada publishing artikel)",
@@ -124,7 +124,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_08',
     chapterId: 'chapter_01',
-    headline: "Choosing the Right Technology",
+    headline: "Memilih Teknologi yang Tepat",
     supportingSentence: "Tidak semua website harus dibangun dengan teknologi yang sama.\n\nChoose technology based on the problem — not the trend.",
     points: [
       "WordPress — Flexible · Extensible · Open Source (Ideal untuk Business Website, Publishing, E-Commerce, Education, Community, Content Platform)",
@@ -138,7 +138,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_09',
     chapterId: 'chapter_01',
-    headline: "Before WordPress",
+    headline: "Pengembangan Web Sebelum WordPress",
     supportingSentence: "Membangun website pada era awal web sering membutuhkan proses teknis yang lebih manual.\n\nThe Transformation: From editing code to managing content.",
     points: [
       "Traditional Workflow (Write HTML → Edit Files → Upload via FTP → Configure Server → Publish)",
@@ -152,7 +152,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_10',
     chapterId: 'chapter_01',
-    headline: "WordPress History",
+    headline: "Sejarah & Perjalanan WordPress",
     supportingSentence: "2003 → 2026: Blogging Software → CMS → Web Platform → Block-Based Web → AI-Enabled WordPress",
     points: [
       "2003 — AWAL PROYEK (WordPress 0.70 — Matt Mullenweg dan Mike Little fork b2/cafelog. 27 May 2003)",
@@ -171,7 +171,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_11',
     chapterId: 'chapter_01',
-    headline: "Why Does WordPress Matter?",
+    headline: "Mengapa WordPress Sangat Penting?",
     supportingSentence: "Bukan hanya karena jumlah website yang menggunakannya. Kekuatan WordPress berasal dari kombinasi fondasi utama:",
     points: [
       "OPEN SOURCE (Teknologi yang dapat dikembangkan secara terbuka)",
@@ -188,7 +188,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_12',
     chapterId: 'chapter_01',
-    headline: "Real-World Case Studies",
+    headline: "Studi Kasus Merek Global",
     supportingSentence: "WordPress bersifat gratis dan open-source, serta digunakan oleh lebih dari 43% dari seluruh website di dunia. Berbagai perusahaan kelas dunia juga menggunakan WordPress sebagai CMS (Content Management System) mereka.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -197,7 +197,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_13',
     chapterId: 'chapter_01',
-    headline: "Who Develops WordPress?",
+    headline: "Siapa yang Mengembangkan WordPress?",
     supportingSentence: "The WordPress Community — WordPress dikembangkan melalui kontribusi dari berbagai kelompok.\n\nYou don't need to be a developer to contribute.",
     points: [
       "Core Developers (Mengembangkan WordPress Core)",
@@ -214,7 +214,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_14',
     chapterId: 'chapter_01',
-    headline: "Perbandingan Cost & Effort",
+    headline: "Perbandingan Biaya & Efisiensi",
     supportingSentence: "Visualisasi matriks perbandingan biaya awal, waktu pengerjaan, dan kepemilikan data: WordPress vs Framework Custom vs Closed SaaS.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -223,12 +223,13 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_15',
     chapterId: 'chapter_01',
-    headline: "Who Owns WordPress?",
+    headline: "Siapa Pemilik Utama WordPress?",
     supportingSentence: "Perbedaan penting: WordPress.org ≠ WordPress.com (Open-source WordPress ≠ Commercial Services).\n\nEcosystem = Open Source Project + Foundation + Companies + Contributors + Community",
     points: [
-      "WordPress.org (Rumah bagi proyek WordPress open source)",
-      "WordPress Foundation (Organisasi nonprofit yang menjaga merek dagang dan misi WordPress)",
-      "Automattic (Perusahaan teknologi yang didirikan Matt Mullenweg dan mengembangkan produk terkait WordPress, termasuk WordPress.com)"
+      "WordPress.org (Platform open-source mandiri tempat mengunduh core, tema, dan plugin secara gratis oleh komunitas global.)",
+      "WordPress Foundation (Organisasi nonprofit pelindung merek dagang WordPress guna menjamin hak kebebasan akses bagi siapa saja.)",
+      "Automattic (Perusahaan komersial pimpinan Matt Mullenweg yang menggerakkan inovasi produk serta memperluas ekosistem WordPress.)",
+      "WordPress.com (Layanan managed hosting instan dari Automattic, platform andalan untuk praktik mudah tanpa pusing urusan server.)"
     ],
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -237,7 +238,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_16',
     chapterId: 'chapter_02',
-    headline: "Career in WordPress",
+    headline: "Peluang Karier di WordPress",
     supportingSentence: "Menjelajahi berbagai career path dalam ekosistem WordPress, dari development dan design hingga SEO, marketing, e-commerce, consulting, dan education.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -246,7 +247,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_17',
     chapterId: 'chapter_02',
-    headline: "Your WordPress Career Path",
+    headline: "Tahapan Karier WordPress Anda",
     supportingSentence: "Tidak perlu langsung menjadi expert. Jalani tahap demi tahap:\n\nFormula: Learn → Build → Show → Connect → Grow",
     points: [
       "01 — LEARN (HTML · CSS · JavaScript · WordPress)",
@@ -273,7 +274,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_19',
     chapterId: 'chapter_03',
-    headline: "What Is WordCamp?",
+    headline: "Apa Itu WordCamp?",
     supportingSentence: "WordCamp adalah konferensi WordPress yang diselenggarakan oleh komunitas secara volunteer-driven.\n\nThe Goal: Datang untuk belajar, berbagi, dan terhubung.",
     points: [
       "Topik Pembahasan (Development, Design, SEO, Marketing, Content, Business, Accessibility, Open Source)",
@@ -286,7 +287,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_20',
     chapterId: 'chapter_03',
-    headline: "A Global Community",
+    headline: "Komunitas Global WordPress",
     supportingSentence: "WordPress Community hadir di berbagai negara melalui Meetups, WordCamps, Contributor Events, dan Online Community.\n\nFrom Local to Global: Campus → City → Country → Global Community",
     points: [
       "Meetups & WordCamps (Pertemuan komunitas lokal hingga konferensi regional dan global)",
@@ -300,7 +301,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_21',
     chapterId: 'chapter_03',
-    headline: "Introducing WordPress Campus Connect",
+    headline: "Mengenal WordPress Campus Connect",
     supportingSentence: "Bring WordPress to Your Campus — Program yang dirancang untuk memperkenalkan WordPress kepada lingkungan kampus.\n\nThe Model: Students + Faculty + WordPress Community = Campus Innovation",
     points: [
       "Learning & Practice (Hands-on practice dan pembelajaran teknologi web)",
@@ -314,14 +315,14 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_22',
     chapterId: 'chapter_03',
-    headline: "What Will Students Get?",
+    headline: "Manfaat Bagi Mahasiswa",
     supportingSentence: "Lebih dari sekadar sertifikat:\n\nThe Real Value = Experience + Knowledge + Network + Opportunity",
     points: [
       "01 — Hands-on Experience (Belajar WordPress melalui praktik langsung)",
       "02 — Career Exposure (Mengenal peluang karier dalam ekosistem WordPress)",
       "03 — Certificate (Mendapatkan Certificate of Participation)",
       "04 — Community Connection (Berkenalan dengan komunitas WordPress)",
-      "05 — Gifts & Swags (Mendapatkan berbagai merchandise/dukungan komunitas)"
+      "05 — Free Hosting & Domain (Hosting & domain .blog/.art gratis 1 tahun dari WordPress.com)"
     ],
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -330,7 +331,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_23',
     chapterId: 'chapter_03',
-    headline: "How Can the Campus Participate?",
+    headline: "Partisipasi & Peran Kampus",
     supportingSentence: "Campus Connect membutuhkan dukungan kampus agar kegiatan dapat berjalan dengan baik.",
     points: [
       "01 — Students (Menyediakan peserta yang tertarik belajar teknologi web)",
@@ -346,7 +347,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_24',
     chapterId: 'chapter_03',
-    headline: "Your Journey Starts Here",
+    headline: "Perjalanan Anda Dimulai Di Sini",
     supportingSentence: "WordPress Campus Connect bukan sekadar workshop. Ini adalah kesempatan untuk mengenal teknologi, karier, open source, komunitas, dan peluang.",
     points: [
       "TECHNOLOGY (Bagaimana website dibangun)",
@@ -362,7 +363,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_25',
     chapterId: 'chapter_04',
-    headline: "Community & WordPress Events",
+    headline: "Komunitas & Acara WordPress",
     supportingSentence: "Mengenal WordPress Community melalui Meetup, WordCamp, knowledge sharing, networking, dan berbagai bentuk kontribusi dalam ekosistem global.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -493,16 +494,15 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_34',
     chapterId: 'chapter_04',
-    headline: "Workflow WordPress",
-    supportingSentence: "Alur kerja terstruktur untuk membangun website dari awal hingga siap dipublikasikan.",
+    headline: "Workflow WordPress.com Student Plan",
+    supportingSentence: "Secara umum, proses membangun website dengan WordPress.com Student Plan mengikuti alur praktis dan cepat berikut.",
     points: [
-      "01 — PLAN (Tentukan tujuan, struktur, konten, dan kebutuhan website)",
-      "02 — INSTALL (Siapkan WordPress pada lingkungan lokal atau server)",
-      "03 — CONFIGURE (Atur konfigurasi dasar, theme, plugin, dan kebutuhan website)",
-      "04 — DESIGN (Bangun layout, navigation, template, dan visual menggunakan Site Editor)",
-      "05 — CREATE (Masukkan konten, media, halaman, dan elemen interaktif)",
-      "06 — TEST (Periksa tampilan, responsivitas, fungsi, dan pengalaman pengguna)",
-      "07 — PUBLISH (Publikasikan website dan mulai melakukan pengembangan berkelanjutan)"
+      "01 — Registrasi Akun (Daftar atau masuk ke WordPress.com menggunakan email kampus Anda)",
+      "02 — Klaim Student Plan (Aktifkan lisensi Student Plan gratis dari benefit akademis kampus)",
+      "03 — Pilih Domain (Tentukan nama sub-domain unik kustom gratis yang Anda inginkan)",
+      "04 — Pilih Block Theme (Aktifkan tema modern berbasis blok yang mendukung Full Site Editing)",
+      "05 — Desain & Konten (Mulai susun halaman utama dan tulis artikel menggunakan Block Editor)",
+      "06 — Publish Website (Luncurkan website Anda secara resmi ke internet agar bisa diakses publik)"
     ],
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -523,7 +523,7 @@ export const storyScenes: SceneConfig[] = [
     headline: "Yang Akan Dipraktikkan",
     supportingSentence: "Kita akan membangun website WordPress sederhana dari awal hingga dapat ditampilkan.",
     points: [
-      "01 — Instalasi Lokal (Menjalankan WordPress menggunakan LocalWP)",
+      "01 — Klaim Domain & Hosting (Aktivasi paket Student Plan gratis & domain .blog/.art dari WordPress.com)",
       "02 — Login Administrator (Mengakses dashboard WordPress melalui /wp-admin)",
       "03 — Pilih Block Theme (Menggunakan tema yang mendukung pengalaman berbasis blok)",
       "04 — Buat Beranda (Membangun homepage menggunakan Gutenberg Block Editor)",
@@ -541,8 +541,8 @@ export const storyScenes: SceneConfig[] = [
     headline: "Persiapan Praktik",
     supportingSentence: "Pastikan seluruh perangkat dan kebutuhan teknis sudah siap sebelum memulai hands-on workshop.",
     points: [
-      "Perangkat (Laptop / komputer, Browser modern, Koneksi internet, LocalWP, WordPress)",
-      "Persiapan (Pastikan laptop siap digunakan, Siapkan folder project, Pastikan ruang penyimpanan tersedia, Ikuti instruksi instalasi secara bertahap)",
+      "Perangkat (Laptop / komputer, Browser modern, Koneksi internet, Akun WordPress.com)",
+      "Persiapan (Aktivasi paket Student Plan gratis, Siapkan ide situs portofolio/bisnis, Ikuti langkah pembuatan secara bertahap)",
       "Saat Praktik (Ikuti → Praktikkan → Eksperimen → Tanyakan. Tidak harus sempurna. Yang penting mulai membangun.)"
     ],
     backgroundExperience: { colorWorld: '#0F172A' },
@@ -552,7 +552,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_38',
     chapterId: 'chapter_06',
-    headline: "Build, Connect & Grow",
+    headline: "Membangun, Terhubung & Berkembang",
     supportingSentence: "Mengubah pembelajaran menjadi pengalaman nyata melalui workshop, community connection, resources, dan langkah berikutnya untuk terus berkembang bersama WordPress.",
     backgroundExperience: { colorWorld: '#0F172A' },
     heroExperience: { heroPosition: 'center' }
@@ -561,7 +561,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_39',
     chapterId: 'chapter_06',
-    headline: "Resources & Pembelajaran",
+    headline: "Sumber Belajar & Dokumentasi",
     supportingSentence: "Gunakan sumber resmi dan komunitas untuk terus mengembangkan kemampuan WordPress.",
     points: [
       "Learn WordPress (Materi pembelajaran resmi untuk mempelajari WordPress melalui kursus, tutorial, dan workshop)",
@@ -595,7 +595,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_41',
     chapterId: 'chapter_06',
-    headline: "Stay Connected",
+    headline: "Tetap Terhubung dengan Komunitas",
     supportingSentence: "Belajar tidak berhenti ketika workshop selesai. Tetap terhubung, berbagi, dan berkembang bersama.",
     points: [
       "WordPress Community (Terus terhubung dengan komunitas WordPress global dan lokal)",
@@ -610,7 +610,7 @@ export const storyScenes: SceneConfig[] = [
   {
     id: 'scene_42',
     chapterId: 'chapter_06',
-    headline: "Let's Build with WordPress",
+    headline: "Mari Membangun Bersama WordPress",
     supportingSentence: "Teori telah usai. Sekarang saatnya membangun.\n\nWordPress bukan hanya sebuah software. WordPress adalah open-source ecosystem untuk belajar, berkarya, berbagi, dan membangun sesuatu yang nyata.",
     points: [
       "Build something (Mulai karya pertama Anda hari ini)",
