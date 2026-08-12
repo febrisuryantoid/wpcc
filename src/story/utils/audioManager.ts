@@ -88,6 +88,7 @@ export class SFXManager {
   }
 
   playSound(key: string, volume: number = 1.0) {
+    if (typeof window !== 'undefined' && window.location.pathname === '/print') return;
     if (key === 'point_reveal') {
       const selectedKey = this.boxPointKeys[this.boxPointCounter % this.boxPointKeys.length];
       this.boxPointCounter++;

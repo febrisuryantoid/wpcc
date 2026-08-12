@@ -24,7 +24,8 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const resolvedShowMode = showMode || (isTyping ? 'typing' : 'full');
+  const isPrint = typeof window !== 'undefined' && window.location.pathname === '/print';
+  const resolvedShowMode = isPrint ? 'full' : (showMode || (isTyping ? 'typing' : 'full'));
 
   useEffect(() => {
     // Reset state when text changes or typing trigger shifts
@@ -87,6 +88,14 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
   
   const isCursorFinished = resolvedShowMode === 'full' ? true : isFinished;
   const isCursorStarted = resolvedShowMode === 'full' ? true : isStarted;
+
+  if (isPrint) {
+    return (
+      <span className={`${className} inline-relative`}>
+        {displayedText}
+      </span>
+    );
+  }
 
   return (
     <span className={`${className} inline-relative`}>

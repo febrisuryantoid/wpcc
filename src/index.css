@@ -6,6 +6,12 @@
   --font-serif: 'Lora', Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+@layer utilities {
+  .print-mode, .print-mode * {
+    pointer-events: none !important;
+  }
+}
+
 /* Custom cursor blink animation for typewriter text */
 @keyframes cursor-blink-anim {
   0%, 100% { opacity: 1; }

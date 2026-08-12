@@ -30,7 +30,8 @@ export const SegmentedTypewriterText: React.FC<SegmentedTypewriterTextProps> = (
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const resolvedShowMode = showMode || (isTyping ? 'typing' : 'full');
+  const isPrint = typeof window !== 'undefined' && window.location.pathname === '/print';
+  const resolvedShowMode = isPrint ? 'full' : (showMode || (isTyping ? 'typing' : 'full'));
 
   useEffect(() => {
     setCurrentLength(0);
@@ -85,7 +86,7 @@ export const SegmentedTypewriterText: React.FC<SegmentedTypewriterTextProps> = (
   const isCursorFinished = resolvedShowMode === 'full' ? true : isFinished;
   const isCursorStarted = resolvedShowMode === 'full' ? true : isStarted;
 
-  const cursorElement = (
+  const cursorElement = !isPrint ? (
     <span 
       className={`inline-block w-[3px] h-[1.1em] bg-blue-400 align-middle ml-1 ${
         !isCursorStarted || isCursorFinished ? 'custom-cursor-blink' : 'opacity-100'
@@ -94,7 +95,7 @@ export const SegmentedTypewriterText: React.FC<SegmentedTypewriterTextProps> = (
         boxShadow: '0 0 8px rgba(96, 165, 250, 0.6)'
       }}
     />
-  );
+  ) : null;
 
   let accumulated = 0;
   const renderedSegments = segments.map((seg, idx) => {

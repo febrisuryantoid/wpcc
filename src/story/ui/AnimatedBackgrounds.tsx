@@ -108,6 +108,26 @@ export const AnimatedBackgrounds: React.FC<AnimatedBackgroundsProps> = ({ sceneI
 
   // Direction offset based on slide index for 3D slide transition flow
   const slideDir = sceneIndex % 2 === 0 ? 1 : -1;
+  const isPrint = typeof window !== 'undefined' && window.location.pathname === '/print';
+
+  if (isPrint) {
+    return (
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#000205]">
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+          <img 
+            src={currentBgUrl} 
+            alt="" 
+            aria-hidden="true"
+            className="w-full h-full object-cover select-none"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000205]/85 via-[#000205]/25 to-transparent" />
+        </div>
+        <div className="absolute inset-0 z-[3] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#000205]/40 to-[#000205]/85" />
+      </div>
+    );
+  }
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#000205] perspective-1000 transform-gpu">
