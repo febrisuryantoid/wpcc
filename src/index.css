@@ -512,34 +512,42 @@ div#root:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-t
 /* PRINT STYLESHEET / PDF EXPORT PRESET */
 @media print {
   @page {
-    size: A4 landscape;
-    margin: 1cm;
+    size: landscape;
+    margin: 0;
   }
   body, html {
-    background: #ffffff !important;
-    color: #000000 !important;
+    background-color: #000205 !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-  canvas,
-  .glass-nav,
-  header,
-  footer,
-  nav,
-  button,
-  [aria-label="Navigation"],
-  .pointer-events-none:not(.printable) {
+
+  .print-mode,
+  .print-mode * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print-slide-section {
+    height: 100vh !important;
+    width: 100vw !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .no-print {
     display: none !important;
   }
-  .wpcc-card, div[class*="bg-slate-900"], div[class*="bg-black"], div[class*="backdrop-blur"] {
-    background: #f8fafc !important;
-    color: #0f172a !important;
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: none !important;
-    break-inside: avoid !important;
-  }
-  h1, h2, h3, h4, p, span, div {
-    color: #0f172a !important;
-    text-shadow: none !important;
+
+  .mix-blend-screen, .mix-blend-color-dodge, .mix-blend-multiply {
+    mix-blend-mode: normal !important;
   }
 }
 

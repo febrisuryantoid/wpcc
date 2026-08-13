@@ -119,8 +119,8 @@ export const AnimatedBackgrounds: React.FC<AnimatedBackgroundsProps> = ({ sceneI
             alt="" 
             aria-hidden="true"
             className="w-full h-full object-cover select-none"
-            loading="lazy"
-            decoding="async"
+            loading="eager"
+            decoding="sync"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000205]/85 via-[#000205]/25 to-transparent" />
         </div>
