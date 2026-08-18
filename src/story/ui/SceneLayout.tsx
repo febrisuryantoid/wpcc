@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { TypewriterText } from './TypewriterText';
 import { SceneConfig, isChapterSlide, getChapterNumber } from '../types';
 import { SlideAnimationProvider, useSlideAnimation } from './SlideAnimationContext';

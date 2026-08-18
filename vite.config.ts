@@ -10,6 +10,10 @@ export default defineConfig(() => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+      dedupe: ['react', 'react-dom', 'motion', '@react-three/fiber'],
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'motion/react', '@react-three/fiber', '@react-three/drei'],
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
