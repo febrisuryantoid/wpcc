@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Lora', Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: 'EB Garamond', Garamond, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 @layer utilities {
@@ -32,7 +32,7 @@
   }
   
   h1, h2, h3, h4, h5, h6, .font-serif {
-    font-family: 'Lora', Georgia, Cambria, serif !important;
+    font-family: 'EB Garamond', Garamond, Georgia, Cambria, serif !important;
   }
 
   button, .font-sans {
@@ -84,7 +84,7 @@
 
 /* H1 - Only Slide 01 */
 .wpcc-h1 {
-  font-family: 'Lora', Georgia, serif !important;
+  font-family: 'EB Garamond', Garamond, Georgia, serif !important;
   font-weight: 700 !important;
   line-height: 1.1 !important;
   letter-spacing: -0.02em !important;
@@ -108,7 +108,7 @@
 
 /* H2 - Slide 02 to end */
 .wpcc-h2 {
-  font-family: 'Lora', Georgia, serif !important;
+  font-family: 'EB Garamond', Garamond, Georgia, serif !important;
   font-weight: 700 !important;
   line-height: 1.15 !important;
   letter-spacing: -0.015em !important;
@@ -132,7 +132,7 @@
 
 /* H3 */
 .wpcc-h3 {
-  font-family: 'Lora', Georgia, serif !important;
+  font-family: 'EB Garamond', Garamond, Georgia, serif !important;
   font-weight: 700 !important;
   line-height: 1.15 !important;
   font-size: 20px !important; /* Mobile */
@@ -160,7 +160,7 @@
 
 /* H4 */
 .wpcc-h4 {
-  font-family: 'Lora', Georgia, serif !important;
+  font-family: 'EB Garamond', Garamond, Georgia, serif !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
   font-size: 13px !important; /* Mobile */
